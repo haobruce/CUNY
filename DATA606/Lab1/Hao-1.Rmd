@@ -1,0 +1,100 @@
+---
+title: "Hao-1"
+author: "Bruce Hao"
+date: "September 2, 2016"
+output: html_document
+---
+
+Setup lab.
+```{r results='hide', message=FALSE}
+library(IS606)
+library(dplyr)
+library(ggvis)
+source("more/cdc.R")
+```
+
+
+**Exercise 1: How many cases are there in this data set? How many variables? For each variable, identify its data type (e.g. categorical, discrete).**
+
+```{r}
+str(cdc)
+```
+As shown above, there are 20,000 observation and 9 variables with the following data types:
+
+* genhlth: categorical ordinal
+* exerany: categorical
+* hlthplan: categorical
+* smoke100: categorical
+* height: numeric continuous (discrete when captured in whole units)
+* weight: numeric continuous (discrete when captured in whole units)
+* wtdesire: numeric continuous (discrete when captured in whole units)
+* age: numeric continuous (discrete when captured in whole units)
+* gender: categorical
+
+
+**Exercise 2: Create a numerical summary for height and age, and compute the interquartile range for each. Compute the relative frequency distribution for gender and exerany. How many males are in the sample? What proportion of the sample reports being in excellent health?**
+
+Summary and relative frequency distribution for height:
+```{r}
+summary(cdc$height)
+prop.table(table(cdc$height))
+#barplot(prop.table(table(cdc$height)))
+
+height_freq = cdc %>% group_by(height) %>% summarise(n=n()) %>% mutate(height_freq=n/sum(n))
+height_freq %>% ggvis(~height, ~height_freq) %>% layer_bars()
+```
+
+Summary relative frequency distribution for age:
+```{r}
+summary(cdc$age)
+prop.table(table(cdc$age))
+#barplot(prop.table(table(cdc$age)))
+
+age_freq = cdc %>% group_by(age) %>% summarise(n=n()) %>% mutate(age_freq=n/sum(n))
+age_freq %>% ggvis(~age, ~age_freq) %>% layer_bars()
+```
+
+```{r}
+table(cdc$gender)
+```
+
+There are 9,569 males in the sample.
+
+```{r}
+prop.table(table(cdc$genhlth))
+```
+
+23.3% of the sample reports being in excellent health.
+
+
+**Exercise 3: What does the mosaic plot reveal about smoking habits and gender?**
+
+```{r}
+prop.table(table(cdc$smoke100, cdc$gender))
+mosaicplot(table(cdc$smoke100, cdc$gender))
+```
+
+Within the sample, more than half of men reported having smoked (at least a 100 cigarettes); whereas less than half of females reported the same.
+
+
+**Exercise 4: Create a new object called under23_and_smoke that contains all observations of respondents under the age of 23 that have smoked 100 cigarettes in their lifetime. Write the command you used to create the new object as the answer to this exercise.**
+
+```{r}
+under23_and_smoke = subset(cdc, age < 23 & smoke100 == 1)
+```
+
+
+**Exercise 5: What does this box plot show? Pick another categorical variable from the data set and see how it relates to BMI. List the variable you chose, why you might think it would have a relationship to BMI, and indicate what the figure seems to suggest.**
+
+```{r}
+bmi <- (cdc$weight / cdc$height^2) * 703
+boxplot(bmi ~ cdc$genhlth)
+```
+
+The boxplot shows that BMIs trend upward as health worsens - medians, IQRs and overall distributions increase monotonically as health worsens.
+
+```{r}
+boxplot(bmi ~ cdc$exerany)
+```
+
+The boxplot above shows that BMIs for those who reported to have exercised over the past month appear to be lower and more tightly distributed than those who did not exercise. 

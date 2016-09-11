@@ -1,0 +1,36 @@
+---
+title: "Hao-0"
+author: "Bruce Hao"
+date: "September 1, 2016"
+output: github_document
+---
+
+Lab 0 setup:
+
+```{r}
+source('more/arbuthnot.R')
+```
+
+
+<i>Exercise 1: What command would you use to extract just the counts of girls baptized?</i>
+
+```{r}
+arbuthnot$girls
+```
+
+
+<i>Exercise 2: Is there an apparent trend in the number of girls baptized over the years? How would you describe it?</i>
+
+As illustrated in the chart below, the number of girls baptized appears to increase with time, except for a sharp drop around 1650.
+```{r}
+plot(arbuthnot$year, arbuthnot$girls, type='l')
+```
+
+
+<i>Exercise 3: Now, make a plot of the proportion of boys over time. What do you see?</i>
+
+While the proportion oscillates between a minimum of 0.5027 and maximum of 0.5362 with a mean of 0.5210, it's interesting that the ratio of boys never drops below 50% in any year.
+```{r}
+summary(arbuthnot$boys / (arbuthnot$boys + arbuthnot$girls))
+plot(arbuthnot$year, arbuthnot$boys / (arbuthnot$boys + arbuthnot$girls), type='l')
+```

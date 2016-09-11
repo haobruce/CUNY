@@ -1,0 +1,46 @@
+---
+title: "Hao-2_7"
+author: "Bruce Hao"
+date: "September 8, 2016"
+output: html_document
+---
+
+Setup.
+```{r message=FALSE, warning=FALSE}
+library(VennDiagram)
+```
+
+
+**2.7**
+
+Proportional contingency table: 
+
+```{r echo=FALSE}
+table = matrix(c(11,24,35,12,53,65,23,77,100), ncol=3, byrow=T)
+colnames(table) = c('Swing', 'Not Swing', 'Total')
+rownames(table) = c('Independent', 'Not Independent', 'Total')
+table
+```
+
+a) Are being Independent and being a swing voter disjoint, i.e. mutually exclusive?
++ No, some voters are Independent and swing voters.
+b) Draw a Venn diagram summarizing the variables and their associated probabilities. 
+
+```{r fig.align='center'}
+draw.pairwise.venn(area1 = 35, area2 = 23, cross.area = 11, 
+                   category = c('% Independent', '% Swing Voter'), 
+                   cat.pos = c(3, -1))
+```
+
+c) What percent of voters are Independent but not swing voters?
++ 24% are non-swinging Independents.
+
+d) What percent of voters are Independent or swing voters?
++ 47% are Independent and/or swing voters; 36% are Independent or swing voters but not both.
+
+e) What percent of voters are neither Independent nor swing voters?
++ 53% are neither Independent nor swing voters.
+
+f) Is the event that someone is a swing voter independent of the event that someone is a political
+Independent?
++ No, the probability of being a swing voter is 23% for all voters, but the probability of being a swing voter given being an independent is 31%. The probabilities would be the same if the two variables were independent. 

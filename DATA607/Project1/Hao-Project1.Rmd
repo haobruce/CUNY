@@ -1,0 +1,62 @@
+---
+title: "Hao-Project1"
+author: "Bruce Hao"
+date: "September 10, 2016"
+output: html_document
+---
+
+```{r}
+library(RCurl)
+library(stringr)
+```
+
+Download and store raw data from github repository. `read.csv` was producing an error until I added the `text=` in front of the url. I don't completely understand this behavior.
+
+```{r warning=FALSE}
+url = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Project1/tournamentinfo.txt')
+chess = read.csv(text=url, stringsAsFactors = F)
+
+# initialize empty data frame
+df = data.frame('PlayerName' = character(), 'PlayerState'= character(), 'TotalPoints' = numeric(), 
+                'PreRating' = integer(), 'OpponentAvgPreRating' = integer(), 'Opp1' = integer(), 
+                'Opp2' = integer(), 'Opp3' = integer(), 'Opp4' = integer(), 'Opp5' = integer(), 
+                'Opp6' = integer(), 'Opp7' = integer(), stringsAsFactors = F)  
+
+
+# loop through chess txt file and add relevant data to data frame
+for (i in 1:nrow(chess)) {
+  # check if row contains player data
+  if (!is.na(as.numeric(str_sub(chess[i,], 4, 5)))) {
+    player = str_trim(str_sub(chess[i,], 9, 40))  # retrieve player name
+    state = str_sub(chess[i+1,], 4, 5)  # retrieve player state
+    points = as.numeric(str_sub(chess[i,], 42, 44))  # retrieve player points
+    preRating = as.numeric(str_sub(chess[i+1,], 23, 26))  # retrieve player points
+    opp1 = as.numeric(str_sub(chess[i,], 51, 52))  # retrieve opponent numbers to calculate avg later
+    opp2 = as.numeric(str_sub(chess[i,], 57, 58))
+    opp3 = as.numeric(str_sub(chess[i,], 63, 64))
+    opp4 = as.numeric(str_sub(chess[i,], 69, 70))
+    opp5 = as.numeric(str_sub(chess[i,], 75, 76))
+    opp6 = as.numeric(str_sub(chess[i,], 81, 82))
+    opp7 = as.numeric(str_sub(chess[i,], 87, 88))
+    # append data to data frame
+    df = rbind(df, list('PlayerName' = player, 'PlayerState' = state, 'TotalPoints' = points, 
+                        'PreRating' = preRating, 'OpponentAvgPreRating' = 0.0, 'Opp1' = opp1, 
+                        'Opp2' = opp2, 'Opp3' = opp3, 'Opp4' = opp4, 'Opp5' = opp5, 'Opp6' = opp6, 
+                        'Opp7' = opp7), stringsAsFactors=F)
+  }
+}
+
+
+# loop through data frame to add average opponent ratings
+for (r in 1:nrow(df)) {
+  oppRatings = NULL  # initialize empty vector
+  for (c in 1:7) {
+    colName = paste('Opp', c, sep = '')  # create dynamic reference to column name
+    oppRow = df[r, colName]
+    oppRatings = c(oppRatings, df[oppRow, 'PreRating'])  # append opponent rating to vector
+  }
+  df[r, 'OpponentAvgPreRating'] = round(mean(oppRatings, na.rm = T), 0)  # calculate avg rating and ignore NAs
+}
+
+write.csv(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')],
+          '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')

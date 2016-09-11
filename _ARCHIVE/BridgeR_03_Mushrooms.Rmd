@@ -1,0 +1,45 @@
+---
+title: "BridgeR_03_Mushrooms"
+author: "Bruce"
+date: "July 28, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown Documentation of Downloading and Relabeling Mushroom Data from UCI
+
+Install hash library.
+```{r, echo=FALSE}
+require(hash)
+```
+
+Read UCI data into dataframe and rename columns.
+```{r}
+df = read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data", header=FALSE)
+
+colnames(df) = c('classes','cap_shape','cap_surface','cap_color','bruises?','odor','gill_attachment','gill_spacing','gill_size','gill_color','stalk_shape','stalk_root','stalk_surface_above_ring','stalk_surface_below_ring','stalk_color_above_ring','stalk_color_below_ring','veil_type','veil_color','ring_number','ring_type','spore_print_color', 'population','habitat')
+```
+
+Create hashes with abbreviations as keys and expanded names as values for each column. For brevity, only the first four columns are shown below.
+```{r}
+classes = hash(keys=c('e','p'), values=c('edible','poisonous'))
+cap_shape = hash(keys=c('b','c','x','f','k','s'), values=c('bell','conical','convex','flat','knobbed','sunken'))
+cap_surface = hash(keys=c('f','g','y','s'), values=c('fibrous','grooves','scaly','smooth'))
+cap_color = hash(keys=c('n','b','c','g','r','p','u','e','w','y'), values=c('brown','buff','cinnamon','gray','green','pink','purple','red','white','yellow'))
+```
+
+Loop through dataframe columns and add expanded levels. For brevity, only first first columns are looped through below.
+```{r}
+for (i in 1:4) {
+  columnName = colnames(df)[i]
+  for (key in as.list(keys(get(columnName)))) {
+    levels(df[[columnName]]) = c(levels(df[[columnName]]), get(columnName)[[key]])
+    df[df[columnName]==key, columnName] = get(columnName)[[key]]
+  }
+}
+
+knitr::kable(head(df[1:4]))
+```

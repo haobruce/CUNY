@@ -1,0 +1,92 @@
+---
+title: "Hao-Week3-Regex"
+author: "Bruce Hao"
+date: "September 10, 2016"
+output: html_document
+---
+
+```{r}
+library(stringr)
+```
+
+**3.**
+
+```{r}
+raw.data <- "555-1239Moe Szyslak(636) 555-0113Burns, C. Montgomery555-6542Rev. Timothy Lovejoy555 8904Ned Flanders636-555-3226Simpson, Homer5543642Dr. Julius Hibbert"
+names <- unlist(str_extract_all(raw.data, "[[:alpha:]., ]{2,}"))
+```
+
+a. Use the tools of this chapter to rearrange the vector so that all elements conform to the standard first_name last_name.
+
+?? Question to Andy - is there a vectorized approach to solving this?
+
+``` {r}
+first_last = NULL  # initialize an empty character vector
+for (name in names) {  # loop through each name within names vector
+  name_split = unlist(str_split(name, ', '))  # separate strings that contain commas; then flatten list
+  if (length(name_split) > 1) {  # if name contains a comma and is split
+    name_split = paste(name_split[2], name_split[1])  # then reverse the order of the name components
+  }
+  first_last = c(first_last, name_split)  # append revised names to new character vector
+}
+first_last
+```
+
+b. Construct the logical vector indicating whether a character has a title (i.e. Rev. and Dr.)
+
+```{r}
+has_title = NULL  # initialize an empty vector
+for (name in names) {
+  has_title = append(has_title, str_detect(name, '[:alpha:]{2,}[.]'))  # look for pattern of >1 letters ending in a period
+}
+data.frame(first_last, has_title)
+```
+
+c. Construct a logical vector indicating whether the character has a second name.
+
+```{r}
+has_second_name = str_detect(names, '[A-Z]\\.')
+data.frame(first_last, has_second_name)
+```
+
+
+**4.**
+
+a. `[0-9]+\\$`  -- Find patterns of lines that end with one or more numbers, although it only works for me without the double backslashes.
+
+```{r}
+test = 'asfjsk23423 ask2 asdkf 123sdf sdf123'
+str_extract_all(test, '[0-9]+\\$')
+str_extract_all(test, '[0-9]+$')
+```
+
+b. `\\b[a-z]{1,4}\\b` -- Find groups of adjacent letters between 1 to 4 characters long.
+```{r}
+str_extract_all('abc abcd abcdef 123abc abc123', '\\b[a-z]{1,4}\\b')
+```
+
+c. `.*?\\.txt$` -- Find lines that end in .txt.
+```{r}
+str_extract_all('abc123.txt', '.*?\\.txt$')
+```
+
+d. `\\d{2}/\\d{2}/\\d{4}` -- Find groups of two digits, two digits and four digits all separated by forward slashes.
+```{r}
+str_extract_all('12/34/1234 1/1/1234 12/34/12 43/32/4321', '\\d{2}/\\d{2}/\\d{4}')
+```
+
+e. `<(.+?)>.+?</\\1>` -- Find patterns between and including matching, opening and closing HTML angle brackets.
+```{r}
+str_extract_all('<head>Some heaader text</head>', '<(.+?)>.+?</\\1>')
+str_extract_all('<head>Some heaader text</typo>', '<(.+?)>.+?</\\1>')
+```
+
+
+**9.**
+
+```{r}
+code = 'clcopCow1zmstc0d87wnkig7OvdicpNuggvhryn92Gjuwczi8hqrfpRxs5Aj5dwpn0TanwoUwisdij7Lj8kpf03AT5Idr3coc0bt7yczjatOaootj55t3Nj3ne6c4Sfek.r1w1YwwojigOd6vrfUrbz2.2bkAnbhzgv4R9i05zEcrop.wAgnb.SqoU65fPa1otfb7wEm24k6t3sR9zqe5fy89n6Nd5t9kc4fE905gmc4Rgxo5nhDk!gr'
+
+str_extract_all(code, '[[:upper:]]')
+```
+

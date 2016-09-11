@@ -1,0 +1,81 @@
+---
+title: "Hao-HW2"
+author: "Bruce Hao"
+date: "September 7, 2016"
+output: pdf_document
+---
+
+Setup.
+```{r message=FALSE, warning=FALSE}
+library(VennDiagram)
+```
+
+
+**2.6**
+
+```{r}
+combinations = expand.grid(seq(1,6), seq(1,6))
+combinations$Total = combinations$Var1 + combinations$Var2
+nrow(combinations[combinations$Total==5, ])
+```
+
+a) 0
+b) 4/36 = 11.11%
+c) 1/36 = 2.78%
+
+
+**2.8**
+
+a) No, disjoint outcomes are mutually exclusive.
+b)
+
+```{r fig.align='center'}
+draw.pairwise.venn(area1 = 14.6, area2 = 20.7, cross.area = 4.2, 
+                   category = c('Americans in poverty %', 'Foreign language speakers at home %'), 
+                   cat.pos = c(3, -1))
+```
+
+c) 10.4%
+d) 16.5 + 4.2 + 10.4 = 31.1%
+e) 100 - 31.1 = 68.9%
+f) No, the probability of being below the poverty line is 14.6% for all Americans, but the probability of being below the poverty line given being a foreign language speaker at home is 4.2/20.7 = 20.29%
+
+
+**2.20**
+
+a) (114 + 108) / 408 = 54.41%
+b) 78 / 114 = 68.42%
+c) 19 / 54 = 35.19%; 11 / 36 = 30.56%
+d) No, the color of the male's eyes affects the probability of having a partner with certain eye color.
+
+
+**2.30**
+
+a) 28/95 * 59/94 = 18.50%
+b) 67/95 * 28/94 = 21.01%
+c) 67/95 * 28/95 = 20.79%
+d) When the sample size is a small fraction of the population, observations are nearly independent even when sampling without replacement. 
+
+
+**2.38**
+
+a) 0 * 0.54 + 25 * 0.34 + 35 * 0.12 = $12.7 average revenue per passenger;
+  0.54*(0 - 12.7)^2 + 0.34*(25 - 12.7)^2 + 0.12*(35 - 12.7)^2 = $198.21 variance;
+  198.21^0.5 = $14.08 standard deviation
+b) $12.7 * 120 = $1,524 revenue per flight; 
+  ($198.21 * 120)^0.5 = $154 standard deviation
+
+
+**2.44**
+
+a) The distribution is bell shaped with a minimum of zero and a fat right tail.
+b) 62.2%
+c) 62.2% * 41% = 25.5%; this assumes that gender and income are independent variables.
+d) Based on the table below, 29.4% of femals earn less than $50K per year; thus, the assumption in part c is likely incorrect (but further analysis would be needed to answer this more concretely)
+```{r echo=FALSE}
+table = matrix(c(32.8, 29.4, 62.2, 26.2, 11.6, 37.8, 59.0, 41.0, 100.0), ncol=3, byrow=T)
+colnames(table) = c('M', 'F', 'Total')
+rownames(table) = c('<$50K', '>=$50K', 'Total')
+table
+```
+
