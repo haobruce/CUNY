@@ -5,7 +5,8 @@ date: "September 10, 2016"
 output: html_document
 ---
 
-```{r}
+```{r warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 library(RCurl)
 library(stringr)
 ```
@@ -64,4 +65,5 @@ write.csv(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'Oppon
           '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')
 
 
-head(df)
+# show top 10 rows of data frame
+knitr::kable(head(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')], 10))

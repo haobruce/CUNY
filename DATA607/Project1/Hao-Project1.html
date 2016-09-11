@@ -123,9 +123,9 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(RCurl)</code></pre>
-<pre><code>## Loading required package: bitops</code></pre>
-<pre class="r"><code>library(stringr)</code></pre>
+<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)
+library(RCurl)
+library(stringr)</code></pre>
 <p>Download and store raw data from github repository. <code>read.csv</code> was producing an error until I added the <code>text=</code> in front of the url. I don’t completely understand this behavior.</p>
 <pre class="r"><code>url = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Project1/tournamentinfo.txt')
 chess = read.csv(text=url, stringsAsFactors = F)
@@ -178,21 +178,91 @@ write.csv(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'Oppon
           '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')
 
 
-head(df)</code></pre>
-<pre><code>##                         PlayerName PlayerState TotalPoints PreRating
-## 1 90123456789012345678901234567890          --       234.0        NA
-## 2                         GARY HUA          ON         6.0      1794
-## 3                  DAKSHESH DARURI          MI         6.0      1553
-## 4                     ADITYA BAJAJ          MI         6.0      1384
-## 5              PATRICK H SCHILLING          MI         5.5      1716
-## 6                       HANSHI ZUO          MI         5.5      1655
-##   OpponentAvgPreRating Opp1 Opp2 Opp3 Opp4 Opp5 Opp6 Opp7
-## 1                 1515   12   78   34   90   56   12   78
-## 2                 1585   39   21   18   14    7   12    4
-## 3                 1440   63   58    4   17   16   20    7
-## 4                 1454    8   61   25   21   11   13   12
-## 5                 1660   23   28    2   26    5   19    1
-## 6                 1512   45   37   12   13    4   14   17</code></pre>
+# show top 10 rows of data frame
+knitr::kable(head(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')], 10))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">PlayerName</th>
+<th align="left">PlayerState</th>
+<th align="right">TotalPoints</th>
+<th align="right">PreRating</th>
+<th align="right">OpponentAvgPreRating</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">GARY HUA</td>
+<td align="left">ON</td>
+<td align="right">6.0</td>
+<td align="right">1794</td>
+<td align="right">1605</td>
+</tr>
+<tr class="even">
+<td align="left">DAKSHESH DARURI</td>
+<td align="left">MI</td>
+<td align="right">6.0</td>
+<td align="right">1553</td>
+<td align="right">1469</td>
+</tr>
+<tr class="odd">
+<td align="left">ADITYA BAJAJ</td>
+<td align="left">MI</td>
+<td align="right">6.0</td>
+<td align="right">1384</td>
+<td align="right">1564</td>
+</tr>
+<tr class="even">
+<td align="left">PATRICK H SCHILLING</td>
+<td align="left">MI</td>
+<td align="right">5.5</td>
+<td align="right">1716</td>
+<td align="right">1574</td>
+</tr>
+<tr class="odd">
+<td align="left">HANSHI ZUO</td>
+<td align="left">MI</td>
+<td align="right">5.5</td>
+<td align="right">1655</td>
+<td align="right">1501</td>
+</tr>
+<tr class="even">
+<td align="left">HANSEN SONG</td>
+<td align="left">OH</td>
+<td align="right">5.0</td>
+<td align="right">1686</td>
+<td align="right">1519</td>
+</tr>
+<tr class="odd">
+<td align="left">GARY DEE SWATHELL</td>
+<td align="left">MI</td>
+<td align="right">5.0</td>
+<td align="right">1649</td>
+<td align="right">1372</td>
+</tr>
+<tr class="even">
+<td align="left">EZEKIEL HOUGHTON</td>
+<td align="left">MI</td>
+<td align="right">5.0</td>
+<td align="right">1641</td>
+<td align="right">1468</td>
+</tr>
+<tr class="odd">
+<td align="left">STEFANO LEE</td>
+<td align="left">ON</td>
+<td align="right">5.0</td>
+<td align="right">1411</td>
+<td align="right">1523</td>
+</tr>
+<tr class="even">
+<td align="left">ANVIT RAO</td>
+<td align="left">MI</td>
+<td align="right">5.0</td>
+<td align="right">1365</td>
+<td align="right">1554</td>
+</tr>
+</tbody>
+</table>
 
 
 
