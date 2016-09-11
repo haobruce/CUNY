@@ -38,6 +38,6 @@ pvt = movies %>%
         group_by(movie_name) %>%
         summarise(avg_rating = mean(rating)) 
 pvt
-pvt %>% ggvis(~movie_name, ~avg_rating) %>% layer_bars(width = 0.7)
+#pvt %>% ggvis(~movie_name, ~avg_rating) %>% layer_bars(width = 0.7)
 ```
 
