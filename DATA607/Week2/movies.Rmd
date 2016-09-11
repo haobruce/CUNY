@@ -1,0 +1,43 @@
+---
+title: "Movies"
+author: "Bruce Hao"
+date: "September 3, 2016"
+output: html_document
+---
+
+Load necessary libraries.
+```{r message=FALSE, warning=FALSE}
+library(dbConnect)
+library(dplyr)
+library(ggvis)
+```
+
+Establish database connection.
+```{r include=FALSE}
+username = 'brucehao'
+password = 'password'
+host = 'mysql-instance.ch6yubfph0cs.us-west-1.rds.amazonaws.com'
+```
+
+```{r}
+myDb = dbConnect(MySQL(), user=username, password=password, dbname='movies', host=host)
+```
+
+Query movie_names and movie_ratings tables.
+```{r}
+rs = dbSendQuery(myDb, 'SELECT DISTINCT names.*, ratings.user_id, ratings.rating 
+                 FROM movie_names names INNER JOIN movie_ratings ratings
+                 ON names.movie_name = ratings.movie_name')
+movies = fetch(rs, n=-1)
+```
+
+The following outputs show 1) the frequency of each rating value (1-5) by movie and 2) the average rating for each movie:
+```{r out.width='900px', message=FALSE}
+table(movies$movie_name, movies$rating)
+pvt = movies %>%
+        group_by(movie_name) %>%
+        summarise(avg_rating = mean(rating)) 
+pvt
+pvt %>% ggvis(~movie_name, ~avg_rating) %>% layer_bars(width = 0.7)
+```
+
