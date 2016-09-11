@@ -58,5 +58,10 @@ for (r in 1:nrow(df)) {
   df[r, 'OpponentAvgPreRating'] = round(mean(oppRatings, na.rm = T), 0)  # calculate avg rating and ignore NAs
 }
 
+
+# write df to csv file
 write.csv(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')],
           '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')
+
+
+head(df)

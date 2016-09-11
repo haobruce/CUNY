@@ -172,8 +172,27 @@ for (r in 1:nrow(df)) {
   df[r, 'OpponentAvgPreRating'] = round(mean(oppRatings, na.rm = T), 0)  # calculate avg rating and ignore NAs
 }
 
+
+# write df to csv file
 write.csv(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')],
-          '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')</code></pre>
+          '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')
+
+
+head(df)</code></pre>
+<pre><code>##                         PlayerName PlayerState TotalPoints PreRating
+## 1 90123456789012345678901234567890          --       234.0        NA
+## 2                         GARY HUA          ON         6.0      1794
+## 3                  DAKSHESH DARURI          MI         6.0      1553
+## 4                     ADITYA BAJAJ          MI         6.0      1384
+## 5              PATRICK H SCHILLING          MI         5.5      1716
+## 6                       HANSHI ZUO          MI         5.5      1655
+##   OpponentAvgPreRating Opp1 Opp2 Opp3 Opp4 Opp5 Opp6 Opp7
+## 1                 1515   12   78   34   90   56   12   78
+## 2                 1585   39   21   18   14    7   12    4
+## 3                 1440   63   58    4   17   16   20    7
+## 4                 1454    8   61   25   21   11   13   12
+## 5                 1660   23   28    2   26    5   19    1
+## 6                 1512   45   37   12   13    4   14   17</code></pre>
 
 
 
