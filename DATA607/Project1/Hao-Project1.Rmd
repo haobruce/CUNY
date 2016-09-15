@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(RCurl)
 library(stringr)
+library(DT)
 ```
 
 Download and store raw data from github repository. `read.csv` was producing an error until I added the `text=` in front of the url. I don't completely understand this behavior.
@@ -39,11 +40,13 @@ for (i in 1:nrow(chess)) {
     opp5 = as.numeric(str_sub(chess[i,], 75, 76))
     opp6 = as.numeric(str_sub(chess[i,], 81, 82))
     opp7 = as.numeric(str_sub(chess[i,], 87, 88))
-    # append data to data frame
-    df = rbind(df, list('PlayerName' = player, 'PlayerState' = state, 'TotalPoints' = points, 
+    # use a temporary data frame to house each new row
+    new_row = data.frame('PlayerName' = player, 'PlayerState' = state, 'TotalPoints' = points, 
                         'PreRating' = preRating, 'OpponentAvgPreRating' = 0.0, 'Opp1' = opp1, 
                         'Opp2' = opp2, 'Opp3' = opp3, 'Opp4' = opp4, 'Opp5' = opp5, 'Opp6' = opp6, 
-                        'Opp7' = opp7), stringsAsFactors=F)
+                        'Opp7' = opp7, stringsAsFactors = F)  
+    # append data to data frame
+    df = rbind(df, new_row)
   }
 }
 
@@ -61,9 +64,10 @@ for (r in 1:nrow(df)) {
 
 
 # write df to csv file
-write.csv(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')],
-          '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')
+#write.csv(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')],
+#          '/Users/brucehao/Google Drive/CUNY/git/DATA607/Project1/chess.csv')
 
 
 # show top 10 rows of data frame
-knitr::kable(head(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')], 10))
+#knitr::kable(head(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')], 10))
+datatable(df[, c('PlayerName', 'PlayerState', 'TotalPoints', 'PreRating', 'OpponentAvgPreRating')])

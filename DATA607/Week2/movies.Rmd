@@ -20,6 +20,7 @@ host = 'mysql-instance.ch6yubfph0cs.us-west-1.rds.amazonaws.com'
 ```
 
 ```{r}
+# local IP addresses need to be permissioned on RDS dashboard
 myDb = dbConnect(MySQL(), user=username, password=password, dbname='movies', host=host)
 ```
 
