@@ -19,8 +19,15 @@ names <- unlist(str_extract_all(raw.data, "[[:alpha:]., ]{2,}"))
 a. Use the tools of this chapter to rearrange the vector so that all elements conform to the standard first_name last_name.
 
 ?? Question to Andy - is there a vectorized approach to solving this?
+** Judd Andermann provided a vectorized approach
 
 ``` {r}
+# Vectorized approach
+split_name = str_split_fixed(names, ", ", 2)
+first_last_vec = str_trim(paste(split_name[,2], split_name[,1]))
+first_last_vec
+
+# For loop method
 first_last = NULL  # initialize an empty character vector
 for (name in names) {  # loop through each name within names vector
   name_split = unlist(str_split(name, ', '))  # separate strings that contain commas; then flatten list
