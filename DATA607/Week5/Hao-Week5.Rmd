@@ -9,6 +9,7 @@ output: html_document
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(ggthemes)
 ```
 
 **1. Create a .CSV file (or optionally, a MySQL database!) that includes all of the information above. You’re encouraged to use a “wide” structure similar to how the information appears above, so that you can practice tidying and transformations as described below.**
@@ -86,7 +87,9 @@ airlines %>%
   ggplot(aes(x = airline, y = OnTimePct, fill = airline)) + 
     geom_bar(stat = 'identity', width = 0.5) + 
     geom_text(aes(label = format(OnTimePct, digits = 2)), vjust = -0.25) + 
-    scale_y_continuous(limits = c(0, 1))
+    scale_y_continuous(limits = c(0, 1)) +
+    scale_fill_economist() +
+    theme_minimal()
 ```
 
 Next, let's evaluate each airlines performance on an airport by airport basis. In this case, we follow the same steps except that we group by both airline and airport. Additionally, we plot airport on the x-axis instead of airline and use color coding to indicate the airline. 
@@ -103,7 +106,9 @@ airlines %>%
   ggplot(aes(x = airport, y = OnTimePct, fill = airline)) + 
     geom_bar(stat = 'identity', width = 0.75, position = 'dodge') + 
     geom_text(aes(label = format(OnTimePct, digits = 2)), position = position_dodge(width=0.75), vjust = -0.25) +
-    scale_y_continuous(limits = c(0, 1))
+    scale_y_continuous(limits = c(0, 1)) +
+    scale_fill_economist() +
+    theme_minimal()
 ```
 
 The chart below tries to explain this apparent contradiction. The width of the bars below represents the total number of flights for each airline at each airport. AM West obviously makes a lot of flights to/from Phoenix, where on time performance is generally better than at the other airports for both airlines. Taken together, these factors combine to 'pull up' AM West's overall on time performance and hides the fact that it actually performs worse than does Alaska at each and every airport, including Phoenix. 
@@ -118,7 +123,10 @@ airlines %>%
   ggplot(aes(x = airport, y = OnTimePct, fill = airline, width = Total/5000)) + 
     geom_bar(stat = 'identity') + 
     geom_text(aes(label = format(OnTimePct, digits = 2), color = airline), position = position_dodge(width=0.75), vjust = -0.25) +
-    scale_y_continuous(limits = c(0, 1))
+    scale_y_continuous(limits = c(0, 1)) +
+    scale_fill_economist() +
+    scale_color_economist() +
+    theme_minimal()
 ```
 
 
