@@ -23,7 +23,7 @@ a. Use the tools of this chapter to rearrange the vector so that all elements co
 
 ``` {r}
 # Vectorized approach
-split_name = str_split_fixed(names, ", ", 2)
+split_name = str_split(names, ', ', simplify = T)
 first_last_vec = str_trim(paste(split_name[,2], split_name[,1]))
 first_last_vec
 

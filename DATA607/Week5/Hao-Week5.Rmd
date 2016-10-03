@@ -2,7 +2,7 @@
 title: "Hao-Week5"
 author: "Bruce Hao"
 date: "September 23, 2016"
-output: github_document
+output: html_document
 ---
 
 ```{r message=FALSE, warning=FALSE}

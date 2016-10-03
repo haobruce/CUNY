@@ -8,11 +8,69 @@ output: html_document
 ```{r warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(RCurl)
+library(readr)
 library(stringr)
+library(dplyr)
+library(tidyr)
 library(DT)
 ```
 
 Download and store raw data from github repository. `read.csv` was producing an error until I added the `text=` in front of the url. I don't completely understand this behavior.
+
+```{r warning=FALSE, message=FALSE}
+# COMMENTED OUT CODE READR
+# readLines reads txt file in as string (while maintaining rows) instead of list that read.csv does
+#raw = readLines('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Project1/tournamentinfo.txt')
+#raw = str_replace_all(raw, '-', '')
+
+# read.delim splits string on some delimiter into a list of multiple columns and rows
+#input = read.delim(textConnection(raw), header = F, sep = '|', stringsAsFactors = F)
+# drop the last column
+#input = input[,-11]
+
+url = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Project1/tournamentinfo.txt')
+chess2 = unlist(read.csv(text=url, stringsAsFactors = F))  # convert output to string
+chess2 = str_replace_all(chess2, '-', '')
+chess2 = str_split(chess2, '\\|', simplify = T)
+chess2 = trimws(chess2)
+input = as.data.frame(chess2, stringsAsFactors = F)
+input = input[input[,1] != '', ]  # delete empty rows
+input = input[, -11]  # drop last column
+
+# first two rows make up the column names
+header = paste(str_trim(as.character(input[1,])), str_trim(as.character(input[2,])))
+header = make.names(str_sub(header, 1, 11))  # limit header name to 11 characters for Player.Name column
+names(input) = header
+# drop first two rows
+input = input[-1:-2,]
+
+# create vector to house player ID and state
+player_id = seq(1, nrow(input), 2)
+state_rank_id = seq(2, nrow(input), 2)
+state_rank = select(input[state_rank_id, ], State = Pair.Num, Rank = Player.Name)
+state_rank$Rank = str_extract(state_rank$Rank, 'R:\\s\\d+')
+state_rank$Rank = str_extract(state_rank$Rank, '\\d+')
+
+# apply player_id vector to input to isolate player rows; combine with states
+output = input[player_id, ]
+output = bind_cols(output, as.data.frame(state_rank))
+
+# calculate average opponent rankings
+output_tidy = output %>%
+  gather('Round', 'OppNum', 4:10) %>%
+  mutate(OppNum = as.character(parse_number(OppNum)))
+ranks = output[c('Pair.Num', 'Rank')]
+output_tidy = left_join(output_tidy, ranks, by = c('OppNum' = 'Pair.Num'))
+
+output_tidy$OppNum = output[output$Pair.Num == output_tidy$OppNum, 'Rank']
+avg_opp_rank = output_tidy %>%
+  group_by(Player.Name) %>%
+  summarize(AvgOppRank = round(mean(as.numeric(Rank.y), na.rm = T), 0))
+
+### NOT PRODUCING CORRECT OPPONENT RANKING AVERAGES!!! ***
+
+```
+
 
 ```{r warning=FALSE}
 url = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Project1/tournamentinfo.txt')
