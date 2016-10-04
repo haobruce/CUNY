@@ -1,0 +1,35 @@
+---
+title: "Hao-4b"
+author: "Bruce Hao"
+date: "September 27, 2016"
+output: html_document
+---
+
+```{r message=FALSE, warning=FALSE, results='hide'}
+#setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA606/Lab4b")
+library(IS606)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+set.seed(123)
+load("more/ames.RData")
+```
+
+**Exercise 1: Describe the distribution of your sample. What would you say is the "typical" size within your sample? Also state precisely what you interpreted "typical" to mean.**
+
+The sample has a mean of 1534 and median of 1413. Its distribution is right skewed with some outliers to the right. If I had to choose a 'typical' size from this sample, I would use the median of 1413 as the mean is more biased by the outliers.
+
+```{r fig.height=3}
+population <- ames$Gr.Liv.Area
+samp <- sample(population, 60)
+summary(samp)
+qplot(samp, geom = 'histogram', bins = 10)
+```
+
+
+**Exercise 2: Would you expect another student's distribution to be identical to yours? Would you expect it to be similar? Why or why not?**
+
+No, it would not be identical as the sample is a random sample, and so differences should be expected. Given the population size of 2930 and sample size of 60, I would expect that the results would be somewhat similar.
+
+
+

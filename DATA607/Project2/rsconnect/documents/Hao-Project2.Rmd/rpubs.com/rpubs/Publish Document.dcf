@@ -1,0 +1,7 @@
+name: Publish Document
+account: rpubs
+server: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/214935/30215917b9e34b3a9eeaeeba5e5e12b7
+bundleId: https://api.rpubs.com/api/v1/document/214935/30215917b9e34b3a9eeaeeba5e5e12b7
+url: http://rpubs.com/brucehao/214935
+when: 1475545585.20532
