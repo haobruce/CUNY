@@ -1,0 +1,19 @@
+{
+  "books": [{
+    "bookName": "Applied Predictive Modeling", 
+    "authorName1": "Max Kuhn", 
+    "authorName2": "Kjell Johnson",
+    "genre": "Non-fiction", 
+    "publisher": "Springer"
+  }, {
+    "bookName": "Unsouled (Cradle Book 1)", 
+    "authorName1": "Will Wight", 
+    "genre": "Fantasy", 
+    "publisher": "Amazon"
+  }, {
+    "bookName": "The Forever War", 
+    "authorName1": "Joe Haldemann",
+    "genre":"Sci-fi", 
+    "publisher": "St. Martin's Griffin"
+  }]
+}

@@ -1,0 +1,21 @@
+---
+title: "Hao-Week7"
+author: "Bruce Hao"
+date: "October 10, 2016"
+output: html_document
+---
+
+```{r message=FALSE, warning=FALSE}
+library(RCurl)
+library(XML)
+library(rjson)
+#setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA607/Week7")
+```
+
+```{r}
+url = '/Users/bhao/Google Drive/CUNY/git/DATA607/Week7/Hao-Week7.html'
+books_html = readHTMLTable(url)
+
+
+```
+
