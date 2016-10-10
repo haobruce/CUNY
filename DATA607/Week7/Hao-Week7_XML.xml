@@ -5,7 +5,7 @@
         <book id="1">
             <bookName>Applied Predictive Modeling</bookName>
             <authorName>Max Kuhn</authorName>
-            <authorName>Kjell Johnson</authorName>
+            <!-- <authorName>Kjell Johnson</authorName> -->
             <genre>Non-fiction</genre>
             <publisher>Springer</publisher>
         </book>
