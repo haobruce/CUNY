@@ -13,9 +13,12 @@ library(rjson)
 ```
 
 ```{r}
-url = '/Users/bhao/Google Drive/CUNY/git/DATA607/Week7/Hao-Week7.html'
+url = 'https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7.xml'
 books_html = readHTMLTable(url)
 
 
+url = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7.xml')
+webpage = readLines(tc <- textConnection(url)); close(tc)
+pagetree = htmlTreeParse(webpage)
 ```
 
