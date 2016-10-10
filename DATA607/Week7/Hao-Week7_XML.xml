@@ -2,22 +2,22 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     
     <books>
-        <book id="1">
+        <book>
             <bookName>Applied Predictive Modeling</bookName>
-            <authorName>Max Kuhn</authorName>
-            <!-- <authorName>Kjell Johnson</authorName> -->
+            <authorName1>Max Kuhn</authorName1>
+            <authorName2>Kjell Johnson</authorName2>
             <genre>Non-fiction</genre>
             <publisher>Springer</publisher>
         </book>
-        <book id="2">
+        <book>
             <bookName>Unsouled (Cradle Book 1)</bookName>
-            <authorName>Will Wight</authorName>
+            <authorName1>Will Wight</authorName1>
             <genre>Fantasy</genre>
             <publisher>Amazon</publisher>
         </book>
-        <book id="3">
+        <book>
             <bookName>The Forever War</bookName>
-            <authorName>Joe Haldemann</authorName>
+            <authorName1>Joe Haldemann</authorName1>
             <genre>Sci-fi</genre>
             <publisher>St. Martin's Griffin</publisher>
         </book>
