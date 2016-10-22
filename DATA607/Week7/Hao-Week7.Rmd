@@ -8,17 +8,49 @@ output: html_document
 ```{r message=FALSE, warning=FALSE}
 library(RCurl)
 library(XML)
-library(rjson)
-#setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA607/Week7")
+library(jsonlite)
+library(dplyr)
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA607/Week7")
+options(width=100)
 ```
+
+**HTML Table**
 
 ```{r}
-url = 'https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7.xml'
-books_html = readHTMLTable(url)
-
-
-url = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7.xml')
-webpage = readLines(tc <- textConnection(url)); close(tc)
-pagetree = htmlTreeParse(webpage)
+url_html = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7_HTML.html')
+books_html = readHTMLTable(url_html, stringsAsFactors = F)[[1]]
+books_html
 ```
+
+**XML**
+
+```{r}
+url_xml = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7_XML.xml')
+data_xml = xmlParse(url_xml)
+books_xml = xmlToDataFrame(data_xml)
+books_xml
+
+# case with extra parent node
+url_xml2 = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7_XML2.xml')
+data_xml2 = xmlParse(url_xml2)
+data_xml2 = xmlRoot(data_xml2)[[1]]
+books_xml2 = xmlToDataFrame(data_xml2)
+books_xml2
+```
+
+**JSON**
+
+```{r}
+url_json = getURL('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA607/Week7/Hao-Week7_JSON.json')
+books_json = fromJSON(url_json)[[1]]
+books_json
+```
+
+
+**Are the three data frames identical?**
+
+* HTML - Using the `readHTMLTable` function from the `XML` package, the output is a List of 1 with the 1 object being the data frame. Additionally, blanks are imported as blanks.
+* XML - Using the `xmlParse` and `xmlToDataFrame` functions from the `XML` package, the output is data frame with blanks appearing as <NA>.
+* JSON - Using the `fromJSON` function from the `jsonlite` package, the output is a List of 1 with the 1 object being the data frame. Additionally, the blanks are imported as <NA>.
+
 

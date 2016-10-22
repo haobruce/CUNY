@@ -1,0 +1,81 @@
+---
+title: "Hao-Project"
+output: html_notebook
+---
+
+```{r include=FALSE, cache=FALSE}
+# DO NOT REMOVE
+# THIS IS FOR SETTING SOME PLOTTING PARAMETERS SO THAT YOUR PLOTS DON'T TAKE UP TOO MUCH SPACE
+# IF YOU WOULD LIKE TO CHANGE THESE, SEE HELP FILES ON THE par() FUNCTION
+# OR ASK FOR HELP
+library(knitr)
+## set global chunk options
+opts_chunk$set(fig.path='figure/manual-', cache.path='cache/manual-', fig.align='center', fig.show='hold', par=TRUE)
+## tune details of base graphics (http://yihui.name/knitr/hooks)
+knit_hooks$set(par=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(4,4,.2,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
+})
+```
+
+```{r}
+# load data
+
+```
+
+
+### Research question 
+
+**You should phrase your research question in a way that matches up with the scope of inference your dataset allows for.**
+
+*In the context of Daily Fantasy Football, are expert projections for individual players on a given week more accurate than simple historical season averages?*
+
+
+### Cases 
+
+**What are the cases, and how many are there?**
+
+*The cases are the daily fantasy points scored by an individual player on a given week. In general, there are approximately 400-500 individual players playing in a given week AND available as daily fantasy football picks.*
+
+
+### Data collection 
+
+**Describe the method of data collection.**
+
+- *For the expert projections, I follow the site www.fantasyfootballanalytics.net, and they make all of their code (including their web scraping code) available to the public.*  
+- *For the historical averages, www.draftkings.com (a platform for daily fantasy sports betting) provides historical average point per game data for each player.*  
+- *For the actual points scored per game for each player, www.rotoguru.com provides that data and makes it easy to either download or scrape.* 
+
+
+### Type of study 
+
+**What type of study is this (observational/experiment)?**
+
+*This would be an observational study*
+
+
+### Data Source 
+
+**If you collected the data, state self-collected. If not, provide a citation/link.**
+
+*Cited and linked above in the Data collection section*
+
+
+### Response 
+
+**What is the response variable, and what type is it (numerical/categorical)?**
+
+*The response variable is the actual points per game per player, which is a numerical variable.*
+
+
+### Explanatory 
+
+**What is the explanatory variable, and what type is it (numerical/categorival)?**
+
+*The explanatory variable is the projected points per game per player, which is also numerical.* 
+
+
+### Relevant summary statistics 
+
+**Provide summary statistics relevant to your research question. For example, if you’re comparing means across groups provide means, SDs, sample sizes of each group. This step requires the use of R, hence a code chunk is provided below. Insert more code chunks as needed.**
+
+*If I am to compare the accuracy of expert projections against historical averages, I will likely use RMSE as a summary statistic. Another possibility would be to measure the overall accuracy of expert projections, but I will need to think more about how I might do that.*
