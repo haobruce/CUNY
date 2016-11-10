@@ -1,0 +1,8 @@
+name: Publish Document
+title:
+account: rpubs
+server: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/220709/b4c01e4212fd4a019453d85c720675c3
+bundleId: https://api.rpubs.com/api/v1/document/220709/b4c01e4212fd4a019453d85c720675c3
+url: http://rpubs.com/brucehao/220709
+when: 1477262145.77554

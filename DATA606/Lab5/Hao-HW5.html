@@ -94,6 +94,7 @@ button.code-folding-btn:focus {
 </style>
 
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
@@ -197,11 +198,22 @@ pt(t, df)</code></pre>
 <li>H~A!: At least one mean is different</li>
 <li></li>
 </ol>
-<pre class="r"><code>data.frame('stat' = c('degree', 'Residuals', 'Total'), 'Df' = c(2, 10, 12))</code></pre>
-<pre><code>##        stat Df
-## 1    degree  2
-## 2 Residuals 10
-## 3     Total 12</code></pre>
+<pre class="r"><code>k = 5
+n = 1172
+data.frame('stat' = c('degree', 'Residuals', 'Total'), 
+           'Df' = c(k - 1, n - k, n - 1),
+           'SumSq' = c(501.54 * (k - 1), 267382, 501.54 * (k - 1) + 267382),
+           'MeanSq' = c(501.54, 267382 / (n - k), 501.54 + 267382 / (n - k)),
+           'Fvalue' = c(round(501.54 / (267382 / (n - k)), 4),'',''),
+           'Fcheck' = c(round(qf(0.0682, k - 1, n - k, lower.tail = F), 4),'',''),
+           'Pr(&gt;F)' = c(0.0682,'',''))</code></pre>
+<pre><code>##        stat   Df     SumSq   MeanSq Fvalue Fcheck Pr..F.
+## 1    degree    4   2006.16 501.5400  2.189 2.1889 0.0682
+## 2 Residuals 1167 267382.00 229.1191                     
+## 3     Total 1171 269388.16 730.6591</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>The ANOVA p-value of 0.0682 is greater than 5%, so we cannot reject the null that there are any differences between the means at a 5% significance level.</li>
+</ol>
 
 
 
@@ -214,6 +226,7 @@ pt(t, df)</code></pre>
 $(document).ready(function () {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 });
+
 
 </script>
 

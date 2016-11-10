@@ -1,9 +1,16 @@
 ---
 title: "DATA607-Week7"
-output: html_notebook
+output: 
+  html_notebook:
+    theme: yeti
+    toc: true
+    toc_float: true
+    code_folding: hide
 ---
 
-In addition to being a fun and educational exercise in and of itself, I wanted to use the exercise to answer an interest question (well, at least one interesting to me!). So I explored a few of the various APIs that NYT makes available, and many presented potentially interesting ideas. In the end, maybe because I had been struggling to find a good novel to read, I ended up choosing the books API. But I didn't just want to pull down a list of best sellers. I wanted to dig into the data just a bit and see if I could uncover something interesting. I'd like to know whether Fiction books stay on the best sellers list longer than Non-Fiction books or vice versa. At this point, I've only confirmed feasibility of what I'd like to do, but I haven't actually captured any data, so I don't know what the answer is yet.  
+#Introduction  
+
+In addition to being a fun and educational exercise in and of itself, I wanted to use the exercise to answer an interesting question (well, at least one interesting to me!). So I explored a few of the various APIs that NYT makes available, and many presented potentially interesting ideas. In the end, maybe because I had been struggling to find a good novel to read, I ended up choosing the books API. But I didn't just want to pull down a list of best sellers. I wanted to dig into the data just a bit and see if I could uncover something interesting, so I decided to find out whether Fiction books stay on the best sellers list longer than do Non-Fiction books or vice versa. At this point, I've only confirmed feasibility of what I'd like to do, but I haven't actually captured any data, so I don't know what the answer is yet.  
 
 According to the NYT API README page, the best sellers list URI format is as follows:  
 `http://api.nytimes.com/svc/books/{version}/lists/[date/]{list-name}[.response_format]?`
@@ -40,6 +47,8 @@ nytbestsellers$vendor_link = paste0('[Amazon](', nytbestsellers$amazon_product_u
 nytbestsellers$cover = paste0("<img src=", nytbestsellers$book_image, " width='50px'/>")
 ```
 
+#Top 5 in NYT Best Sellers List  
+
 Let's first have a look at the top five fiction and non-fiction books currently on the list.  
 
 ```{r}
@@ -48,7 +57,9 @@ knitr::kable(nytbestsellers[1:5, c('category', 'rank', 'title', 'description', '
 knitr::kable(nytbestsellers[21:25, c('category', 'rank', 'title', 'description', 'author', 'vendor_link', 'cover')], row.names = FALSE, caption = 'New York Times Best Sellers - Top 5 in Non-Fiction')
 ```
 
-Next, we'll take a look at how long books have been on their respective best sellers lists. Based on the histograms below, there doesn't seem to be a discernible difference between the two book categories.  
+#Weeks on NYT Best Sellers List  
+
+Next, we'll take a look at how long books have been on their respective best sellers lists. Based on the histograms below, there doesn't seem to be a discernible difference between the two book categories (aside from the fiction category having one book that has been on the list for a very long time, which happens to be *The Girl on the Train*).    
 
 ```{r}
 nytbestsellers %>% ggplot(aes(x = weeks_on_list, col = category, fill = category)) +
@@ -58,9 +69,11 @@ nytbestsellers %>% ggplot(aes(x = weeks_on_list, col = category, fill = category
   ggtitle('Number of Weeks on NYT Best Sellers List Histogram')
 ```
 
-Perhaps the amount of turnover within the top 20 of each category might prove more interesting. Let's look at how many new books were added to each list that weren't there the previous list. Fortunately, the API results provide each book's ranking for the previous week. All we need to do is count how many were not in the top 20 in the previous week.  
+#Turnover of NYT Best Sellers  
 
-And again, there does not seem to be a significant difference. There were 10 new non-fiction additions compared to 9 new fiction additions. 
+Perhaps the amount of turnover within the top 20 of each category might prove more interesting. Let's look at how many new books were added to each list that weren't there the previous week. Fortunately, the API results provide each book's ranking for the previous week. All we need to do is count how many were not in the top 20 in the previous week.  
+
+And again, there does not seem to be a significant difference. There were 10 new non-fiction additions compared to 9 new fiction additions. I suppose it's interesting that there is that much turnover from week-to-week. Perhaps in a future study we could look at turnover over time.  
 
 ```{r}
 nytbestsellers %>% mutate(newAddition = ifelse(rank_last_week == 0, 'New Addition', 'Not New Addition')) %>%
@@ -73,7 +86,9 @@ nytbestsellers %>% mutate(newAddition = ifelse(rank_last_week == 0, 'New Additio
   ggtitle('Proportion of New Additions to NYT Best Sellers List')
 ```
 
-I'm running out of things to compare here! One last comparison then - let's have a look at how much movement in rankings took place within each category from the previous week to the current week. We'll evaluate the change in rank from week-to-week. For those books that were not ranked in the previous week, we'll assume that they were ranked 21 (just outside of the best sellers list).  
+#Rank Changes of NYT Best Sellers  
+
+I'm running out of things to compare here! One last comparison then - let's have a look at how much movement in rankings took place within each category from the previous week to the current week. We'll evaluate the change in rank from week-to-week. For those books that were not ranked in the previous week, we'll assume that they were all ranked 21st (just outside of the best sellers list).  
 
 Alas, when comparing the average absolute value of rank change, fiction books seem to have moved around just a bit more than non-fiction books; however, without a benchmark, it's hard to say how big of a difference this really represents.  
 
@@ -83,6 +98,6 @@ nytbestsellers %>% mutate(rankChange = ifelse(rank_last_week == 0, 21, rank_last
   summarise(avgAbsRankChange = mean(abs(rankChange)))
 ```
 
-All in all, this was a fun exercise even if the takeaways from the data analysis were not groundbreaking. Perhaps looking at this data over time would prove more interesting...  
+All in all, this was a fun exercise even if the takeaways from the data analysis were not earth shattering.  Perhaps looking at this data over time would prove more interesting...  
 
 

@@ -2,7 +2,9 @@
 title: "Hao-HW5"
 author: "Bruce Hao"
 date: "10/6/2016"
-output: pdf_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r}
@@ -96,7 +98,7 @@ k = 5
 n = 1172
 data.frame('stat' = c('degree', 'Residuals', 'Total'), 
            'Df' = c(k - 1, n - k, n - 1),
-           'SumSq' = c(501.54 * (k - 1), 267382, 501.54* (k - 1) + 267382),
+           'SumSq' = c(501.54 * (k - 1), 267382, 501.54 * (k - 1) + 267382),
            'MeanSq' = c(501.54, 267382 / (n - k), 501.54 + 267382 / (n - k)),
            'Fvalue' = c(round(501.54 / (267382 / (n - k)), 4),'',''),
            'Fcheck' = c(round(qf(0.0682, k - 1, n - k, lower.tail = F), 4),'',''),

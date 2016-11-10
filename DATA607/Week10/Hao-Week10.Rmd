@@ -1,0 +1,303 @@
+---
+title: "Hao-Week10"
+output: 
+  html_notebook:
+    theme: yeti
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+#Summary#  
+This week's project involves training a predictive model to distinguish between spam and ham emails. The general steps can be broken down as follows:  
+
+* Read emails into R  
+* Label emails as spam or ham  
+* Cleanse emails to 1) work well with the functions and 2) work well with the training and prediction processes  
+* Split the emails into training and test sets  
+* Train various models on the training set  
+* Test models on the test set  
+
+```{r message=FALSE, warning=FALSE}
+library(tm)
+library(stringr)
+library(XML)
+library(RTextTools)
+library(ROCR)
+library(dplyr)
+library(ggplot2)
+
+setwd("~/Google Drive/CUNY/git/DATA607/Week10")
+#setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA607/Week10")
+set.seed(123)
+```
+
+#Custom data cleansing functions#  
+I wrote two functions to separate the email cleansing and corpus cleansing processes.  
+
+```{r}
+# create function to cleanse emails by removing non ASCII characters
+cleanse_emails = function(dat) {
+  dat = str_c(dat, collapse = " ")
+  dat2 <- unlist(strsplit(dat, split=" "))
+  dat3 <- grep("dat2", iconv(dat2, "latin1", "ASCII", sub="dat2"))
+  if (length(dat3) == 0) {
+    dat4 = dat2
+  } else dat4 = dat2[-dat3]
+  dat5 <- paste(dat4, collapse = " ")
+}
+
+cleanse_corpus = function(x) {
+  x = tm_map(x, PlainTextDocument)  # to make tm package play nice
+  x = tm_map(x, removeNumbers)
+  x = tm_map(x, removePunctuation)  # leaving punctuation in case relevant to spam ham filter
+  x = tm_map(x, stripWhitespace)
+  x = tm_map(x, stemDocument)
+  x = tm_map(x, content_transformer(tolower))  # content_transformer required because tolower not tm function
+  x = tm_map(x, removeWords, stopwords('en'))
+}
+```
+
+#Importing emails into document corpus#  
+Using the `tm` library, I created an email corpus of documents, each of which contained the cleansed email content and its spam/ham label as metadata.  
+
+```{r}
+spam_path = '20021010_spam/'
+# add spam to email corpus
+# create initial corpus
+email = readLines(str_c(spam_path, list.files(spam_path)[1]))
+email = cleanse_emails(email)
+email_corpus = Corpus(VectorSource(email))
+email_corpus = cleanse_corpus(email_corpus)
+meta(email_corpus[[1]], 'spam') = 1
+
+for (i in 2:length(list.files(spam_path))) {
+  email = readLines(str_c(spam_path, list.files(spam_path)[i]))
+  email = cleanse_emails(email)
+
+  # add meta data to house spam classification
+  if (length(email) != 0) {
+    tmp_corpus = Corpus(VectorSource(email))
+    tmp_corpus = cleanse_corpus(tmp_corpus)
+    meta(tmp_corpus[[1]], 'spam') = 1
+    email_corpus = c(email_corpus, tmp_corpus)
+  }
+}
+
+easy_ham_path = '20021010_easy_ham/'
+# add ham to email corpus
+for (i in 1:length(list.files(easy_ham_path))) {
+  email = readLines(str_c(easy_ham_path, list.files(easy_ham_path)[i]))
+  email = cleanse_emails(email)
+
+  # add meta data to house spam classification
+  if (length(email) != 0) {
+    tmp_corpus = Corpus(VectorSource(email))
+    tmp_corpus = cleanse_corpus(tmp_corpus)
+    meta(tmp_corpus[[1]], 'spam') = 0
+    email_corpus = c(email_corpus, tmp_corpus)
+  }
+}
+
+hard_ham_path = '20021010_hard_ham/'
+# add ham to email corpus
+for (i in 1:length(list.files(hard_ham_path))) {
+  email = readLines(str_c(hard_ham_path, list.files(hard_ham_path)[i]))
+  email = cleanse_emails(email)
+
+  # add meta data to house spam classification
+  if (length(email) != 0) {
+    tmp_corpus = Corpus(VectorSource(email))
+    tmp_corpus = cleanse_corpus(tmp_corpus)
+    meta(tmp_corpus[[1]], 'spam') = 0
+    email_corpus = c(email_corpus, tmp_corpus)
+  }
+}
+```
+
+#Randomizing email corpus#  
+Because 1) the emails were read in order of spam, easy ham and hard ham and 2) the `RTextTools` container object requires the training data to represent the 1:X documents and the test data to represent the X:N documents, I had to randomize the emails within the corpus before creating the container object.  
+
+```{r}
+# randomize corpus order
+N = length(email_corpus)
+rand_index = sample(1:N)
+email_corpus = email_corpus[rand_index]
+tm_filter(email_corpus[1:100], FUN = function(x) meta(x)[['spam']] == 1)  # check that spam and ham have been randomized
+
+# create document term matrix 
+dtm = DocumentTermMatrix(email_corpus)
+dtm = removeSparseTerms(dtm, 1-(10/length(email_corpus)))
+#inspect(dtm[100:120, 100:110])
+spam_labels = unlist(meta(email_corpus, 'spam'))
+```
+
+#Modeling with the RTextTools package#  
+With the data randomized, I created an `RTextTools` container, which in turn would be used to train the various models and analyze their respective results. I trained three algorithms: 1) support vector machine (SVM), 2) classification tree (TREE) and 3) maximum entropy (MAXENT). As illustrated in the confusion matrices and summary analytics below, the accuracy of all three models is superb. Out of 660 emails in the test set, the models only misclassified 7-8 emails in total.   
+
+```{r}
+# create container
+container = create_container(dtm, labels = spam_labels, 
+                             trainSize = 1:round(N*0.8,0), testSize = (round(N*0.8,0)+1):N,  # use 80% of data for train
+                             virgin = FALSE)
+
+# estimation procedure
+svm_model = train_model(container, 'SVM')
+#cross_validate(container, nfold = 5, algorithm = 'SVM')
+tree_model = train_model(container, 'TREE')
+#cross_validate(container, nfold = 5, algorithm = 'TREE')
+maxent_model = train_model(container, 'MAXENT')
+#cross_validate(container, nfold = 5, algorithm = 'MAXENT')
+
+svm_out = classify_model(container, svm_model)
+tree_out = classify_model(container, tree_model)
+maxent_out = classify_model(container, maxent_model)
+
+# evaluation
+labels_out = data.frame(
+  correct_label = spam_labels[(round(N*0.8,0)+1):N], 
+  svm = as.character(svm_out[,1]),
+  tree = as.character(tree_out[,1]),
+  maxent = as.character(maxent_out[,1]),
+  stringsAsFactors = FALSE
+)
+
+# svm confusion table
+table(actual = labels_out[,1], predicted = labels_out[,2])
+# tree confusion table
+table(actual = labels_out[,1], predicted = labels_out[,3])
+# maxent confusion table
+table(actual = labels_out[,1], predicted = labels_out[,4])
+
+# analytics
+svm_analytics = create_analytics(container, svm_out)
+summary(svm_analytics)
+tree_analytics = create_analytics(container, tree_out)
+summary(tree_analytics)
+maxent_analytics = create_analytics(container, maxent_out)
+summary(maxent_analytics)
+```
+
+#Limitations of RTextTools#  
+The `RTextTools` models worked wonderfully - both extremely fast and accurate; however, the package does not allow for much customization and/or fine tuning. Initially, I did not realize that the probabilities in the classify_model objects were label-specific until Judd Andermann pointed that out to me. With his pointers, I was finally able to produce ROC curves for the `RTextTools` models, an example of which I've produced below.  
+
+That said, I had already moved on to using the `caret` models (as outlined below), which still offered more flexibility in terms of model parameter tuning.  
+
+```{r}
+svm_out2 = svm_out %>% mutate(SVM_PROB2 = ifelse(SVM_LABEL == 0, 1 - SVM_PROB, SVM_PROB)) 
+tree_out2 = tree_out %>% mutate(TREE_PROB2 = ifelse(TREE_LABEL == 0, 1 - TREE_PROB, TREE_PROB)) 
+maxent_out2 = maxent_out %>% mutate(MAXENTROPY_PROB2 = ifelse(MAXENTROPY_LABEL == 0, 1 - MAXENTROPY_PROB,
+                                                          MAXENTROPY_PROB)) 
+
+# create ROCR prediction object
+svm_pred1 = prediction(svm_out2$SVM_PROB2, labels_out$correct_label)
+tree_pred1 = prediction(tree_out2$TREE_PROB2, labels_out$correct_label)
+maxent_pred1 = prediction(maxent_out2$MAXENTROPY_PROB2, labels_out$correct_label)
+# create ROCR performance object
+svm_perf1 = performance(svm_pred1, measure="tpr", x.measure="fpr")
+tree_perf1 = performance(tree_pred1, measure="tpr", x.measure="fpr")
+maxent_perf1 = performance(maxent_pred1, measure="tpr", x.measure="fpr")
+
+plot(svm_perf1)
+lines(tree_perf1@x.values[[1]], tree_perf1@y.values[[1]], col = 2)
+lines(maxent_perf1@x.values[[1]], maxent_perf1@y.values[[1]], col = 3)
+legend('bottomright', legend = c('svm', 'tree', 'maxent'), 
+   lty=1, col=c('black', 'red', 'green'), bty='n', cex=.75)
+```
+
+#Modeling with the caret package#  
+Whereas the `RTextTools` package is specific to text mining, the `caret` package is a much more general purpose predictive modeling package. In this particular case, training models using the `caret` package was considerably slower and/or much more prone to error. For example, training the random forest models took more than 30 minutes; I stopped the training at that point and am unsure if it would have actually completed correctly. Training the Naive Bayes and neural net models resulted in errors for which I was unable to find solutions.  
+
+That said, I was able to train linear/logistic regression and support vector machine models. The beauty of the `caret` package is that it allows for user-friendly, automatic and user-defined model tuning during the training process:  
+
+* The `glmnet` model has two tuning parameters: 1) alpha (0 to 1 or 100% lasso to 100% ridge) and 2) lambda (0 to Inf or the size of the penalty), and the `svmRadial` model has two tuning parameters: 1) sigma (0 to Inf or the complexity of the model or the bias-variance trade-off) and 2) C or the cost regularization parameter . By default, the `caret` `train` function will select the tuning parameters that produce the best out-of-sample results based on a user-specified metric, e.g. accuracy, ROC, etc. and bootstrapped resampling    
+* The `caret` `trainControl` object then allows the user to define the resampling method, summary function for two class classification and more  
+* The `caret` `tuneLength` and `tuneGrid` arguments allow the user to further control the set of parameter values over which to tune the models  
+
+```{r}
+# attempt modeling using caret package
+library(caret)
+#library(parallel)  
+#library(doParallel)  # for OSX use library(doMC)  
+library(caTools)
+
+# convert dtm to matrix
+full_mat = as.matrix(dtm)
+train_mat = full_mat[1:round(N*0.8,0),]
+test_mat = full_mat[(round(N*0.8,0)+1):N,]
+# caret twoClassSummary requires non-numeric classes
+spam_labels = factor(spam_labels, levels = c(0, 1), labels = c('ham', 'spam'))  
+train_y = spam_labels[1:round(N*0.8,0)]
+test_y = spam_labels[(round(N*0.8,0)+1):N]
+
+#use_cores = detectCores()-1
+#cl = makeCluster(use_cores)
+#registerDoParallel(cl)  # for OSX use registerDoMC(cl)
+
+# summaryFunction = twoClassSummary allows train() function to use AUC metric to rank models; 
+# classProbs = TRUE allows summaryFunction to work properly
+myControl = trainControl(method = 'cv', number = 5, summaryFunction = twoClassSummary, classProbs = T, verboseIter = T)
+
+# glmnet = a general linear model with combination of lasso regression (penalizes number of non-zero coefficients) and
+# ridge regression (penalizes absolute magnitude of coefficients); 
+# glmnet has two tuning parameters: 1) alpha (0 to 1 or 100% lasso to 100% ridge) and 2) lambda (0 to Inf or the size
+# of the penalty)
+glm = train(x = train_mat, y = train_y, method = 'glmnet', metric = 'ROC', family = 'binomial', trControl = myControl)
+#            tuneGrid = expand.grid(alpha = seq(0, 1, 0.1), lambda = seq(0, 0.1, 0.01)))
+glm
+plot(glm)
+glm_pred = predict(glm, newdata = test_mat, type = 'raw')
+colAUC(as.numeric(glm_pred), test_y, plotROC = T)
+confusionMatrix(glm_pred, test_y)
+
+# support vector machine
+svm = train(x = train_mat, y = train_y, method = 'svmRadial', metric = 'ROC', family = 'binomial', trControl = myControl)
+svm
+plot(svm)
+svm_pred = predict(svm, newdata = test_mat, type = 'raw')
+colAUC(as.numeric(svm_pred), test_y, plotROC = T)
+confusionMatrix(svm_pred, test_y)
+
+# naive bayes -- FAILED
+# nb = train(x = train_mat, y = train_y, method = 'nb', metric = 'ROC', family = 'binomial', trControl = myControl)
+# plot(nb)
+# nb_pred = predict(nb, newdata = test_mat, type = 'raw')
+# colAUC(as.numeric(nb_pred), test_y, plotROC = T)
+
+# random forest -- TOO SLOW
+#rf = train(x = train_mat, y = train_y, method = 'rf', metric = 'ROC', family = 'binomial', trControl = myControl)
+
+# ranger = random forest model which has one tuning parameter mtry (2 to 100) or the number of variables to consider
+# at each split; this can be controlled by adjusting the tuneLength parameter or by defining a custom tuneGrid
+# -- FAILED
+#rf = train(x = train_mat, y = make.names(train_y), method = 'ranger', metric = 'ROC', trControl = myControl)
+
+# neural network -- FAILED
+#nnet = train(x = train_mat, y = train_y, method = 'nnet', metric = 'ROC', family = 'binomial', trControl = myControl)
+#stopCluster(cl)
+#registerDoSEQ()
+```
+
+#A note on ROC curves for spam detection#  
+Using the `glmnet` ROC curve as an example, the model achieves an extremely high true positive rate (TPR > 95%) without incurring any false positives (FPR = 0%). Practically speaking, this means that one could select a probability threshold that would not incorrectly classify any ham as spam while letting through a small amount of spam. This might be an appropriate setting for a business, where a misclassification of ham as spam could result in real business damage. Conversely, for personal email purposes, one may find it acceptable to miss a real email or two in exchange for few spam emails in one's inbox. Either way, the ROC curve can help the modeler decide on the probability threshold appropriate for the given situation.  
+
+#Comparing caret trained models#  
+The `caretEnsemble` package then allows us compare model results. The `dotplot` function plots the ROC and 95% confidence intervals for each model. As illustrated below, the `glmnet` model outperforms the `svmRadial` model quite significantly.  
+
+```{r}
+library(caretEnsemble)
+
+# compare models using resample
+model_list = list(glm = glm, svm = svm)
+resamps = resamples(model_list)
+summary(resamps)
+dotplot(resamps, metric = 'ROC')
+```
+
+#Conclusion#  
+The `glmnet` model outperformed all other models trained using both the `RTextTools` and `caret` packages as it only produced 4 errors and had the higher AUC value. It also has several other factors in its favor:  
+
+* It tends to be relatively fast to train  
+* Because of the lasso regression component, which seeks to minimize the number of non-zero coefficients, it can be used for feature selection  
+* It is interpretable as the coefficients provide information about direction and magnitude  
+* Lastly, the availability of the ROC curve allows the modeler to decide which classification probability threshold is most appropriate for the situation at hand  

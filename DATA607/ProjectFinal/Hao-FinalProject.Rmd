@@ -1,0 +1,123 @@
+---
+title: "Data607-FinalProject"
+output: 
+  html_notebook:
+    theme: yeti
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+```{r message=FALSE, warning=FALSE}
+library(recommenderlab)
+library(dplyr)
+library(ggplot2)
+library(ggthemes)
+library(gridExtra)
+
+setwd("~/Google Drive/CUNY/git/DATA607/Project4Final")
+path_name = "~/Google Drive/CUNY/git/DATA607/Project4Final"
+ratings = read.csv(paste0(path_name, '/ml-latest-small/ratings.csv'), stringsAsFactors = FALSE)
+```
+
+#Summary of Data Set#  
+
+This dataset (ml-latest-small) describes 5-star rating and free-text tagging activity from MovieLens, a movie recommendation service. It contains 100004 ratings and 1296 tag applications across 9125 movies. These data were created by 671 users between January 09, 1995 and October 16, 2016. This dataset was generated on October 17, 2016.
+
+Users were selected at random for inclusion. All selected users had rated at least 20 movies. No demographic information is included. Each user is represented by an id, and no other information is provided.
+
+The data are contained in the files links.csv, movies.csv, ratings.csv and tags.csv. More details about the contents and use of all these files follows.
+
+This is a development dataset. As such, it may change over time and is not an appropriate dataset for shared research results. See available benchmark datasets if that is your intent.
+
+This and other GroupLens data sets are publicly available for download at http://grouplens.org/datasets/.
+
+#Visualization of Data Set#  
+
+```{r}
+ratings %>% ggplot(aes(x = rating)) + 
+  geom_histogram(bins = 10) + 
+  ggtitle('Histogram of Movie Ratings') 
+
+p1 = ratings %>% group_by(userId) %>%
+  summarise(avgRating = mean(rating), nRatings = n()) %>%
+  ggplot(aes(x = avgRating)) +
+  geom_histogram() +
+  xlab('User Average Rating')
+
+p2 = ratings %>% group_by(userId) %>%
+  summarise(avgRating = mean(rating), nRatings = n()) %>%
+  ggplot(aes(x = nRatings)) +
+  geom_histogram() +
+  xlab('Number of Rated Movies') +
+  ylab('Users')
+
+p3 = ratings %>% group_by(movieId) %>%
+  summarise(avgRating = mean(rating), nRatings = n()) %>%
+  ggplot(aes(x = avgRating)) +
+  geom_histogram() +
+  xlab('Movie Average Rating')
+
+p4 = ratings %>% group_by(movieId) %>%
+  summarise(avgRating = mean(rating), nRatings = n()) %>%
+  ggplot(aes(x = nRatings)) +
+  geom_histogram() +
+  xlab('Number of Ratings per Movie') +
+  ylab('Movies')
+
+grid.arrange(p1, p3, p2, p4, ncol = 2)
+```
+
+#Types of Recommender Methods [REWRITE]#  
+
+There are two main categories of collaborative filtering algorithms: memory-based and model-based methods.
+
+Memory-based methods simply memorize all ratings and make recommendations based on relation between user-item and rest of the matrix. In model-based methods predicting parametrized model firstly is needed to be fit based on rating matrix and then recommendations are issued based on fitted model.
+
+The most popular two memory-based methods are user-based and item-based collaborative filtering. These methods are example of neighboring-based methods, which refer to ratings of similar users or items and make recommendations based on weighed sum of nearest users/items ratings. User-based CF method is built based on assumption that if two users have similar ratings on some items, they will have similar ratings on the remaining items. The same for item-based CF, but with item perspective.
+
+Model-based methods, on the other hand, build parametrized models and recommend items with the highest rank, returned by model. For example, Slope One method learns a set of simple predictors (one for each pair of two items) with just constant variable. Therefore, this variable represents average difference between ratings of two items. Using this method, fast computation and reasonable accuracy could be easily achieved. Another example of this class of methods is SVD Approximation. In this approach ranking matrix is decomposed based on Singular Value Decomposition and then reconstructed keeping only first r most significance entities. This gives an ability to predict missing values of ranking matrix.
+
+#recommenderlab [REWRITE]#  
+
+##Most Popular [REWRITE]##  
+Most popular (item average) approach computes average rating for each item based on available ratings and predicts each unknown rating as average for item. As a result, missed ratings for each item will be the same for each user.
+
+Algorithm:
+1. Calculate average rating for each item;
+2. Predict missed ratings in R(rating matrix) as average for item.
+
+To work with recommenderlab package, data firstly is needed to be converted to sparse format:
+
+```{r}
+# transforming numeric IDs into strings so that sparseMatrix function does not fill in missing
+# ID numbers and thus preserving correct dimensions
+i = paste0('u', ratings$userId)
+j = paste0('m', ratings$movieId)
+x = ratings$rating
+
+df = data.frame(i, j, x, stringsAsFactors = T)
+
+# interesting that as.integer works on character vector
+sparse_matrix = sparseMatrix(as.integer(df$i), as.integer(df$j), x = df$x)
+colnames(sparse_matrix) = levels(df$j)
+rownames(sparse_matrix) = levels(df$i)
+
+# create recommenderLab real rating object
+real_ratings = new('realRatingMatrix', data = sparse_matrix)
+
+# create Recommender object
+model = Recommender(real_ratings, method = 'POPULAR', param = list(normalize = 'center'))
+
+# create prediction object
+pred = predict(model, real_ratings[1:5], type = 'ratings')
+as(pred, 'matrix')[, 1:5]
+
+# evaluate accuracy using RMSE
+e = evaluationScheme(real_ratings, method = 'split', train = 0.8, given = -5)
+model = Recommender(getData(e, 'train'), method = 'POPULAR', param = list(normalize = 'center'))
+pred = predict(model, getData(e, 'known'), type = 'ratings')
+rmse_popular = calcPredictionAccuracy(pred, getData(e, 'unknown'))
+rmse_popular
+```
+

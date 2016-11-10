@@ -1,0 +1,31 @@
+---
+title: "R Notebook"
+output: 
+  html_notebook:
+    theme: yeti
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+```{r}
+setwd("~/Google Drive/CUNY/git/DATA607/Week11")
+```
+
+#Scenario analysis#  
+
+I selected Amazon.com for this example.  
+
+* Who are your target users? Amazons target usrs are basically all kinds of consumers, including consumers of physical goods, digital goods, video, music, etc.  
+
+* What are their key goals? Amazon carries millions of products, so one of the key goals of the site is to make it easier for users to find products that they are interested in, whether they are consciously aware of it or not.  
+
+* How can you accomplish those goals? Amazon accomplishes this particular goal through the design and implementation of a recommendation system. Specficailly, given Amazon's scale - both in terms of users and products - Amazon has somewhat unique challenges as it relates to recommendation systems.  
+
+#Reverse engineering#  
+
+Based on the reading material, Amazon solved the aforementioned problem by designing and implementing its own item-based collaborative filtering algorithm. By conducing the time-intensive calculations offline, Amazon's algorithm is able to very quickly provide accurate recommendations to its users in effectively real time - unlike some of the other algorithms it explored which were either too slow, too inaccurate or otherwise not suitable.  
+
+#Recommendations for improvements#  
+
+Personally, I use Amazon a lot for purchasing books. And when I do, ratings are especially important to me. I won't even click on a book unless it has a 4+ star rating. As such, while my Amazon homepage is covered with books, none of them have ratings. As a result, I hardly ever click on any of the books on my homepage.  
