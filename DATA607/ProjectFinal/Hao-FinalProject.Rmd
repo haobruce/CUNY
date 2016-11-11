@@ -11,13 +11,24 @@ output:
 ```{r message=FALSE, warning=FALSE}
 library(recommenderlab)
 library(dplyr)
+library(stringr)
 library(ggplot2)
 library(ggthemes)
 library(gridExtra)
 
-setwd("~/Google Drive/CUNY/git/DATA607/Project4Final")
-path_name = "~/Google Drive/CUNY/git/DATA607/Project4Final"
+setwd("~/Google Drive/CUNY/git/DATA607/ProjectFinal")
+path_name = "~/Google Drive/CUNY/git/DATA607/ProjectFinal"
 ratings = read.csv(paste0(path_name, '/ml-latest-small/ratings.csv'), stringsAsFactors = FALSE)
+movies = read.csv(paste0(path_name, '/ml-latest-small/movies.csv'), stringsAsFactors = FALSE)
+
+# create year column
+movies = movies %>% mutate(year = as.integer(str_extract(title, "([[:digit:]]{4})")))
+
+# limit to more recent movies
+ratings = ratings %>% 
+  left_join(movies, by = 'movieId') %>%
+  filter(year >= 2010) %>%
+  select(userId, movieId, rating, timestamp)
 ```
 
 #Summary of Data Set#  
@@ -80,13 +91,6 @@ Model-based methods, on the other hand, build parametrized models and recommend 
 
 #recommenderlab [REWRITE]#  
 
-##Most Popular [REWRITE]##  
-Most popular (item average) approach computes average rating for each item based on available ratings and predicts each unknown rating as average for item. As a result, missed ratings for each item will be the same for each user.
-
-Algorithm:
-1. Calculate average rating for each item;
-2. Predict missed ratings in R(rating matrix) as average for item.
-
 To work with recommenderlab package, data firstly is needed to be converted to sparse format:
 
 ```{r}
@@ -105,19 +109,137 @@ rownames(sparse_matrix) = levels(df$i)
 
 # create recommenderLab real rating object
 real_ratings = new('realRatingMatrix', data = sparse_matrix)
+```
 
-# create Recommender object
-model = Recommender(real_ratings, method = 'POPULAR', param = list(normalize = 'center'))
+##Most Popular (Popular)[REWRITE]##  
+Most popular (item average) approach computes average rating for each item based on available ratings and predicts each unknown rating as average for item. As a result, missed ratings for each item will be the same for each user.
+
+Algorithm:
+1. Calculate average rating for each item;
+2. Predict missed ratings in R(rating matrix) as average for item.
+
+```{r}
+# create Recommender object for popular model
+model_popular = Recommender(real_ratings, method = 'POPULAR', param = list(normalize = 'center'))
 
 # create prediction object
-pred = predict(model, real_ratings[1:5], type = 'ratings')
-as(pred, 'matrix')[, 1:5]
+pred_popular = predict(model_popular, real_ratings[1:5], type = 'ratings')
+as(pred_popular, 'matrix')[, 1:5]
 
-# evaluate accuracy using RMSE
-e = evaluationScheme(real_ratings, method = 'split', train = 0.8, given = -5)
-model = Recommender(getData(e, 'train'), method = 'POPULAR', param = list(normalize = 'center'))
-pred = predict(model, getData(e, 'known'), type = 'ratings')
-rmse_popular = calcPredictionAccuracy(pred, getData(e, 'unknown'))
+# evaluate accuracy of popular model
+e_popular = evaluationScheme(real_ratings, method = 'split', train = 0.8, given = -5)
+mode_popular = Recommender(getData(e_popular, 'train'), method = 'POPULAR', param = list(normalize = 'center'))
+pred_popular = predict(model_popular, getData(e_popular, 'known'), type = 'ratings')
+rmse_popular = calcPredictionAccuracy(pred_popular, getData(e_popular, 'unknown'))
 rmse_popular
+```
+
+##User-Based Collaborative Filtering (UBCF)##  
+
+Algorithm:
+1. 
+2. 
+
+```{r}
+# create Recommender object for ubcf model
+model_ubcf = Recommender(real_ratings, method = 'UBCF', param = list(normalize = 'center'))
+
+# create prediction object
+pred_ubcf = predict(model_ubcf, real_ratings[1:5], type = 'ratings')
+as(pred_ubcf, 'matrix')[, 1:5]
+
+# evaluate accuracy of ubcf model
+e_ubcf = evaluationScheme(real_ratings, method = 'split', train = 0.8, given = -5)
+mode_ubcf = Recommender(getData(e_ubcf, 'train'), method = 'ubcf', param = list(normalize = 'center'))
+pred_ubcf = predict(model_ubcf, getData(e_ubcf, 'known'), type = 'ratings')
+rmse_ubcf = calcPredictionAccuracy(pred_ubcf, getData(e_ubcf, 'unknown'))
+rmse_ubcf
+```
+
+##Item-Based Collaborative Filtering (IBCF)##  
+
+Algorithm:
+1. 
+2. 
+
+```{r}
+# create Recommender object for ibcf model
+model_ibcf = Recommender(real_ratings, method = 'IBCF', param = list(normalize = 'center'))
+
+# create prediction object
+pred_ibcf = predict(model_ibcf, real_ratings[1:5], type = 'ratings')
+as(pred_ibcf, 'matrix')[, 1:5]
+
+# evaluate accuracy of ibcf model
+e_ibcf = evaluationScheme(real_ratings, method = 'split', train = 0.8, given = -5)
+mode_ibcf = Recommender(getData(e_ibcf, 'train'), method = 'ibcf', param = list(normalize = 'center'))
+pred_ibcf = predict(model_ibcf, getData(e_ibcf, 'known'), type = 'ratings')
+rmse_ibcf = calcPredictionAccuracy(pred_ibcf, getData(e_ibcf, 'unknown'))
+rmse_ibcf
+```
+
+##Singular Value Decomposition (SVD)##  
+
+Algorithm:
+1. 
+2. 
+
+```{r}
+# create Recommender object for svd model
+model_svd = Recommender(real_ratings, method = 'SVD', param = list(normalize = 'center'))
+
+# create prediction object
+pred_svd = predict(model_svd, real_ratings[1:5], type = 'ratings')
+as(pred_svd, 'matrix')[, 1:5]
+
+# evaluate accuracy of svd model
+e_svd = evaluationScheme(real_ratings, method = 'split', train = 0.8, given = -5)
+mode_svd = Recommender(getData(e_svd, 'train'), method = 'svd', param = list(normalize = 'center'))
+pred_svd = predict(model_svd, getData(e_svd, 'known'), type = 'ratings')
+rmse_svd = calcPredictionAccuracy(pred_svd, getData(e_svd, 'unknown'))
+rmse_svd
+```
+
+#Recommend Movies#  
+
+##Organize Movies According to Genre##  
+
+```{r}
+# find movies based on genre and year
+movies %>% filter(str_detect(genres, "Animation") & year == 2014)
+
+# create custom user ratings
+custom_ratings_df = data.frame(title = c('The Secret Life of Pets (2016)', 'Kung Fu Panda 3 (2016)', 'Zootopia (2016)', 'Inside Out (2015)',
+                                      'Minions (2015)', 'The Good Dinosaur (2015)', 'Hotel Transylvania 2 (2015)', 'The Lego Movie (2014)',
+                                      'Mr. Peabody & Sherman (2014)', 'How to Train Your Dragon 2 (2014)', 'Big Hero 6 (2014)',
+                                      'Song of the Sea (2014)', 'Paperman (2012)', 'Grand Budapest Hotel, The (2014)',
+                                      "King's Speech, The (2010)", 'How to Train Your Dragon (2010)', 'Avengers, The (2012)',
+                                      'The Imitation Game (2014)'),
+                            rating = c(3.5, 3.5, 5.0, 4.0, 3.0, 1.0, 5.0, 1.0, 1.0, 4.5, 5.0, 5.0, 5.0, 5.0, 5.0, 4.5, 1.0, 4.0))
+
+# add movieId
+custom_ratings = custom_ratings_df %>% left_join(movies, by = 'title') %>%
+  mutate(i = 'uCustom', j = paste0('m', movieId), x = rating) %>% select(i, j, x)
+custom_ratings
+
+custom_df = rbind(df, custom_ratings)
+custom_sparse_matrix = sparseMatrix(as.integer(custom_df$i), as.integer(custom_df$j), x = custom_df$x)
+colnames(custom_sparse_matrix) = levels(custom_df$j)
+rownames(custom_sparse_matrix) = levels(custom_df$i)
+
+# check custom user ratings
+check = data.frame(custom_sparse_matrix[custom_sparse_matrix@Dimnames[[1]] == 'uCustom',])
+check$movieId = rownames(check)
+colnames(check)[1] = 'rating'
+check[check$rating != 0,]
+
+# create real rating object
+custom_real_ratings = new('realRatingMatrix', data = custom_sparse_matrix)
+
+# make prediction using ubcf model
+custom_ubcf = predict(model_ubcf, n = 20, custom_real_ratings)
+custom_ubcf = as(custom_ubcf, 'list')$uCustom
+custom_ubcf = data.frame(rank = 1:10, movieId = as.integer(str_replace(custom_ubcf, 'm', '')))
+custom_ubcf %>% left_join(movies, by = 'movieId')
 ```
 
