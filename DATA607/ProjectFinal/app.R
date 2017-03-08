@@ -24,7 +24,8 @@ ratings = ratings %>%
   select(userId, movieId, rating, timestamp)
 
 movies = movies %>%
-  filter(year >= 2010) 
+  filter(year >= 2010) %>%
+  arrange(title)
 
 genres = movies$genres
 genres = str_split(genres, "\\|", simplify = TRUE)

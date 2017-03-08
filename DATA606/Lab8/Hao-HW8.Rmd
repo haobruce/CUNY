@@ -1,0 +1,57 @@
+---
+title: "Hao-HW8"
+author: "Bruce Hao"
+date: "November 30, 2016"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+Practice: 8.1, 8.3, 8.7, 8.15, 8.17
+Graded: 8.2, 8.4, 8.8, 8.16, 8.18
+
+**8.2**  
+
+a) 120.07 - 1.93 x parity  
+
+b) Children who are not first born are 1.93 ounces lighter than first born children, on average  
+
+c) The p-value of 0.1052 indicates that there is not a statistically significant difference at the 5% significance level  
+
+**8.4**  
+
+a) 18.93 - 9.11 x eth + 3.10 x sex + 2.15 x lrn  
+
+b) eth: non-aboriginal students were absent on average 9.11 fewer days vs. aboriginal students, all else remaining equal; sex: male students were absent on average 3.10 more days vs. female students, all else remaining equal; lrn: slow learning students were absent on average 2.15 more days vs. average learning students, all else remaining equal  
+
+c) 2 - (18.93 - 9.11 x 0 + 3.10 x 1 + 2.15 x 1) = -22.18  
+
+d) R2 = 1 - 240.57 / 264.17 = 0.0893; Adj R2 = 1 - (1 - R2)(N - 1)/(N - p - 1) = 0.701  
+
+**8.8**  
+Learner status  
+
+**8.16**  
+
+a) O-rings are more likely to be damaged in colder temperatures.  
+
+b) The negative slope of the temperature coefficient suggests that the lower the temperature, the higher the probability of damaged O-rings.  
+
+c) log(p^ / (1 - p^)) = 11.6630 - 0.2162 x temperature  
+
+d) Yes, the extremely low p-value for the temperature parameter suggest that temperature is a highly statistically significant factor in determining the probabiliy of failure  
+
+**8.18**  
+
+a) log(p^ / (1 - p^)) = 11.6630 - 0.2162 x temperature; p^ = exp(11.6630 - 0.2162 x temp) / (1 + exp(11.630 - 0.2162 x temp))  
+
+* p^~51~ = 0.6540  
+
+* P^~53~ = 0.5509  
+
+* P^~55~ = 0.4351  
+
+b)  Add the model-estimated probabilities from part (a) on the plot, then connect these dots using a smooth curve to represent the model-estimated probabilities.  
+
+c) Describe any concerns you may have regarding applying logistic regression in this application, and note any assumptions that are required to accept the model's validity.  
+

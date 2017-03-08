@@ -1,0 +1,364 @@
+---
+title: "BHao_HW1"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("~/Google Drive/CUNY/git/DATA621/HW1")
+library(caret)
+library(car)
+library(dplyr)
+library(ggplot2)
+```
+
+``` {r}
+train_raw = read.csv("~/Google Drive/CUNY/git/DATA621/HW1/moneyball-training-data.csv")
+```
+
+##Data Exploration  
+
+Our primary objectives for data exploration are two fold:  
+
+1) To get a general sense for our data via summary statistics and visualizations  
+2) To highlight potential data integrity issues that will need to be addressed in the following data preparation phase  
+
+*Note: data exploration, data preparation and model building may be somewhat iterative processes*  
+
+* We start by summarizing our data. A couple things immediately jump out:  
+    + 0 minimum values, especially in the TARGET_WINS column  
+    + NAs in several columns  
+
+```{r echo=FALSE}
+summary(train_raw)
+```
+
+* Next, let's look at each column's distribution graphically with some box plots and outline the highlights below:   
+    + TARGET_WINS: There are a large number of outliers  
+    + TEAM_BATTING_H: There are a large number of outliers, especially in the higher values  
+    + TEAM_BATTING_3B: The lower whisker is close to zero, and there are many outliers in the higher values  
+    + TEAM_BATTING_BB: The IQR is relatively tight; there are a large number of outliers  
+    + TEAM_BASERUN_SB: There are a large number of outliers in the higher values  
+    + TEAM_BASERUN_CS: There are a large number of outliers in the higher values  
+    + TEAM_PITCHING_H: There are an extremely large number of outliers in the higher values
+    + TEAM_PITCHING_BB: There are an extremely large number of outliers in the higher values  
+    + TEAM_PITCHING_SO: There are an extremely large number of outliers in the higher values  
+    + TEAM_FIELDING_E: There are an extremely large number of outliers in the higher values  
+
+*Note: obviously, not having access to the data providers makes it more difficult to make sense of these potential anomalies; however, knowing the total number of at bats and pitches would be very helpful to this end.*  
+
+```{r echo=FALSE, fig.width=10, fig.height=10}
+par(mfrow=c(4, 4))
+boxplot(train_raw[2], show.names=TRUE)
+boxplot(train_raw[3], show.names=TRUE)
+boxplot(train_raw[4], show.names=TRUE)
+boxplot(train_raw[5], show.names=TRUE)
+boxplot(train_raw[6], show.names=TRUE)
+boxplot(train_raw[7], show.names=TRUE)
+boxplot(train_raw[8], show.names=TRUE)
+boxplot(train_raw[9], show.names=TRUE)
+boxplot(train_raw[10], show.names=TRUE)
+boxplot(train_raw[11], show.names=TRUE)
+boxplot(train_raw[12], show.names=TRUE)
+boxplot(train_raw[13], show.names=TRUE)
+boxplot(train_raw[14], show.names=TRUE)
+boxplot(train_raw[15], show.names=TRUE)
+boxplot(train_raw[16], show.names=TRUE)
+boxplot(train_raw[17], show.names=TRUE)
+```
+
+* Next, we examine the correlation between each column and the response variable TARGET_WINS:  
+    + TEAM_BATTING_H exhibits the highest correlation to the response variable, while TEAM_FIELDING_E exhibits the lowest correlation  
+    + Surprisingly both TEAM_PITCHING_HR and TEAM_PITCHING_BB exhibit positive correlations to the response variable; we will revisit these anomalies after the data cleansing process to see if they still appear  
+
+```{r echo=FALSE}
+cor_df = data.frame(cbind(cor(train_raw[3:ncol(train_raw)], train_raw[2]), 
+                         cor(train_raw[3:ncol(train_raw)], train_raw[2], use = 'pairwise.complete.obs')))
+names(cor_df) = c('With NAs', 'Ignoring NAs')
+cor_df %>% tibble::rownames_to_column() %>% arrange(desc(`Ignoring NAs`))
+```
+
+* Data exploration summary: The exploration phase revealed that there are a number of potential data issues that will need to be addressed in the data preparation phase:  
+    + 0 values  
+    + Missing values  
+    + Outliers  
+    + Missing variables - again, it would be very helpful to have the total number of 'at bats' and 'pitches'; however, we can make do without those variables    
+
+##Data Preparation  
+
+In this phase, we will look at each anomaly and decide how best to address it so that our models can work correctly.  
+
+* Since the TEAM_BATTING_H column is inclusive of three other columns, we will start by replacing it with a TEAM_BATTING_1B column   
+
+**We'll replace TEAM_BATTING_H with TEAM_BATTING_1B = TEAM_BATTING_H - TEAM_BATTING_2B - TEAM_BATTING_3B - TEAM_BATTING_HR.**  
+
+```{r}
+train_clean = train_raw
+train_clean = train_clean %>% mutate(TEAM_BATTING_1B = TEAM_BATTING_H - TEAM_BATTING_2B - TEAM_BATTING_3B - TEAM_BATTING_HR) %>%
+  select(-TEAM_BATTING_H)
+```
+
+* Let's next look at the row with 0 wins  
+    + Most of its columns are either 0 or NA
+    + Furthermore, it has a value for TEAM_PITCHING_H (24057) which just does not make sense as that would equate to giving up 148.5 hits on average over 162 games. The median for this field is 1518 which is close to the median value for TEAM_BATTING_H of 1454 - which makes sense as they should be nearly mirror images of each other on average  
+
+**It's safe to assume that this row contains faulty data and should be removed.**  
+    
+```{r}
+train_clean %>% filter(TARGET_WINS == 0)
+train_clean = train_clean %>% filter(TARGET_WINS != 0)
+```
+
+* Let's turn our attention to columns with missing data  
+    + Specifically let's start with TEAM_BATTING_SO and TEAM_PITCHING_SO, both of which are missing values for the same 102 rows
+    + These two columns should be nearly mirror images of each other on average  
+
+**We'll fill in the missing values using their respective median values.**  
+
+```{r}
+train_clean = train_clean %>% mutate(
+  TEAM_PITCHING_SO = ifelse(is.na(TEAM_PITCHING_SO), median(TEAM_PITCHING_SO, na.rm = TRUE), TEAM_PITCHING_SO),
+  TEAM_BATTING_SO = ifelse(is.na(TEAM_BATTING_SO), median(TEAM_BATTING_SO, na.rm = TRUE), TEAM_BATTING_SO))
+```
+
+**We'll use the same approach to fill in the missing values for TEAM_BASERUN_SB, TEAM_BASERUN_CS and TEAM_FIELDING_DP. While we could have used the ratio of average 'stolen bases' to 'caught steals' multiplied by the 'stolen bases' column, we would often then be estimating based on an estimate when the 'stolen bases' itself was filled in.**  
+
+```{r}
+train_clean = train_clean %>% mutate(
+  TEAM_BASERUN_SB = ifelse(is.na(TEAM_BASERUN_SB), median(TEAM_BASERUN_SB, na.rm = TRUE), TEAM_BASERUN_SB),
+  TEAM_BASERUN_CS = ifelse(is.na(TEAM_BASERUN_CS), median(TEAM_BASERUN_CS, na.rm = TRUE), TEAM_BASERUN_CS),
+  TEAM_FIELDING_DP = ifelse(is.na(TEAM_FIELDING_DP), median(TEAM_FIELDING_DP, na.rm = TRUE), TEAM_FIELDING_DP))
+```
+
+* Missing data (cont.)  
+    + The final column with NAs is the TEAM_BATTING_HBP. Since there are 2084 rows with missing data, it may be best to create a categorical variable to indicate whether TEAM_BATTING_HBP exists or not  
+    
+**We'll add a new variable TEAM_BATTING_HBP_YN that is 1 when the TEAM_BATTING_HBP exists and 0 when it does not.**  
+
+```{r}
+train_clean = train_clean %>% mutate(TEAM_BATTING_HBP_YN = ifelse(is.na(TEAM_BATTING_HBP), 0, 1))
+summary(train_clean)
+```
+
+* Looking deeper into the TEAM_PITCHING_H column, we see that it contains a large number of outliers
+    + Quantifying that shows 213 rows with TEAM_PITCHING_H values greater than 1.5 IQRs above the 3rd quartile  
+
+**Instead of removing these rows since they still might contain useful data in the other columns, let's create a flag to indicate which rows contain outliers in this particular column - this happens to address outliers across all of the pitcher-related columns. Let's also do the same for other column categories as well.**  
+
+```{r}
+plot(density(train_clean$TEAM_PITCHING_H))
+train_clean %>% filter(TEAM_PITCHING_H > quantile(TEAM_PITCHING_H, 0.75) + 1.5 * IQR(TEAM_PITCHING_H)) %>%
+  summarise(n = n())
+train_clean = train_clean %>% 
+  mutate('PITCHER_OUTLIER_YN' = ifelse(TEAM_PITCHING_H > quantile(TEAM_PITCHING_H, 0.75) + 1.5 * IQR(TEAM_PITCHING_H) |
+                                       TEAM_PITCHING_H < quantile(TEAM_PITCHING_H, 0.25) - 1.5 * IQR(TEAM_PITCHING_H), 
+                                       1, 0))
+train_clean = train_clean %>% 
+  mutate('BATTING_OUTLIER_YN' = ifelse(TEAM_BATTING_1B > quantile(TEAM_BATTING_1B, 0.75) + 1.5 * IQR(TEAM_BATTING_1B) |
+                                       TEAM_BATTING_1B < quantile(TEAM_BATTING_1B, 0.25) - 1.5 * IQR(TEAM_BATTING_1B), 
+                                       1, 0))
+train_clean = train_clean %>% 
+  mutate('BATTING_OUTLIER_YN' = ifelse(TEAM_BATTING_1B > quantile(TEAM_BATTING_1B, 0.75) + 1.5 * IQR(TEAM_BATTING_1B) |
+                                       TEAM_BATTING_1B < quantile(TEAM_BATTING_1B, 0.25) - 1.5 * IQR(TEAM_BATTING_1B), 
+                                       1, 0))
+train_clean = train_clean %>%
+  mutate('BASERUN_OUTLIER_YN' = ifelse(TEAM_BASERUN_SB > quantile(TEAM_BASERUN_SB, 0.75) + 1.5 * IQR(TEAM_BASERUN_SB) |
+                                       TEAM_BASERUN_SB < quantile(TEAM_BASERUN_SB, 0.25) - 1.5 * IQR(TEAM_BASERUN_SB),
+                                       1, 0))
+train_clean = train_clean %>% 
+  mutate('FIELDING_OUTLIER_YN' = ifelse(TEAM_FIELDING_E > quantile(TEAM_FIELDING_E, 0.75) + 1.5 * IQR(TEAM_FIELDING_E) |
+                                       TEAM_FIELDING_E < quantile(TEAM_FIELDING_E, 0.25) - 1.5 * IQR(TEAM_FIELDING_E), 
+                                       1, 0))
+```
+
+* Next, we'll create some new variables based on ratios of the existing variables. Not only will this scale and normalize the variables, it may also create variables that have a better explain the response variable  
+    + TARGET_WINS_Ratio = TARGET_WINS / 162 (i.e. the percentage of wins)  
+    + TEAM_H_Ratio = (TEAM_BATTING_1B + TEAM_BATTING_2B + TEAM_BATTING_3B + TEAM_BATTING_HR) / TEAM_PITCHING_H (i.e. the ratio of hits earned to hits allowed)  
+    + TEAM_BASERUN_Ratio = TEAM_BASERUN_SB / TEAM_BASERUN_CS (i.e. the ratio of successful steals to unsuccessful ones)  
+    + TEAM_HR_SO_Ratio = TEAM_BATTING_HR / TEAM_BATTING_SO (i.e. the ratio of home runs to strikeouts)  
+    
+```{r}
+train_clean = train_clean %>%
+  mutate(TARGET_WINS_Ratio = TARGET_WINS / 162,
+         TEAM_H_Ratio = (TEAM_BATTING_1B + TEAM_BATTING_2B + TEAM_BATTING_3B + TEAM_BATTING_HR) / TEAM_PITCHING_H,
+         TEAM_BASERUN_Ratio = TEAM_BASERUN_SB / TEAM_BASERUN_CS,
+         TEAM_HR_SO_Ratio = TEAM_BATTING_HR / ifelse(TEAM_BATTING_SO == 0, median(TEAM_BATTING_SO), TEAM_BATTING_SO))
+```
+
+* Let's now revisit our earlier data explorations. Well, we certainly removed the missing values, but it does not yet look like our new variables will be very promising  
+
+```{r echo=FALSE, fig.width=10, fig.height=10}
+summary(train_clean)
+data.frame(cor(train_clean[3:ncol(train_clean)], train_clean[2])) %>% 
+             tibble::rownames_to_column() %>% 
+             arrange(desc(`TARGET_WINS`))
+```
+
+* Let's also revisit our box plots filtered to exclude the outliers. Although some outliers remain, the vast majority of them have been filtered out  
+
+```{r echo=FALSE, fig.width=10, fig.height=10}
+train_clean_ex_outliers = train_clean %>% 
+  filter(PITCHER_OUTLIER_YN == 0, BATTING_OUTLIER_YN == 0, FIELDING_OUTLIER_YN ==0)
+
+par(mfrow=c(4, 4))
+boxplot(train_clean_ex_outliers[2], show.names=TRUE)
+boxplot(train_clean_ex_outliers[3], show.names=TRUE)
+boxplot(train_clean_ex_outliers[4], show.names=TRUE)
+boxplot(train_clean_ex_outliers[5], show.names=TRUE)
+boxplot(train_clean_ex_outliers[6], show.names=TRUE)
+boxplot(train_clean_ex_outliers[7], show.names=TRUE)
+boxplot(train_clean_ex_outliers[8], show.names=TRUE)
+boxplot(train_clean_ex_outliers[9], show.names=TRUE)
+boxplot(train_clean_ex_outliers[10], show.names=TRUE)
+boxplot(train_clean_ex_outliers[11], show.names=TRUE)
+boxplot(train_clean_ex_outliers[12], show.names=TRUE)
+boxplot(train_clean_ex_outliers[13], show.names=TRUE)
+boxplot(train_clean_ex_outliers[14], show.names=TRUE)
+boxplot(train_clean_ex_outliers[15], show.names=TRUE)
+boxplot(train_clean_ex_outliers[16], show.names=TRUE)
+boxplot(train_clean_ex_outliers[17], show.names=TRUE)
+```
+
+##Build Model  
+
+**Model1: Backward elimination**  
+
+* Let's start with a backward elimination by including all variables (except we'll remove -INDEX, -TARGET_WINS_Ratio, -TEAM_BATTING_HBP on the first pass since these are either irrelevant or captured in other columns) and then remove variables until we are left with only statistically significant variables    
+
+```{r}
+train_model1 = train_clean
+train_model1 = train_model1 %>% select(-INDEX, -TARGET_WINS_Ratio, -TEAM_BATTING_HBP)
+model1 = train(TARGET_WINS ~ ., data = train_model1, method = 'lm')
+summary(model1)
+model1$results
+```
+
+* We then remove the insignificant columns, -TEAM_HR_SO_Ratio, -TEAM_BASERUN_Ratio, -BASERUN_OUTLIER_YN, -BATTING_OUTLIER_YN, -TEAM_PITCHING_SO, -TEAM_PITCHING_BB, -TEAM_PITCHING_H, -TEAM_BASERUN_CS, -TEAM_BATTING_SO
+* Nice, not only do we see that the RMSE decreased slightly but that the RMSESD decreased significantly, which indicates a more precise estimate of the RMSE figure  
+
+```{r}
+train_model1 = train_model1 %>% select(-TEAM_HR_SO_Ratio, -TEAM_BASERUN_Ratio, -BASERUN_OUTLIER_YN, -BATTING_OUTLIER_YN,
+                                       -TEAM_PITCHING_SO, -TEAM_PITCHING_BB, -TEAM_PITCHING_H, -TEAM_BASERUN_CS,
+                                       -TEAM_BATTING_SO)
+model1 = train(TARGET_WINS ~ ., data = train_model1, method = 'lm')
+summary(model1)
+model1$results
+```
+
+**Model2: Ratio-based**  
+
+* I'm skeptical based on the correlation results, but let's see how the ratio-based model performs; we'll throw the TEAM_PITCHING_HR column as well since no pitching columns were converted to ratios and thus also the PITCHER_OUTLIER_YN column  
+* Since the response variable was converted into a ratio, the RMSE figures are not directly comparable, but based on the R-squared values, this model clearly underperforms the previous model  
+
+```{r}
+train_model2 = train_clean
+train_model2 = train_model2 %>% select(TARGET_WINS_Ratio, TEAM_H_Ratio, TEAM_BASERUN_Ratio, TEAM_HR_SO_Ratio, TEAM_PITCHING_HR, PITCHER_OUTLIER_YN)
+model2 = train(TARGET_WINS_Ratio ~ ., data = train_model2, method = 'lm')
+summary(model2)
+model2$results
+```
+
+**Model3: Remove highly collinear variables**  
+
+* Time to return to the original model, but we'll remove the most collinear variables based on the cross correlation and variance inflation factors shown below:  
+    - TEAM_BATTING_HR: 0.969 correlation with TEAM_PITCHING_HR  
+    - FIELDING_OUTLIER_YN & TEAM_H_Ratio: both are highly correlated to TEAM_FIELDING_E and to each other  
+* Although the RMSE increases slightly, the model is simpler and more stable without the collinear variables, so we will use Model3 as the final model  
+* Coefficient discussion - in this final model, below is a brief discussion of the coefficients for the selected variables:  
+    - TEAM_FIELDING_DP: The negative coefficient suggests that more double plays is associated with fewer wins. While this differs from the suggested impact as per the homework assignment, it could be possible as teams that have more double play opportunities likely have more opposing runners on base at a given time which should have a negative effect. Further research is needed to isolate the impact of double plays.  
+    - TEAM_BATTING_HBP_YN & PITCHER_OUTLIER_YN: Both are flags created to deal with either missing data or outliers; there coefficients may not have intuitive interpretations  
+    - Remaining variables: The remaining variables have signs that are consistent with their expected impact on the number of wins.  
+
+```{r}
+cor(train_model1)
+vif(model1$finalModel)
+
+train_model3 = train_model1 %>% select(-TEAM_BATTING_HR, -FIELDING_OUTLIER_YN, -TEAM_H_Ratio)
+model3 = train(TARGET_WINS ~ ., data = train_model3, method = 'lm')
+summary(model3)
+model3$results
+vif(model3$finalModel)
+```
+
+##SELECT MODELS  
+
+**Model selection rationale**  
+
+As discussed above, we selected Model3, which was based on backward elimination, followed by removal of any highly collinear variables. Although Model3 did not have the lowest RMSE, it was the most parsimonious (fewest variables) and stable (little collinearity between variables).  
+
+**Inference and regression diagnostics**  
+
+For our inferences to be valid, we need to perform some regression diagnostics and validate some assumptions:   
+
+* Independence of errors: Based on the residual plot below, the residuals appear random over the index values  
+* Outliers and leverage: Based on the leverage plots below, there do not appear to be any data points exerting undue leverage on the regression  
+* Normality: Based on the qq-plot below, the residuals are fairly normally distributed, although there are some outliers in the tails  
+* Constant variance: Based on the spread-level plot below, variance appears relatively constant, although again with a few outliers  
+
+```{r}
+fit = model3$finalModel
+plot(fit$residuals)
+leveragePlots(fit)
+qqPlot(fit)
+spreadLevelPlot(fit)
+```
+
+**Evaluation of regression model**  
+
+Based on the above regression diagnostics results, we can comfortably make inferences from our model results:  
+
+* RMSE: 13.05  
+* Adjusted R2: 0.3057  
+* F-statistic: 101.1  
+* residual plots: see regression diagnostics above  
+
+```{r}
+summary(model3)
+```
+
+**Predictions on evaluation set**  
+
+``` {r}
+# prep evaluation data for prediction  
+test_raw = read.csv("~/Google Drive/CUNY/git/DATA621/HW1/moneyball-evaluation-data.csv")
+test_clean = test_raw
+# create TEAM_BATTING_1B column  
+test_clean = test_clean %>% mutate(TEAM_BATTING_1B = TEAM_BATTING_H - TEAM_BATTING_2B - TEAM_BATTING_3B - TEAM_BATTING_HR) %>%
+  select(-TEAM_BATTING_H)
+# fill in missing values  
+test_clean = test_clean %>% mutate(
+  TEAM_PITCHING_SO = ifelse(is.na(TEAM_PITCHING_SO), median(TEAM_PITCHING_SO, na.rm = TRUE), TEAM_PITCHING_SO),
+  TEAM_BATTING_SO = ifelse(is.na(TEAM_BATTING_SO), median(TEAM_BATTING_SO, na.rm = TRUE), TEAM_BATTING_SO), 
+  TEAM_BASERUN_SB = ifelse(is.na(TEAM_BASERUN_SB), median(TEAM_BASERUN_SB, na.rm = TRUE), TEAM_BASERUN_SB),
+  TEAM_BASERUN_CS = ifelse(is.na(TEAM_BASERUN_CS), median(TEAM_BASERUN_CS, na.rm = TRUE), TEAM_BASERUN_CS),
+  TEAM_FIELDING_DP = ifelse(is.na(TEAM_FIELDING_DP), median(TEAM_FIELDING_DP, na.rm = TRUE), TEAM_FIELDING_DP))
+# add TEAM_BATTING_HBP_YN  
+test_clean = test_clean %>% mutate(TEAM_BATTING_HBP_YN = ifelse(is.na(TEAM_BATTING_HBP), 0, 1))
+# add outlier flags  
+test_clean = test_clean %>% 
+  mutate('PITCHER_OUTLIER_YN' = ifelse(TEAM_PITCHING_H > quantile(TEAM_PITCHING_H, 0.75) + 1.5 * IQR(TEAM_PITCHING_H) |
+                                       TEAM_PITCHING_H < quantile(TEAM_PITCHING_H, 0.25) - 1.5 * IQR(TEAM_PITCHING_H), 
+                                       1, 0))
+test_clean = test_clean %>% 
+  mutate('BATTING_OUTLIER_YN' = ifelse(TEAM_BATTING_1B > quantile(TEAM_BATTING_1B, 0.75) + 1.5 * IQR(TEAM_BATTING_1B) |
+                                       TEAM_BATTING_1B < quantile(TEAM_BATTING_1B, 0.25) - 1.5 * IQR(TEAM_BATTING_1B), 
+                                       1, 0))
+test_clean = test_clean %>% 
+  mutate('BATTING_OUTLIER_YN' = ifelse(TEAM_BATTING_1B > quantile(TEAM_BATTING_1B, 0.75) + 1.5 * IQR(TEAM_BATTING_1B) |
+                                       TEAM_BATTING_1B < quantile(TEAM_BATTING_1B, 0.25) - 1.5 * IQR(TEAM_BATTING_1B), 
+                                       1, 0))
+test_clean = test_clean %>%
+  mutate('BASERUN_OUTLIER_YN' = ifelse(TEAM_BASERUN_SB > quantile(TEAM_BASERUN_SB, 0.75) + 1.5 * IQR(TEAM_BASERUN_SB) |
+                                       TEAM_BASERUN_SB < quantile(TEAM_BASERUN_SB, 0.25) - 1.5 * IQR(TEAM_BASERUN_SB),
+                                       1, 0))
+test_clean = test_clean %>% 
+  mutate('FIELDING_OUTLIER_YN' = ifelse(TEAM_FIELDING_E > quantile(TEAM_FIELDING_E, 0.75) + 1.5 * IQR(TEAM_FIELDING_E) |
+                                       TEAM_FIELDING_E < quantile(TEAM_FIELDING_E, 0.25) - 1.5 * IQR(TEAM_FIELDING_E), 
+                                       1, 0))
+
+# make predictions and save as csv file  
+pred = predict(model3, newdata = test_clean)
+write.csv(pred, "~/Google Drive/CUNY/git/DATA621/HW1/moneyball-evaluation-pred.csv")
+```
+

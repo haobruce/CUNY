@@ -1,0 +1,67 @@
+---
+title: "BHao_Assign2"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("~/Google Drive/CUNY/git/DATA605/HW2")
+library(stringr)
+```
+
+##Problem Set 1  
+
+1) In general, A may not be a square matrix; in which case, A would be a m x n matrix. As such $A^T A$ will be a n x n matrix; whereas $A A^T$ will be a m x m matrix. Therefore $A^T A \ne A A^T$ in general.  
+2)  
+```{r}
+# A is 2 x 3 matrix
+A = matrix(seq(1:6), nrow = 2)
+
+# result is 3 x 3 matrix
+t(A) %*% A
+
+# result is a 2 x 2 matrix
+A %*% t(A)
+```
+
+##Problem Set 2  
+
+```{r}
+A = matrix(c(1,3,5,8,2,3,5,2,6,2,4,5,1,3,7,8), nrow = 4)
+
+# as per instructions, no allowance made for zero pivots and row permutations
+factorize_matrix = function(A) {
+  U = A
+  L = diag(nrow(A))
+  c = 1
+  for (e in 2:nrow(A)) {  # loop through n - 1 elements
+    for (r in e:nrow(A)) {  # loop through n - 1 - e rows
+      multiplier = U[r, c]  / U[e - 1, c]
+      U[r,] = U[r,] - multiplier * U[e - 1,]
+      L[r, c] = multiplier
+    }
+    c = c + 1
+  }
+  return(list('L' = L, 'U' = U))
+}
+
+L = factorize_matrix(A)$L
+U = factorize_matrix(A)$U
+A_LU = A == L %*% U
+
+L
+U
+A_LU
+```
+
+```{r}
+# was trying to use the function below format matrices into latex friendly format
+# but was not able to get latex to cooperate so gave up on function
+format_matrix = function(A) {
+  n = nrow(A)
+  A_ = paste0(toString(A), ', ')
+  A_ = str_extract_all(A_, paste0("(\\d\\,\\s){", n, "}"))[[1]]
+  paste(str_replace_all(A_, "(, )$", " \\\\ "), sep = "", collapse = "")
+}
+```

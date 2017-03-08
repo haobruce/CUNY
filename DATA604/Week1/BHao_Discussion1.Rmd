@@ -1,0 +1,22 @@
+---
+title: "BHao_Discussion1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("~/Google Drive/CUNY/git/DATA604/Week1")
+```
+
+Using R, generate 100 simulations of 30 samples each from a distribution (other than normal) of your choice.  Graph the sampling distribution of means.  Graph the sampling distribution of the minimum. Share your graphs and your R code. What did the simulation of the means demonstrate?  What about the distribution of the minimum...?  
+
+```{r}
+set.seed(123)
+
+means = replicate(100, mean(rexp(30)))
+mins = replicate(100, min(rexp(30)))
+
+hist(means)
+hist(mins)
+```
+
+The distribution of the means appears normally distributed; while the distribution of the minimums is shaped like the exponential distribution probablity density. 

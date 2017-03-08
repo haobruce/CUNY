@@ -1,0 +1,173 @@
+---
+title: "BHao_Assign3"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE, message=FALSE}
+setwd("~/Google Drive/CUNY/git/DATA604/Week3")
+library(data.table)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+##Problem 3.5.1
+
+a) As the rolls increase, the observed results approach the calculated actual probabilities.    
+
+```{r}
+set.seed(123)
+
+# create simulation function 
+roll_dice = function(rolls) {
+  tbl_results = data.table(roll = seq(1:rolls), 
+                           dice1 = sample(seq(1:6), rolls, replace = TRUE),
+                           dice2 = sample(seq(1:6), rolls, replace = TRUE))
+  tbl_results[, dice1_2 := dice1 + dice2]
+}
+
+roll_dice_50 = roll_dice(50)
+roll_dice_500 = roll_dice(500)
+roll_dice_10000 = roll_dice(10000)
+
+data.table(rolls = c('Actual probality', 50, 500, 10000), 
+           rbind(c(1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1)/36, 
+                 prop.table(table(roll_dice_50$dice1_2)),
+                 prop.table(table(roll_dice_500$dice1_2)),
+                 prop.table(table(roll_dice_10000$dice1_2))))
+```
+
+b) Here, we've loaded both die to make 1s three times more likely to appear than other numbers.  
+
+```{r}
+set.seed(123)
+
+# create simulation function 
+roll_loaded_dice = function(rolls) {
+  tbl_results = data.table(roll = seq(1:rolls), 
+                           # load dice by making 1s three times more likely to appear than other number
+                           dice1 = sample(c(1, 1, seq(1:6)), rolls, replace = TRUE),
+                           dice2 = sample(c(1, 1, seq(1:6)), rolls, replace = TRUE))
+  tbl_results[, dice1_2 := dice1 + dice2]
+}
+
+roll_loaded_dice_50 = roll_loaded_dice(50)
+roll_loaded_dice_500 = roll_loaded_dice(500)
+roll_loaded_dice_10000 = roll_loaded_dice(10000)
+
+# calculate actual probabilites
+actual_probs = data.frame(dice = c(1, 1, seq(1:6)))
+actual_probs = actual_probs %>% merge(actual_probs, by = NULL) %>%
+  mutate(dice1_2 = dice.x + dice.y) %>%
+  select(dice1_2) 
+
+data.table(rolls = c('Actual probality', 50, 500, 10000), 
+           rbind(prop.table(table(actual_probs)), 
+                 prop.table(table(roll_loaded_dice_50$dice1_2)),
+                 prop.table(table(roll_loaded_dice_500$dice1_2)),
+                 prop.table(table(roll_loaded_dice_10000$dice1_2))))
+```
+
+c) See answer to a) above.  
+
+##Problem 3.5.5
+
+Using 90, 95 and 99% confidence intervals and 1000 runs, I generally saw results within +/- 1-3% from the stated confidence interval.  
+
+```{r}
+# create function for simulation
+integrate_sim = function(mu, sig, a, b, n, ci) {
+  tbl_results = data.table(sim = seq(1:n), Xi = runif(n) * (b - a ) + a)
+  tbl_results[, est := (b - a) * dnorm(Xi, mu, sig)]
+  tbl_results = tbl_results[, .(mean = mean(est), se = sd(est) / sqrt(n))]
+  ci = qnorm(mean(c(ci, 1)))
+  return(list(lowerCI = tbl_results$mean - ci * tbl_results$se,
+              upperCI = tbl_results$mean + ci * tbl_results$se))
+}
+
+exact = (pnorm(6.7, 5.8, 2.3) - pnorm(4.5, 5.8, 2.3))
+df = data.frame(ci_90 = rep(0, 100), ci_95 = rep(0, 100), ci_99 = rep(0, 100))
+for (i in 1:1000) {
+  c = 1
+  for (test in c(0.90, 0.95, 0.99)) {
+    ci = integrate_sim(5.8, 2.3, 4.5, 6.7, 50, test)
+    df[i, c] = ci$lowerCI < exact & exact < ci$upperCI
+    c = c + 1
+  }
+}
+colSums(df)/1000
+```
+
+##Problem 3.5.17  
+
+```{r}
+set.seed(123)
+
+# create simulation function for one season
+run_sim = function(days = 90) {
+  # create data table to house inputs
+  tbl_items = data.table(item = c('oats', 'peas', 'beans', 'barley'),
+                  cost = c(1.05, 3.17, 1.99, 0.95),
+                  price = c(1.29, 3.76, 2.23, 1.65),
+                  minq = c(0, 0, 0, 0),
+                  maxq = c(10, 8, 14, 11))
+  tbl_items = tbl_items[, profit := price - cost]
+
+  # create data frame to house results
+  tbl_sim = data.frame(day = rep(0, days), total_revenue = rep(0, days), 
+                       total_cost = rep(0, days), total_profit = rep(0, days))
+
+  for (i in 1:days) {
+    qty = NULL
+    revenue = 0
+    cost = 0
+    profit = 0
+    for (r in 1:nrow(tbl_items)) {
+      qty = sample(tbl_items[r, minq]:tbl_items[r, maxq], 1)
+      revenue = revenue + tbl_items[r, price] * qty
+      cost = cost + tbl_items[r, cost] * qty
+      profit = profit + tbl_items[r, profit] * qty
+    }
+    tbl_sim[i,] = c(i, revenue, cost, profit)
+  }
+  return(data.table(tbl_sim))
+}
+
+# create simulation function for x seasons
+run_sim_season = function(seasons = 1000, days = 90) {
+  tbl_daily = data.frame(day = rep(0, seasons*days), total_revenue = rep(0, seasons*days), 
+                         total_cost = rep(0, seasons*days), total_profit = rep(0, seasons*days))
+  tbl_season = data.frame(season = rep(0, seasons), total_revenue = rep(0, seasons), 
+                          total_cost = rep(0, seasons), total_profit = rep(0, seasons))
+  for (i in 1:seasons) {
+    ## REPLACE LOGIC BELOW WITH A SIMPLE ARRAY AND THEN RETURN A DATA.TABLE 
+    sim = run_sim(days = days)
+    tbl_daily[(i*days-days+1):(i*days),] = sim
+    tbl_season[i,] = c(season = i, sim[, lapply(.SD, sum), .SDcols = 2:4])
+  }
+  return(list(tbl_daily = data.table(tbl_daily), tbl_season = data.table(tbl_season)))
+}
+
+# run simulation x times and aggregate results
+sim_results = run_sim_season(seasons = 100, days = 90)
+
+summary(sim_results$tbl_daily)
+summary(sim_results$tbl_season)
+
+sim_results$tbl_daily %>% select(-day) %>%
+  gather('metric', 'value') %>%
+  mutate('metric' = factor(metric, levels = c('total_revenue', 'total_cost', 'total_profit'))) %>%
+  ggplot(aes(x = value)) +
+  geom_histogram() +
+  facet_grid(. ~ metric, scales = 'free')
+
+sim_results$tbl_season %>% select(-season) %>%
+  gather('metric', 'value') %>%
+  mutate('metric' = factor(metric, levels = c('total_revenue', 'total_cost', 'total_profit'))) %>%
+  ggplot(aes(x = value)) +
+  geom_histogram() +
+  facet_grid(. ~ metric, scales = 'free')
+
+```
+

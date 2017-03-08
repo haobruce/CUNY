@@ -1,0 +1,76 @@
+---
+title: "BHao_Assign5"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("~/Google Drive/CUNY/git/DATA605/HW5")
+```
+
+##Problem Set 1  
+
+```{r}
+A = matrix(c(1,1,1,1,0,1,3,4), nrow = 4)
+b = matrix(c(0,8,8,20), nrow = 4)
+# for verification purposes
+df = data.frame(y = b, x = A[,2])
+model = lm(y ~ ., data = df)
+
+#AtA  
+t(A) %*% A
+
+#Atb
+t(A) %*% b
+
+#x hat
+x_hat = solve(t(A) %*% A) %*% t(A) %*% b
+x_hat
+model$coefficients
+
+#squared error
+sum((b - A %*% x_hat)^2)
+sum(model$residuals^2)
+
+#exact solution using p  
+p = matrix(c(1,5,13,17), nrow = 4)
+x = solve(t(A) %*% A) %*% t(A) %*% p
+sum((p - A %*% x)^2)
+
+#show the error
+e = b - p
+e
+
+#show that e is orthogonal to p and to columns of A
+#dot products equal zero when vectors are orthogonal
+t(p) %*% e
+t(A[,1]) %*% e
+t(A[,2]) %*% e
+```
+
+
+##Problem Set 2  
+
+```{r}
+df = read.delim('~/Google Drive/CUNY/git/DATA605/HW5/assign5/auto-mpg.data', header = F, sep = "")
+names(df) = c('displacement', 'horsepower', 'weight', 'acceleration', 'mpg')
+# for verification purposes
+model = lm(mpg ~ ., data = df)
+
+# convert data frame to A and b matrices 
+A = data.matrix(df[,1:4])
+# add column of 1s for intercept term 
+A = cbind(rep(1, nrow(A)), A)
+b = data.matrix(df[,5])
+
+# calculate x_hat
+x_hat = solve(t(A) %*% A) %*% t(A) %*% b
+x_hat
+model$coefficients
+
+SSE = sum((b - A %*% x_hat)^2)
+SSE
+anova(model)
+```
+

@@ -1,0 +1,40 @@
+---
+title: "BHao_Discussion5"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA604/Week5")
+```
+
+```{r}
+#################################################################
+# NEXT TIME FEED THE VECTOR BACK INTO THE FUNCTION AS AN ARGUMENT
+#################################################################
+# recursive method - only returns one random number
+recursive.randGen = function(seed, a, c, m, n = 10) {
+  options(expressions = 100000)  # to allow deeper recursions
+  if (n == 1) {
+    return(seed)
+  } else {
+    return((a * recursive.randGen(seed, a, c, m, n - 1) + c) %% m)
+  }
+}
+
+for (i in 1:1000) {
+  print(recursive.randGen(1,2,3,499,i))
+}
+
+# loop method - prints all n random numbers
+loop.randGen = function(seed, a, c, m, n =  10) {
+  x = seed
+  print(x)
+  for (i in 2:n) {
+    x = (a * x + c) %% m
+    print(x)
+  }
+}
+
+loop.randGen(1,2,3,499,10)
+```
+

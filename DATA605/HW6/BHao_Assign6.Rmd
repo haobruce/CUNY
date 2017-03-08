@@ -1,0 +1,89 @@
+---
+title: "BHao_Assign6"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA605/HW6")
+library(dplyr)
+```
+
+##Problem Set 1  
+
+```{r}
+# 1.  
+6^3
+
+# 2. Combinations include 1 + 2 and 2 + 1 out of 6^2 total combinations 
+2/6^2
+
+# 3.
+same_bday_prob = function(k) {
+  # we want 1 - 364/365 * 363/365 * ... * (365-k)/365, or
+  # 1 - [ 365! / (365 - k)! ] / 365^k
+  # since combination = n! / k!(n - k)!, just multiply by k! 
+  return(1 - choose(365, k) * factorial(k) / 365^k)
+}
+
+same_bday_prob(25)
+same_bday_prob(50)
+```
+
+
+##Problem Set 2  
+
+```{r message=FALSE, warning=FALSE}
+library(RTextTools)
+library(tm)
+texts = paste(readLines(paste0(getwd(), '/assign6.sample.txt')), collapse = ' ')
+
+term_freq = function(texts) {
+  # create document-term matrix with i columns for each document (1 in this case),
+  # j rows for each uniue term, and matrix v for count of each term within each document 
+  tdm = create_matrix(textColumns = texts, language = 'english', removeNumbers = FALSE, removePunctuation = TRUE, 
+                         removeStopwords = FALSE,  stemWords = FALSE, stripWhitespace = TRUE, toLower = TRUE)
+  
+  # create data frame of terms and term counts 
+  data.frame(term = tdm$dimnames$Terms[tdm$j], count = tdm$v, stringsAsFactors = FALSE) %>% 
+    mutate(freq = round(count / sum(count), 4)) %>%
+    arrange(desc(freq))
+}
+
+head(term_freq(texts))
+```
+
+```{r message=FALSE, warning=FALSE}
+library(stringr)
+
+# function to cleanse corpus
+cleanse_corpus = function(x) {
+  x = tm_map(x, PlainTextDocument)  # to make tm package play nice
+  x = tm_map(x, removeNumbers)
+  x = tm_map(x, removePunctuation)  # leaving punctuation in case relevant to spam ham filter
+  x = tm_map(x, stripWhitespace)
+  # x = tm_map(x, stemDocument)
+  x = tm_map(x, content_transformer(tolower))  # content_transformer required because tolower not tm function
+  # x = tm_map(x, removeWords, stopwords('en'))
+}
+
+bigram_freq = function(texts, word1, word2) {
+  # convert texts to corpus
+  text_corpus = Corpus(VectorSource(texts))
+  text_corpus = cleanse_corpus(text_corpus)
+  dtm = DocumentTermMatrix(text_corpus)
+  
+  # data frame to house individual probabilities 
+  df = term_freq(texts) %>% filter(term == word1 | term == word2)
+
+  # calculate joint probability of adjacent occurence
+  joint_count = str_count(texts, paste0("\\b", word1, "\\b\\s\\b", word2, "\\b")) + 
+    str_count(texts, paste0("\\b", word2, "\\b\\s\\b", word1, "\\b"))
+
+  df %>% union(data.frame(term = 'bigram', count = joint_count, freq = round(joint_count / sum(dtm$v), 4)))  # divide by total word count
+}
+
+bigram_freq(texts, 'and', 'the')
+```
+

@@ -1,0 +1,129 @@
+---
+title: "BHao_HW2"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+# 1-2. 
+setwd("~/Google Drive/CUNY/git/DATA621/HW2")
+library(dplyr)
+
+df = read.csv('classification-output-data.csv', header = TRUE)
+str(df)
+table(pred = df$scored.class, actual = df$class)
+```
+
+```{r}
+# 3-8.
+# accuracy = % of true positives and true negatives
+pred_accuracy = function(df) {
+  as.numeric(df %>% filter(class == scored.class) %>% summarise(n = n()) /
+    nrow(df))
+}
+
+# error rate = % of false positives and false negatives 
+pred_error_rate = function(df) {
+  as.numeric(df %>% filter(class != scored.class) %>% summarise(n = n()) /
+    nrow(df))
+}
+
+# precision = % of all positive predictions that were actually positives 
+pred_precision = function(df) {
+  as.numeric(df %>% filter(class == 1 & scored.class == 1) %>% summarise(n = n()) /
+    df %>% filter(scored.class == 1) %>% summarise(n = n()))
+}
+
+# sensitivity/recall = % of all actual positives that were predicted positives 
+pred_sensitivity = function(df) {
+  as.numeric(df %>% filter(class == 1 & scored.class == 1) %>% summarise(n = n()) /
+    df %>% filter(class == 1) %>% summarise(n = n()))
+}
+
+# specificity = % of all actual negatives that were predicted as negatives 
+pred_specificity = function(df) {
+  as.numeric(df %>% filter(class == 0 & scored.class == 0) %>% summarise(n = n()) /
+    df %>% filter(class == 0) %>% summarise(n = n()))
+}
+
+# F1 score 
+pred_F1 = function(df) {
+  (2 * pred_precision(df) * pred_sensitivity(df)) /
+    (pred_precision(df) + pred_sensitivity(df))
+}
+```
+
+```{r}
+# 9. Before we move on, let's consider a question that was asked: What are the bounds on the 
+# F1 score? Show that the F1 score will always be between 0 and 1.
+
+# Since precision and sensitivity are both between 0 and 1, their product is less than their sum. 
+# As both approach zero, the numerator approaches zero faster than the denominator; thus the ratio 
+# approaches zero. As both approach 1, the ratio approaches 1/2. The multiplier 2 then scales the 
+# ratio to range between 0 and 1. 
+```
+
+```{r}
+# 10. 
+plot_ROC = function(df, scale = 100) {
+  library(ggplot2)
+  true_positive_rate = rep(0, scale+1)
+  false_positive_rate = rep(0, scale+1)
+  for (i in seq(0, 1, 1 / scale)) {
+    df$scored.class = ifelse(df$scored.probability > i, 1, 0)
+    true_positive_rate[i*scale+1] = pred_sensitivity(df)
+    false_positive_rate[i*scale+1] = 1 - pred_specificity(df)
+  }
+  # plot(x = false_positive_rate, y = true_positive_rate)
+  data.frame(false_positive_rate = false_positive_rate, true_positive_rate = true_positive_rate) %>% 
+    ggplot(aes(x = false_positive_rate, y = true_positive_rate)) + geom_point() +
+    ggtitle('ROC Curve')
+}
+
+plot_ROC(df)
+```
+
+```{r}
+# 11.
+# accuracy = % of true positives and true negatives
+pred_accuracy(df)
+
+# error rate = % of false positives and false negatives 
+pred_error_rate(df)
+
+# precision = % of all positive predictions that were actually positives 
+pred_precision(df)
+
+# sensitivity/recall = % of all actual positives that were predicted positives 
+pred_sensitivity(df)
+
+# specificity = % of all actual negatives that were predicted as negatives 
+pred_specificity(df)
+
+# F1 score 
+pred_F1(df)
+```
+
+```{r}
+# 12. compare to caret function outputs 
+library(caret)
+
+# IMPORTANT to add positive = '1' to confusionMatrix since according to ?confusionMatrix 
+# "If there are only two factor levels, the first level will be used as the 'positive' result."
+confusionMatrix(df$scored.class, df$class, positive = '1')
+
+# The caret results tie with the custom functions built above.  
+```
+
+```{r}
+# 13. All of the produced ROC curves are essentially the same 
+library(pROC)
+plot.roc(df$class, df$scored.probability)
+
+# I prefer the caTools colAUC output to the pROC curve 
+library(caTools)
+colAUC(df$scored.probability, df$class, plotROC = TRUE)
+```
+
+
