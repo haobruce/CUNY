@@ -1,0 +1,129 @@
+---
+title: "BHao_HW3"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("~/Google Drive/CUNY/git/DATA621/HW3")
+```
+
+##DATA EXPLORATION  
+
+* Summary data indicate that ~49% of neighborhoods have crime rates above the median, which makes sense  
+* Also, there are no NA data points that we need to address via preprocessing for logistic regression  
+
+```{r}
+crime = read.csv('crime-training-data.csv')
+str(crime)
+summary(crime)
+```
+
+##DATA PREPARATION  
+
+* Again, there were no NAs within the data, so no need to address those  
+* Since I'll be using the caret package for modeling, I need to convert the categorical variables to factors  
+* Lastly, we'll use caret's center and scale preprocessing features to automatically transform the data during modeling  
+
+```{r}
+crime$chas = factor(crime$chas, labels = c('not_bordered', 'bordered'))
+crime$target = factor(crime$target, labels = c('below_median', 'above_median'))
+str(crime)
+```
+
+##BUILD MODELS  
+
+* In terms of setup, we are using 10-fold cross validation to measure out-of-sample performance and are using the same folds for each model to ensure comparable results    
+* We then start by including all variables and then remove statistically insignificant ones at the 5% level until all remaining are significant  
+* We then tried a glmnet model which combines lasso and ridge regression; given that it penalizes large magnitude and the number of non-zero coefficients, it can be used for variable selection  
+* As such, we fit a simple logistic regression model based on the variables selected by the glmnet model: nox, rad and age (which was then dropped as it was insignificant)  
+* Lastly, we fit a random forest model just for fun  
+* Based on the ROC dot plot (the x-axis is actually AUC), surprisingly the simple logistic regression model based on nox and rad performed the best and is our final selected model  
+* You can also see the improvement as variables were removed; also note how well the glmnet and rf models performed without manual tuning  
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+library(caretEnsemble)
+
+set.seed(123)
+# use cross validation to compare out-of-sample ROC for all models  
+# use the same folds for each model to ensure comparable results 
+myFolds = createFolds(crime$target, k = 10)  
+
+# confirm that folks preserve class distribution 
+table(crime$target) / nrow(crime)
+table(crime$target[myFolds$Fold1]) / length(myFolds$Fold1)
+
+myControl = trainControl(summaryFunction = twoClassSummary, classProbs = TRUE, verboseIter = FALSE,
+                         savePredictions = TRUE, index = myFolds)  # used instead of method = 'cv', number = 10
+
+# model using glm model
+model_glm_full = train(target ~ ., data = crime, metric = 'ROC', method = 'glm',
+                  preProcess = c('center', 'scale'), trControl = myControl)
+summary(model_glm_full)
+
+# let's drop any statistically insignificant variables at 5% 
+model_glm_sig1 = train(target ~ nox + age + dis + rad + tax + ptratio + black + medv, data = crime,
+                       metric = 'ROC', method = 'glm', preProcess = c('center', 'scale'), trControl = myControl)
+summary(model_glm_sig1)
+
+# let's drop any additional statistically insigificant variables at 5% 
+model_glm_sig2 = train(target ~ nox + age + dis + rad + tax + ptratio + medv, data = crime,
+                       metric = 'ROC', method = 'glm', preProcess = c('center', 'scale'), trControl = myControl)
+summary(model_glm_sig2)
+
+# it looks like there are still some variables to drop; let's drop any additional statistically insigificant variables at 1% 
+model_glm_sig3 = train(target ~ nox + age + rad + tax + ptratio + medv, data = crime,
+                       metric = 'ROC', method = 'glm', preProcess = c('center', 'scale'), trControl = myControl)
+summary(model_glm_sig3)
+
+# let's try a glmnet model that combines ridge vs. lasso regression 
+# since it penalizes either or both magnitude and number of non-zero coefficients, it can be used for variable selection
+model_glmnet = train(target ~ ., data = crime, metric = 'ROC', method = 'glmnet', 
+                     preProcess = c('center', 'scale'), trControl = myControl)
+coef(model_glmnet$finalModel, s = model_glmnet$finalModel$tuneValue$lambda)
+
+# let's build a simple linear model based on the variables selected by the glmnet model
+# here no penalty terms or regularization is introduced 
+model_glm_sig4 = train(target ~ nox + rad, data = crime,
+                       metric = 'ROC', method = 'glm', preProcess = c('center', 'scale'), trControl = myControl)
+summary(model_glm_sig4)
+
+# let's also model using random forest just for fun 
+model_rf = train(target ~ ., data = crime, metric = 'ROC', method = 'ranger', 
+                 trControl = myControl)
+
+# compare models 
+model_list = list(glm_full = model_glm_full, glm_sig1 = model_glm_sig1, glm_sig2 = model_glm_sig2, glm_sig3 = model_glm_sig3,
+                  glm_sig4 = model_glm_sig4, glmnet = model_glmnet, rf = model_rf)
+
+# collect resamples from the CV folds
+resamps = resamples(model_list)
+summary(resamps)
+dotplot(resamps, metric = 'ROC')
+```
+
+##SELECT MODEL  
+
+* The final model was selected because it performed the best, is very simple and is highly intuitive  
+* Since the coefficients for both nox and rad are positive, it suggests that higher nox levels and being closer to highways are associated with higher rates of crime (which makes sense intuitively)    
+* After the final model was selected, we then re-fit the model to the entire data set (i.e. no cross validation) to ensure that we maximize use of all the available data   
+* The final model is then used to predict the classes and probabilities on the test data   
+
+```{r}
+final_model = train(target ~ nox + rad, data = crime, metric = 'ROC', method = 'glm', preProcess = c('center', 'scale'),
+                    trControl = trainControl(summaryFunction = twoClassSummary, classProbs = TRUE, verboseIter = FALSE))
+
+summary(model_glm_sig4)
+
+crime_test = read.csv('crime-evaluation-data.csv')
+pred_class = predict(final_model, newdata = crime_test)
+pred_prob = predict(final_model, newdata = crime_test, type = 'prob')
+write.csv(cbind(pred_class, pred_prob), 'crime_evaluation-prediction.csv')
+
+# assuming the evaluation data is similarly class balanced, the predictions do not seem unreasonable  
+table(pred_class) / length(pred_class)
+```
+
+

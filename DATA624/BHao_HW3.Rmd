@@ -1,0 +1,129 @@
+---
+title: "BHao_HW3"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd('/Users/brucehao/Google Drive/CUNY/git/DATA624')
+```
+
+# 3.1  
+
+```{r}
+library(mlbench)
+data(Glass)
+```
+
+## 3.1.a. Using visualizations, explore the predictor variables to understand their distributions as well as the relationships between predictors.  
+
+```{r}
+preds = colnames(Glass)
+
+# check histograms for each predictor 
+par(mfrow = c(3, 3))
+for (c in 1:(length(preds)-1)){
+  hist(Glass[, c], main = preds[c])
+}
+
+# check boxplots for each predictor 
+par(mfrow = c(3, 3))
+for (c in 1:(length(preds)-1)){
+  boxplot(Glass[, c], main = preds[c])
+}
+
+# check scatter plot matrix  
+pairs(Glass[, 1:9])
+```
+
+## 3.1.b. Do their appear to be any outliers in the data? Are any predictors skewed?  
+
+Based on the histograms and boxplots, the following predictors appear to contain outliers: RI, Na, Al, Si, K, Ca, Ba, Fe. However, K, Ba, Fe are highly skewed to the right, so it's harder to see if the observations in the tails are in fact outliers.  
+
+## 3.1.c. Are there any relevant transformations of one or more predictors that might improve the classification model?  
+
+Center and scale - since the predictors have significantly different scales, depending on the classification model, centering and scaling may improve classification results.  
+
+Log transformation - since predictors K, Ba and Fe are highly skewed, we can consider using a log transformation.   
+
+# 3.2  
+
+```{r}
+data("Soybean")
+```
+
+## 3.2.a. Investigate the frequency distributions for the categorical predictors. Are any of the distributions degenerate in the ways discussed earlier in this chapter?  
+
+Although based on the distributions several predictors only have a couple values, only three predictors meet the rules outlined in the chapter for degenerate variables: stem, int.discolor, fruit.pods  
+
+```{r}
+preds = colnames(Soybean[, 2:length(colnames(Soybean))])
+
+# check historgrams for each predictor 
+par(mfrow = c(7, 5), mar = c(.5, .5, .5, .5))
+for (c in 2:length(colnames(Soybean))){
+  hist(as.numeric(Soybean[, c]), 
+       main = preds[c])  # need to change margins to prevent error
+}
+
+# calculate fraction of unique values and ratio of frequency between 1st and 2nd most prevalent value 
+df = data.frame(pred = as.character(),
+                deg  = as.character())
+for (c in 2:length(colnames((Soybean)))){
+  uniq_frac = (length(unique(Soybean[, c])) / length(Soybean[, c])) < 0.1  
+
+  # determine frequency of top 1 and 2 values 
+  var1_freq = sort(table(Soybean[, c]), decreasing = TRUE, useNA = 'ifany')[1]
+  var2_freq = sort(table(Soybean[, c]), decreasing = TRUE, useNA = 'ifany')[2]
+  freq_ratio= (var1_freq / var2_freq) > 20 
+  uniq_frac & freq_ratio
+  df_temp   = data.frame(preds[c], uniq_frac & freq_ratio)
+  df        = rbind(df, df_temp)
+}
+colnames(df)= c('pred', 'deg')
+
+# return only those predictors that meet degenerate rules 
+df[df['deg'] == TRUE, ]
+```
+
+## 3.2.b. Roughly 18% of the data are missing. Are there particular predictors that are more likely to be missing? Is the pattern of missing data related to the classes?  
+
+Yes, the first table below shows the predictors by number of NAs, most to least.  
+
+The second table below shows the number of complete rows (i.e. no NAs) by Class. As shown, only phytophthora-rot has complete and incomplete records. All other classes have records that are all complete or are all missing values.  
+
+The third table below shows the number of NAs for each predictor for each Class. Here, we see that typically when a Class is missing data for a predictor, all observations in that Class are missing data for that particular predictor.  
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(tidyr)
+
+Soybean %>% select(-one_of(c('Class'))) %>% 
+  summarise_each(funs(sum(is.na(.)))) %>%
+  gather(pred, n_na) %>% 
+  arrange(desc(n_na))
+
+any_na = Soybean %>% complete.cases()
+Soybean %>% mutate(any_na = any_na) %>% 
+  group_by(Class, any_na) %>% 
+  summarise(n = n()) %>% 
+  spread(any_na, n) %>% 
+  arrange(`TRUE`, `FALSE`, Class) %>%
+  rename('has_NAs' = `FALSE`, 'no_NAs' = `TRUE`)
+
+Soybean %>% mutate(n = NaN) %>%
+  group_by(Class) %>%
+  summarise_each(funs(sum(is.na(.)))) 
+```
+
+## 3.2.c. Develop a strategy for handling missing data, either by eliminating predictors or imputation.  
+
+Since so many Classes consistently have missing data, one possibility is to create a dummy variable that indicates such a class. Another approach might be to use two different models, one for those with complete data and another for ones with incomplete data (and drop the empty predictors from the latter model).  
+
+I don't think imputation makes sense here because the missing values seem to be missing completely most of the time for a given class, so imputing based on other classes would just create a static (zero variance) value for that particular class and predictor combination.  
+
+
+
+

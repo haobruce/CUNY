@@ -1,0 +1,168 @@
+---
+title: "BHao_HW6"
+output:
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd('/Users/brucehao/Google Drive/CUNY/git/DATA624')
+library(caret)
+library(AppliedPredictiveModeling)
+data("ChemicalManufacturingProcess")
+#View(ChemicalManufacturingProcess)
+```
+
+##KJ6.3 Linear regression - Chemical manufacturing process 
+
+```{r message=FALSE, warning=FALSE}
+set.seed(123)
+# impute missing values 
+imputeMedian = function(x) replace(x, is.na(x), median(x, na.rm = TRUE))
+
+for (c in 1:dim(ChemicalManufacturingProcess)[2]){
+  if (is.na(sum(ChemicalManufacturingProcess[, c]))){
+    ChemicalManufacturingProcess[, c] = imputeMedian(ChemicalManufacturingProcess[, c])
+  }
+}
+
+# split data into train and test sets 
+trainIndex = createDataPartition(ChemicalManufacturingProcess$Yield, p = 0.75, list = FALSE, times = 1)
+trainSet   = ChemicalManufacturingProcess[ trainIndex, ]
+testSet    = ChemicalManufacturingProcess[-trainIndex, ]
+
+# first, we'll try a general linear model with all predictors 
+myControl = trainControl(verboseIter = FALSE, savePredictions = TRUE)
+model_glm_full = train(Yield ~ ., data = trainSet, metric = 'RMSE', method = 'glm', 
+                       preProcess = c('center', 'scale'), trControl = myControl)
+
+# next, we'll try a glmnet model which combines lasso and ridge regression 
+model_glmnet = train(Yield ~ ., data = trainSet, metric = 'RMSE', method = 'glmnet', 
+                       preProcess = c('center', 'scale'), trControl = myControl)
+
+# let's also model using random forest just for fun
+model_rf = train(Yield ~ ., data = trainSet, metric = 'RMSE', method = 'ranger', trControl = myControl)
+
+# compare models
+model_list = list(glm_full = model_glm_full, glmnet = model_glmnet, rf = model_rf)
+resamps = resamples(model_list) 
+summary(resamps)
+dotplot(resamps, metric = 'RMSE')
+
+# display predictors used by glmnet model 
+coef(model_glmnet$finalModel, s = model_glmnet$finalModel$tuneValue$lambda)
+```
+
+It looks like the `glmnet` and `rf` models produce the lowest RMSEs. Another benefit of the `glmnet` model is that it can help identify significant predictors. Based on the output above, none of the biological materials were used, and manufacturing processes 6, 9, 13, 15, 17, 29, 31, 32, 36, 37 and 45 were used in the model.  
+
+```{r message=FALSE, warning=FALSE}
+pred_glmnet = predict(model_glmnet, newdata = testSet)
+
+# calculate rmse of predicted values vs actual values in test set 
+sqrt(mean((testSet$Yield - pred_glmnet)^2)) 
+```
+
+The 1.20 RMSE for the prediction on the test set was a bit larger than that of the training set, which had an RMSE of 1.03. 
+
+As for the relationships between the top predictors and yield improvement, the signs of the predictors indicate which direction a given predictor affects yield. In the models above, the predictors were centered and scaled to improve the models predictive ability, so some interpretability is lost. But re-running the model without centering and scaling would show a more exact impact of how changing one predictor would affect yield.  
+
+##KJ7.2  
+
+The tuned MARS model produces the lowest RMSE of the models tested. Yes, the tuned MARS model does select X1-5 and ignores the other predictors.  
+
+```{r message=FALSE, warning=FALSE}
+library(mlbench)
+set.seed(200)
+trainingData = mlbench.friedman1(200, sd = 1)
+trainingData$x = data.frame(trainingData$x)
+#featurePlot(trainingData$x, trainingData$y)
+testData = mlbench.friedman1(5000, sd = 1)
+testData$x = data.frame(testData$x)
+
+# knn model 
+knnModel = train(x = trainingData$x, y = trainingData$y, method = 'knn', 
+                 preProcess = c('center', 'scale'), tuneLength = 10)
+knnPred = predict(knnModel, newdata = testData$x)
+
+# mars model 
+library(earth)
+marsFit = earth(trainingData$x, y = trainingData$y)
+marsPred = predict(marsFit, newdata = testData$x)
+
+# tuned mars model 
+marsGrid = expand.grid(.degree = 1:2, .nprune = 2:38)
+set.seed(100)
+marsTuned = train(trainingData$x, trainingData$y, method = 'earth', tuneGrid = marsGrid,
+                  trControl = trainControl(method = 'cv'))
+marsTunedPred = predict(marsTuned, newdata = testData$x)
+
+data.frame(model = c('knn', 'mars', 'marsTuned'),
+           rmse  = c(postResample(pred = knnPred, obs = testData$y)[1],
+                     postResample(pred = marsPred, obs = testData$y)[1],
+                     postResample(pred = marsTunedPred, obs = testData$y)[1]))
+
+marsTuned$finalModel
+```
+
+##KJ7.5  
+
+Of the `knn`, `neural net` and tuned `MARS` models, the tuned `MARS` model produces the lowest RMSE.  
+
+Based on the tuned `MARS` model, the top 4 predictors are manufacturing process 32, 09, 13 and 39 in descending order. In this model, no one predictor dominates; however, in the untuned `MARS` model, process 32 dominates all others. The selected linear model and the tuned `MARS` model share 32, 09 and 13 as significant predictors.  
+
+Based on the scatter plots below between the top 4 predictors and yield, processes 32 and 09 exhibit some positive correlation, i.e. whatever results in higher process 32 and 9 values also contributes to higher yield. Conversely, process 13 is negatively correlated with yield. Lastly, process 39 seems to have some zero values which may have some limited preditive value (39 is the lowest ranked of the 4 predictors).  
+
+```{r message=FALSE, warning=FALSE}
+myControl = trainControl(verboseIter = FALSE, savePredictions = TRUE)
+
+model_knn = train(Yield ~ ., data = trainSet, metric = 'RMSE', method = 'knn', 
+                  preProcess = c('center', 'scale'), trControl = myControl)
+pred_knn = predict(model_knn, newdata = testSet)
+
+library(nnet)
+model_nnet = train(Yield ~ ., data = trainSet, metric = 'RMSE', method = 'nnet', 
+                  preProcess = c('center', 'scale'), trControl = myControl, 
+                  linout = TRUE, trace = FALSE, MaxNWts = 10 * (ncol(trainSet) + 1) + 10 + 1,
+                  maxit = 500)
+pred_nnet = predict(model_nnet, newdata = testSet)
+
+model_marsTuned = train(Yield ~ ., data = trainSet, metric = 'RMSE', method = 'earth', 
+                        tuneGrid = marsGrid, preProcess = c('center', 'scale'), 
+                        trControl = trainControl(verboseIter = FALSE, savePredictions = TRUE, method = 'cv'))
+pred_marsTuned = predict(model_marsTuned, newdata = testSet)
+
+# compare models
+data.frame(model = c('knn', 'nnet', 'marsTuned'),
+           rmse  = c(postResample(pred = pred_knn, obs = testSet$Yield)[1],
+                     postResample(pred = pred_nnet, obs = testSet$Yield)[1],
+                     postResample(pred = pred_marsTuned, obs = testSet$Yield)[1]))
+
+# display most important variables for tuned MARS model 
+varImp(model_marsTuned)
+
+# scatterplots of top 4 predictors vs. response variable 
+par(mfrow = c(2,2))
+plot(ChemicalManufacturingProcess$ManufacturingProcess32, ChemicalManufacturingProcess$Yield, main = 'Process 32') 
+plot(ChemicalManufacturingProcess$ManufacturingProcess09, ChemicalManufacturingProcess$Yield, main = 'Process 09') 
+plot(ChemicalManufacturingProcess$ManufacturingProcess13, ChemicalManufacturingProcess$Yield, main = 'Process 13') 
+plot(ChemicalManufacturingProcess$ManufacturingProcess39, ChemicalManufacturingProcess$Yield, main = 'Process 39') 
+```
+
+##KJ8.1  
+
+```{r message=FALSE, warning=FALSE}
+library(mlbench)
+set.seed(200)
+simulated = mlbench.friedman1(200, sd = 1)
+simulated = cbind(simulated$x, simulated$y)
+simulated = as.data.frame(simulated)
+colnames(simulated)[ncol(simulated)] = 'y'
+```
+
+
+##KJ8.2  
+
+##KJ8.3  
+
+##KJ8.7  

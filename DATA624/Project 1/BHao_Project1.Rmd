@@ -1,0 +1,168 @@
+---
+title: "BHao_Project1"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd('/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/')
+
+library(fpp)
+library(xts)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+```
+
+##Project 1: Part A  
+
+First, we load the data and convert to time series with a 7-day frequency. We'll start with ATM1.  
+
+```{r}
+atm = read.csv('/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/ATM624Data.csv', stringsAsFactors = F)
+atm$DATE = as.Date(atm$DATE, '%m/%d/%Y')
+atm1 = atm %>% filter(ATM=='ATM1') %>% select(DATE, Cash)
+atm1_ts = as.xts(atm1$Cash, order.by = atm1$DATE)
+attr(atm1_ts, 'frequency') = 7
+```
+
+Next, we plot the data to see what we're dealing with. There does not appear to be any particular trend, and there's insufficient data to tell if there is annual seasonality. But there is cearly a weekly pattern with significant dips on Thursdays. The 7-day pattern is clearly captured by the ACF and PACF plots below. Interestingly, the tsdisplay and forecast charts plot the week the x-axis rather than the date.  
+
+```{r}
+plot(atm1_ts)
+tsdisplay(atm1_ts)
+```
+
+Interestingly, it appears that the weekly dip shifts from Thursdays to Tuesdays in mid February 2010. We also see similar shifts for the other ATMs. Assuming nothing corrupted the data like a faulty ETL process, we might assume that a weekly process that put the ATMs out of order for the much of the day (maybe maintenance, replishment, etc.) changed from Thursdays to Tuesdays in mid February 2010. Lastly, in the case of ATM2, it appears as if Wednesday cash volumes were also reduced after mid February.   
+
+```{r}
+atm_all = atm %>% filter(ATM != '') %>% 
+  mutate(Weekday = factor(weekdays(DATE), levels = c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')), 
+                Period  = if_else(DATE < '2010-2-14', 'Pre', 'Post')) 
+
+atm_all %>%
+  group_by(ATM, Period, Weekday) %>% 
+  summarise(avg = mean(Cash, na.rm = T)) %>% 
+  ggplot(aes(x = Weekday, y = avg, fill = Period)) + 
+  geom_bar(stat = 'identity', position = 'dodge') + 
+  facet_grid(ATM ~ ., scales = 'free')
+```
+
+Auto.arima with D = 1 to prevent convergence suggests an ARIMA(1,0,0)(2,1,0)$_7$ model that still produces 1-2 spikes in the ACF and PACF residuals plots, but 1 can be expected given the number of data points.  
+
+```{r}
+atm1_auto = auto.arima(atm1_ts, D = 1)
+summary(atm1_auto)
+tsdisplay(residuals(atm1_auto))
+```
+
+Lastly, we forecast the month of May 2010 using the model that auto.arima suggested. The forecast captures the mean well, and it also nicely captures the dip and correctly places it in Tuesdays (rather than Thursdays) going forward.  
+
+```{r}
+atm1_forecast = forecast(atm1_auto, h = 31)
+plot(atm1_forecast)
+write.csv(atm1_forecast$mean, '/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/atm1_forecast.csv')
+```
+
+Okay, now we'll move on to ATMs 2 and 4. We'll handle ATM3 separately since there is so little data with which to build a model.  
+
+ATM2:  
+
+```{r}
+atm2 = atm %>% filter(ATM=='ATM2') %>% select(DATE, Cash)
+atm2_ts = as.xts(atm2$Cash, order.by = atm2$DATE)
+attr(atm2_ts, 'frequency') = 7
+plot(atm2_ts)
+tsdisplay(atm2_ts)
+atm2_auto = auto.arima(atm2_ts, D = 1)  #, stepwise = F, approximation = F)
+summary(atm2_auto)
+tsdisplay(residuals(atm2_auto))
+atm2_forecast = forecast(atm2_auto, h = 31)
+plot(atm2_forecast)
+write.csv(atm2_forecast$mean, '/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/atm2_forecast.csv')
+```
+
+ATM4: There is a clear outlier on 2/9/2010 which is an order of magnitude higher than any other day. Since it occurs right around the shift from Tuesday dips to Thursday dips that we discussed above, it may not be faulty data, but it definitely throws off our forecast. So we will use the average Tuesday cash volume prior to the shift.   
+
+```{r}
+atm4 = atm %>% filter(ATM=='ATM4') %>% select(DATE, Cash) 
+atm4_subCash = atm_all %>% filter(Weekday == 'Tuesday', Period == 'Pre', Cash < 1000) %>%
+  summarise(avg = mean(Cash)) %>% as.numeric()
+atm4[atm4$DATE == '2010-02-09', 'Cash'] = atm4_subCash
+atm4_ts = as.xts(atm4$Cash, order.by = atm4$DATE)
+attr(atm4_ts, 'frequency') = 7
+plot(atm4_ts)
+tsdisplay(atm4_ts)
+atm4_auto = auto.arima(atm4_ts, D = 1)  #, stepwise = F, approximation = F)
+summary(atm4_auto)
+tsdisplay(residuals(atm4_auto))
+atm4_forecast = forecast(atm4_auto, h = 31)
+plot(atm4_forecast)
+write.csv(atm4_forecast$mean, '/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/atm4_forecast.csv')
+```
+
+ATM3: Since ATM3 has only 3 data points that exactly match ATM1's for the same dates, we'll just set ATM3's forecast to the same as ATM1's.  
+
+##Project 1: Part B  
+
+Again, we first load the data and configure it as a time series with a 12 month frequency.  
+
+```{r}
+kwh = read.csv('/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/ResidentialCustomerForecastLoad-624.csv', stringsAsFactors = F)
+kwh$Date = as.Date(paste0(kwh$YYYY.MMM, '-01'), '%Y-%b-%d')
+kwh_ts = as.xts(kwh$KWH, order.by = kwh$Date)
+attr(kwh_ts, 'frequency') = 12
+```
+
+Then, we take a preliminary look at the data. We see that data for September 2008 is NA, so we'll impute it by using the average for other Septembers (even though we recognize that there is a slight upward trend to the data and September 2008 is toward the latter half of the data set). We'll do the same thing for July 2010, which is a clear outlier.   
+
+```{r}
+plot(kwh_ts)
+
+kwh_sep08 = kwh %>% filter(month(Date) == 9) %>% summarise(avg = mean(KWH, na.rm = T)) %>% as.numeric()
+kwh_ts['2008-09-01'] = kwh_sep08
+kwh_jul10 = kwh %>% filter(month(Date) == 7, year(Date) != 2010) %>% 
+  summarise(avg = mean(KWH, na.rm = T)) %>% as.numeric()
+kwh_ts['2010-07-01'] = kwh_jul10
+
+plot(kwh_ts)
+tsdisplay(kwh_ts)
+```
+
+With the data relatively clean, we'll use auto.arima which suggests an ARIMA(1,0,1)(2,1,0)$_{12}$ model. The residuals plots look reasonable as does the forecast plot with peaks in the winter and summer months and troughs in the spring and fall months.   
+
+```{r}
+kwh_auto = auto.arima(kwh_ts)
+summary(kwh_auto)
+tsdisplay(residuals(kwh_auto))
+kwh_forecast = forecast(kwh_auto, h = 12)
+plot(kwh_forecast)
+write.csv(kwh_forecast$mean, '/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/kwh_forecast.csv')
+```
+
+##Project 1: BONUS  
+
+First, we take the combined spreadsheets, group by day/hour and take the average flow per hour. Then, we apply the same plotting, auto.arima and forecasting methods as above.  
+
+```{r}
+water = read.csv('/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/Waterflow_Pipe.csv', stringsAsFactors = F)
+water_agg = water %>% 
+  mutate(dt = mdy_hm(water$Date.Time)) %>% 
+  mutate(dt = ymd_h(paste(year(dt), month(dt), day(dt), hour(dt), sep = ' '))) %>% 
+  group_by(dt) %>% 
+  summarise(AvgFlow = mean(WaterFlow))
+
+water_ts = as.xts(water_agg$AvgFlow, order.by = water_agg$dt)
+attr(water_ts, 'frequency') = 24
+
+plot(water_ts)
+tsdisplay(water_ts)
+water_auto = auto.arima(water_ts, D = 1)  #, stepwise = F, approximation = F)
+summary(water_auto)
+tsdisplay(residuals(water_auto))
+water_forecast = forecast(water_auto, h = 7 * 24)
+plot(water_forecast)
+write.csv(water_forecast$mean, '/Users/brucehao/Google Drive/CUNY/git/DATA624/Project 1/water_forecast.csv')
+```

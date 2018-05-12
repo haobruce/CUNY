@@ -7,8 +7,7 @@ from scipy import stats
 from scipy.optimize import curve_fit
 
 # file imported from local directory
-df = pd.read_csv('C:/Users/bhao/Google Drive/CUNY/git/DATA602/brainandbody.csv')
-# df = pd.read_csv('~/Google Drive/CUNY/git/DATA602/brainandbody.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/haobruce/CUNY/master/DATA602/brainandbody.csv')
 
 def formulaic_approach():
     # using formulaic approach

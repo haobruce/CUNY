@@ -1,0 +1,29 @@
+---
+title: "BHao_Assign12"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA605/HW12")
+library(boot)
+```
+
+```{r}
+mpg = read.table('auto-mpg.data')
+names(mpg) = c('disp', 'hp', 'weight', 'accel', 'mpg')
+str(mpg)
+
+cv.err5 = list()
+
+set.seed(8956)
+for (n in 1:8) {
+  glm.fit = glm(mpg ~ poly(disp + hp + weight + accel, n), data = mpg)
+  cv.err5[n] = cv.glm(mpg, glm.fit, K = 5)$delta[1]
+}
+
+cv.err5
+plot(1:8, cv.err5, type = 'b')
+```
+

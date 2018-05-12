@@ -1,0 +1,79 @@
+---
+title: "BHao_HW1"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd('/Users/brucehao/Google Drive/CUNY/git/DATA624')
+```
+
+```{r message=FALSE, warning=FALSE}
+library(fma)
+# data(package='fma')
+```
+
+## 2.8.1.a. Monthly total of people on unemployed benefits in Australia (January 1956–July 1992). 
+
+Given the exponential nature of population growth in absolute terms, a log transformation makes sense. To remove the impact of population changes, we could look at the data on a per-capita basis as well. 
+
+```{r}
+plot(log(dole), ylab = 'People (log n)', xlab = 'Year', 
+     main = 'Monthly total of people on unemployed\nbenefits in Australia')
+```
+
+## 2.8.1.b. Monthly total of accidental deaths in the United States (January 1973–December 1978).
+
+Given the 1) monthly seasonality of this data and 2) the general declining trend over the years, the `monthplot` chart seemed like an appropriate choice. To remove the impact of population changes, we could look at the data on a per-capita basis as well. 
+
+```{r}
+monthplot(usdeaths, ylab = 'People (n)', xlab = 'Month/Year', 
+           main = 'Monthly total of accidental deaths\n in the United States')
+```
+
+## 2.8.1.c. Quarterly production of bricks (in millions of units) at Portland, Australia (March 1956–September 1994).
+
+Again, there appears to be some quarterly seasonality in the data as well as a general increase over time (with a few years of sharp decline); as such, a monthplot (or quarterly in this case) seems to capture that information well. 
+
+```{r}
+monthplot(bricksq, ylab = 'Bricks (M units)', xlab = 'Quarter', 
+          main = 'Quarterly production of bricks\n at Portland, Australia')
+```
+
+## 2.8.3.a. Consider the daily closing IBM stock prices (data set ibmclose). Produce some plots of the data in order to become familiar with it.
+
+```{r}
+plot(ibmclose)
+```
+
+## 2.8.3.b. Split the data into a training set of 300 observations and a test set of 69 observations.
+
+```{r}
+ibm_train = window(ibmclose, start=1  , end=300)
+ibm_test  = window(ibmclose, start=301)
+```
+
+## 2.8.3.c. Try various benchmark methods to forecast the training set and compare the results on the test set. Which method did best?
+
+Of the mean, naive and seasonal naive methods, the seasonal naive method produced the most accurate result. 
+
+```{r}
+ibm_meanfit  = meanf( ibm_train, h = 69)
+ibm_naivefit = rwf(   ibm_train, h = 69)
+ibm_driftfit = rwf(   ibm_train, h = 69, drift = TRUE)
+
+plot(ibmclose, ylab = 'Closing price', xlab = 'Time', 
+     main = 'IBM closing price and prediction')
+lines(ibm_meanfit$mean , col = 2)
+lines(ibm_naivefit$mean, col = 3)
+lines(ibm_driftfit$mean, col = 4)
+legend('bottomleft', lty = 1, col = c(2, 3, 4),
+       legend = c('mean method', 'naive method', 'drift method'))
+
+accuracy(ibm_meanfit , ibm_test)
+accuracy(ibm_naivefit, ibm_test)
+accuracy(ibm_driftfit, ibm_test)
+```
+

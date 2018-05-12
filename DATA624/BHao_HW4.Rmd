@@ -1,0 +1,212 @@
+---
+title: "BHao_HW4"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd('/Users/brucehao/Google Drive/CUNY/git/DATA624')
+```
+
+## 7.8.1.a. Plot the series and discuss the main features of the data.  
+
+The data represent daily unit sales for paperback and hardcover books at the same store over 30 days. Optically, it appears that sales trend upward, but there are no obvious patterns in day-to-day sales.  
+
+```{r}
+library(fma)
+plot(books)
+```
+
+
+## 7.8.1.b. Use simple exponential smoothing with the ses function (setting initial="simple") and explore different values of αα for the paperback series. Record the within-sample SSE for the one-step forecasts. Plot SSE against αα and find which value of αα works best. What is the effect of αα on the forecasts?  
+
+In this case, the smaller alpha value 0.2 performed much better in terms of SSE than did the larger alpha value 0.6.  
+
+```{r}
+pb = books[, 'Paperback']
+
+fit1 = ses(pb, alpha = 0.2, initial = 'simple')
+fit2 = ses(pb, alpha = 0.6, initial = 'simple')
+plot(pb)
+lines(fitted(fit1), col='blue', type='o')
+lines(fitted(fit2), col='red' , type='o')
+legend('bottomright', lty=1, col=c(1,'blue','red'),
+       c('data', expression(a = 0.2), expression(a = 0.6)),
+         pch=1)
+
+sse1 = sum((fitted(fit1) - mean(pb))^2)
+sse2 = sum((fitted(fit2) - mean(pb))^2)
+
+plot(data.frame(a = c(0.2, 0.6), sse = c(sse1, sse2)))
+```
+
+
+
+## 7.8.1.c. Now let ses select the optimal value of αα. Use this value to generate forecasts for the next four days. Compare your results with 2.  
+
+In this case, ses selected 0.1685 as the optimal alpha value; however, the SSE was still higher than the 0.2 alpha value above.  
+
+```{r}
+fit3 = ses(pb, initial = 'simple')
+
+plot(pb)
+lines(fitted(fit1), col='blue' , type='o')
+lines(fitted(fit2), col='red'  , type='o')
+lines(fitted(fit3), col='green', type='o')
+legend('bottomright', lty=1, col=c(1,'blue','red','green'),
+       c('data', expression(a = 0.2), expression(a = 0.6), expression(a = 0.2125)),
+         pch=1)
+
+sse3 = sum((fitted(fit3) - mean(pb))^2)
+
+plot(data.frame(a = c(0.2, 0.6, 0.2125), sse = c(sse1, sse2, sse3)))
+```
+
+
+## 7.8.1.d. Repeat but with initial="optimal". How much difference does an optimal initial level make?  
+
+Interestingly, allowing ses to select the optimal initial value, the resulting SSE was higher than than above.  
+
+```{r}
+fit4 = ses(pb, initial = 'optimal')
+
+plot(pb)
+lines(fitted(fit1), col='blue'  , type='o')
+lines(fitted(fit2), col='red'   , type='o')
+lines(fitted(fit3), col='green' , type='o')
+lines(fitted(fit4), col='yellow', type='o')
+legend('bottomright', lty=1, col=c(1,'blue','red','green','yellow'),
+       c('data', expression(a = 0.2), expression(a = 0.6), expression(a = 0.2125), expression(a = 0.1685)),
+         pch=1)
+
+sse4 = sum((fitted(fit4) - mean(pb))^2)
+
+plot(data.frame(a = c(0.2, 0.6, 0.2125, 0.1685), sse = c(sse1, sse2, sse3, sse4)))
+```
+
+
+## 7.8.1.e Repeat steps (b)–(d) with the hardcover series.  
+
+In the case of hardcovers, allowing ses to select the optimal initial and alpha values resulted in the lowest SSE by far.  
+
+```{r}
+hc = books[, 'Hardcover']
+
+fit1 = ses(hc, alpha = 0.2, initial = 'simple')
+fit2 = ses(hc, alpha = 0.6, initial = 'simple')
+fit3 = ses(hc, initial = 'simple')
+fit4 = ses(hc, initial = 'optimal')
+
+plot(hc)
+lines(fitted(fit1), col='blue'  , type='o')
+lines(fitted(fit2), col='red'   , type='o')
+lines(fitted(fit3), col='green' , type='o')
+lines(fitted(fit4), col='yellow', type='o')
+legend('bottomright', lty=1, col=c(1,'blue','red','green','yellow'),
+       c('data', expression(a = 0.2), expression(a = 0.6), expression(a = 0.2125), expression(a = 0.1685)),
+         pch=1)
+
+sse1 = sum((fitted(fit1) - mean(hc))^2)
+sse2 = sum((fitted(fit2) - mean(hc))^2)
+sse3 = sum((fitted(fit3) - mean(hc))^2)
+sse4 = sum((fitted(fit4) - mean(hc))^2)
+
+plot(data.frame(a = c(0.2, 0.6, 0.2125, 0.1685), sse = c(sse1, sse2, sse3, sse4)))
+```
+
+
+## 7.8.3.a. Plot the data and describe the main features of the series.  
+
+There is a clear upward trend in the data over time as well as clear seasonality.  
+
+```{r}
+library(expsmooth)
+plot(ukcars)
+```
+
+
+## 7.8.3.b. Decompose the series using STL and obtain the seasonally adjusted data.  
+
+```{r}
+fit_stl = stl(ukcars, s.window = 'periodic', robust = TRUE)
+plot(fit_stl)
+```
+
+
+## 7.8.3.c. Forecast the next two years of the series using an additive damped trend method applied to the seasonally adjusted data. Then reseasonalize the forecasts. Record the parameters of the method and report the RMSE of the one-step forecasts from your method.  
+
+
+```{r}
+ukcars_seasAdj = fit_stl$time.series[, 'trend']
+reSeas = as.numeric(tail(fit_stl$time.series[, 'seasonal'], 8))  # use prev 8 periods to reseasonalize forecast 
+
+fit_damped = ses(ukcars_seasAdj, h = 8, damped = TRUE)
+fit_damped_reSeas = fit_damped$mean + reSeas  # combine with forecasted mean 
+
+plot(window(ukcars, start(ukcars), end(ukcars) + 2, extend = TRUE))  # extend window to include full forecast 
+lines(fit_damped_reSeas, col='blue')
+
+# output model parameters 
+summary(fit_damped)
+```
+
+
+## 7.8.3.d. Forecast the next two years of the series using Holt's linear method applied to the seasonally adjusted data. Then reseasonalize the forecasts. Record the parameters of the method and report the RMSE of of the one-step forecasts from your method.  
+
+```{r}
+fit_holt = holt(ukcars_seasAdj, h = 8)
+fit_holt_reSeas = fit_holt$mean + reSeas 
+
+plot(window(ukcars, start(ukcars), end(ukcars) + 2, extend = TRUE))
+lines(fit_damped_reSeas, col='blue')
+lines(fit_holt_reSeas  , col='red')
+legend('bottomright', lty=1, col=c(1,'blue','red'),
+       c('data', 'damped', 'holt'))
+
+# output model parameters 
+summary(fit_holt)
+```
+
+
+## 7.8.3.e. Now use ets() to choose a seasonal model for the data.  
+
+```{r}
+fit_ets = ets(ukcars)
+
+# output model parameters
+summary(fit_ets)
+```
+
+
+## 7.8.3.f. Compare the RMSE of the fitted model with the RMSE of the model you obtained using an STL decomposition with Holt's method. Which gives the better in-sample fits?  
+
+The linear Holt method produced the lowest in-sample RMSE.  
+
+```{r}
+plot(ukcars)
+lines(fitted(fit_ets), col='blue')
+# although the below two comparisons are not exactly fair since they are using the actual seasonality estimates 
+lines(fitted(fit_damped) + fit_stl$time.series[, 'seasonal'], col='red')
+lines(fitted(fit_holt) + fit_stl$time.series[, 'seasonal'], col='green')
+legend('bottomright', lty=1, col=c(1,'blue','red','green'),
+       c('data', 'ets', 'damped', 'holt'))
+
+data.frame(c('ets', 'damped', 'holt'), 
+           c(sqrt(fit_ets$mse), sqrt(fit_damped$model$mse), sqrt(fit_holt$model$mse)))
+```
+
+
+## 7.8.3.g. Compare the forecasts from the two approaches? Which seems most reasonable?  
+
+The ets and damped forecasts are right on top of one another. The Holt model forecasts slightly lower values. It's not clear which is the most reasonable, as they all appear quite reasonable.  
+
+```{r}
+plot(forecast(fit_ets, h = 8))
+lines(fit_damped_reSeas, col='red')
+lines(fit_holt_reSeas  , col='green')
+legend('bottomright', lty=1, col=c(1,'blue','red','green'),
+       c('data', 'ets', 'damped', 'holt'))
+```
+

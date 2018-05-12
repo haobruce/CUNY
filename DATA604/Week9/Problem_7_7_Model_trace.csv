@@ -1,0 +1,4 @@
+Time(Hours),EntityID,ObjectName,ProcessID,StepName,Action
+0.413503616621557,--,--,--,--,Destroying entity with seized resources
+0.413503616621557,--,--,--,--,"Entity 'Severe.35' is being destroyed while still owning one or more resources. The resources will be automatically released, however this warning may indicate a problem in the modeled logic."
+

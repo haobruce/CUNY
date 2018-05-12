@@ -1,0 +1,906 @@
+Scenario,Object Type,Object Name,Data Source,Category,Data Item,Statistic Type,Average,Minimum,Maximum,Half Width,Standard Deviation
+Scenario1,Main_Model,Main_Model,[Object],Costs,TotalCost,Total (USD),4016358.7592147,4016358.7592147,4016358.7592147,NaN,NaN
+Scenario1,Main_Model,Main_Model,LogTransport,Costs,TotalCost,Total (USD),1389316.51999986,1389316.51999986,1389316.51999986,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,[Object],Costs,TotalCost,Total (USD),686814.839976912,686814.839976912,686814.839976912,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Object],Costs,TotalCost,Total (USD),37220.1718598993,37220.1718598993,37220.1718598993,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,ScheduledUtilization,Percent,89.9146781185443,89.9146781185443,89.9146781185443,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,UnitsAllocated,Total,18772,18772,18772,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,UnitsScheduled,Average,0.855171596029683,0.855171596029683,0.855171596029683,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,UnitsScheduled,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,UnitsUtilized,Average,0.768924787931308,0.768924787931308,0.768924787931308,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeOffShift,Average (Hours),30.289826201792,30.289826201792,30.289826201792,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeOffShift,Occurrences,7,7,7,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeOffShift,Percent,14.4828403970317,14.4828403970317,14.4828403970317,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeOffShift,Total (Hours),212.028783412544,212.028783412544,212.028783412544,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeProcessing,Average (Hours),140.713236191429,140.713236191429,140.713236191429,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeProcessing,Occurrences,8,8,8,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeProcessing,Percent,76.8924787931308,76.8924787931308,76.8924787931308,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeProcessing,Total (Hours),1125.70588953143,1125.70588953143,1125.70588953143,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeStarved,Average (Hours),15.7831658820027,15.7831658820027,15.7831658820027,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeStarved,Occurrences,8,8,8,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeStarved,Percent,8.62468080983754,8.62468080983754,8.62468080983754,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester [Resource],ResourceState,TimeStarved,Total (Hours),126.265327056022,126.265327056022,126.265327056022,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Content,NumberInStation,Average,4454.21728815155,4454.21728815155,4454.21728815155,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Content,NumberInStation,Maximum,11999,11999,11999,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Costs,CostPerItem,Average (USD),1.98258541710377,1.98258541710377,1.98258541710377,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Costs,CostPerItem,Maximum (USD),4.10579763190666,4.10579763190666,4.10579763190666,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Costs,TotalCost,Total (USD),37220.1718598993,37220.1718598993,37220.1718598993,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,HoldingTime,TimeInStation,Average (Hours),347.348965076582,347.348965076582,347.348965076582,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),719.335745110047,719.335745110047,719.335745110047,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Throughput,NumberEntered,Total,18832,18832,18832,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.InputBuffer,Throughput,NumberExited,Total,18772,18772,18772,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.OutputBuffer,Throughput,NumberEntered,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.OutputBuffer,Throughput,NumberExited,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,Content,NumberInStation,Average,0.768924787931308,0.768924787931308,0.768924787931308,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,HoldingTime,TimeInStation,Average (Hours),0.0599679185898044,0.0599679185898044,0.0599679185898044,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.0853276658997686,0.0853276658997686,0.0853276658997686,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,HoldingTime,TimeInStation,Minimum (Hours),0.0358840345893441,0.0358840345893441,0.0358840345893441,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,Throughput,NumberEntered,Total,18772,18772,18772,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Digester.Processing,Throughput,NumberExited,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Object],Costs,TotalCost,Total (USD),631532.548005491,631532.548005491,631532.548005491,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,ScheduledUtilization,Percent,3.52787967526309,3.52787967526309,3.52787967526309,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,UnitsAllocated,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,UnitsScheduled,Average,5.50819672131148,5.50819672131148,5.50819672131148,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,UnitsScheduled,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,UnitsScheduled,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,UnitsUtilized,Average,0.194322552604655,0.194322552604655,0.194322552604655,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,UnitsUtilized,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeOffShift,Average (Hours),24,24,24,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeOffShift,Occurrences,5,5,5,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeOffShift,Percent,8.19672131147541,8.19672131147541,8.19672131147541,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeOffShift,Total (Hours),120,120,120,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeProcessing,Average (Hours),0.325173394151055,0.325173394151055,0.325173394151055,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeProcessing,Occurrences,446,446,446,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeProcessing,Percent,9.90623864695154,9.90623864695154,9.90623864695154,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeProcessing,Total (Hours),145.027333791371,145.027333791371,145.027333791371,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeStarved,Average (Hours),2.68226547250253,2.68226547250253,2.68226547250253,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeStarved,Occurrences,447,447,447,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeStarved,Percent,81.8970400415731,81.8970400415731,81.8970400415731,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff [Resource],ResourceState,TimeStarved,Total (Hours),1198.97266620863,1198.97266620863,1198.97266620863,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Content,NumberInStation,Average,2.41930385570292,2.41930385570292,2.41930385570292,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Content,NumberInStation,Maximum,85,85,85,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Costs,CostPerItem,Average (USD),335.937621106177,335.937621106177,335.937621106177,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Costs,CostPerItem,Maximum (USD),3887.75061573779,3887.75061573779,3887.75061573779,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Costs,TotalCost,Total (USD),573781.45684935,573781.45684935,573781.45684935,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,HoldingTime,TimeInStation,Average (Hours),2.07368901917393,2.07368901917393,2.07368901917393,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),23.998460590974,23.998460590974,23.998460590974,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.InputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.OutputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.OutputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Content,NumberInStation,Average,0.243502880473508,0.243502880473508,0.243502880473508,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Content,NumberInStation,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Costs,CostPerItem,Average (USD),33.8121142600357,33.8121142600357,33.8121142600357,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Costs,CostPerItem,Maximum (USD),3918.3853114891,3918.3853114891,3918.3853114891,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Costs,CostPerItem,Minimum (USD),21.6091598407843,21.6091598407843,21.6091598407843,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Costs,TotalCost,Total (USD),57751.0911561408,57751.0911561408,57751.0911561408,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,HoldingTime,TimeInStation,Average (Hours),0.208716754691578,0.208716754691578,0.208716754691578,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,HoldingTime,TimeInStation,Maximum (Hours),24.1875636511673,24.1875636511673,24.1875636511673,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,HoldingTime,TimeInStation,Minimum (Hours),0.133389875560397,0.133389875560397,0.133389875560397,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,DropOff.Processing,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Object],Costs,TotalCost,Total (USD),12136.67493522,12136.67493522,12136.67493522,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,ScheduledUtilization,Percent,3.88030402863829,3.88030402863829,3.88030402863829,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,UnitsAllocated,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,UnitsUtilized,Average,0.0388030402863829,0.0388030402863829,0.0388030402863829,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeProcessing,Average (Hours),0.04466010297112,0.04466010297112,0.04466010297112,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeProcessing,Occurrences,1272,1272,1272,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeProcessing,Percent,3.88030402863829,3.88030402863829,3.88030402863829,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeProcessing,Total (Hours),56.8076509792646,56.8076509792646,56.8076509792646,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeStarved,Average (Hours),1.10541425688982,1.10541425688982,1.10541425688982,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeStarved,Occurrences,1273,1273,1273,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeStarved,Percent,96.1196959713617,96.1196959713617,96.1196959713617,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale [Resource],ResourceState,TimeStarved,Total (Hours),1407.19234902074,1407.19234902074,1407.19234902074,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Content,NumberInStation,Average,0.0123702838349996,0.0123702838349996,0.0123702838349996,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Content,NumberInStation,Maximum,4,4,4,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Costs,CostPerItem,Average (USD),1.71770226965995,1.71770226965995,1.71770226965995,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Costs,CostPerItem,Maximum (USD),50.0036132516907,50.0036132516907,50.0036132516907,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Costs,TotalCost,Total (USD),2933.83547657919,2933.83547657919,2933.83547657919,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Average (Hours),0.0106031004299997,0.0106031004299997,0.0106031004299997,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),0.308664279331424,0.308664279331424,0.308664279331424,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.InputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.OutputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.OutputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Content,NumberInStation,Average,0.0388030402863829,0.0388030402863829,0.0388030402863829,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Costs,CostPerItem,Average (USD),5.38807930833774,5.38807930833774,5.38807930833774,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Costs,CostPerItem,Maximum (USD),53.9970988706496,53.9970988706496,53.9970988706496,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Costs,CostPerItem,Minimum (USD),0.00300220240207238,0.00300220240207238,0.00300220240207238,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Costs,TotalCost,Total (USD),9202.83945864086,9202.83945864086,9202.83945864086,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,HoldingTime,TimeInStation,Average (Hours),0.0332597488168996,0.0332597488168996,0.0332597488168996,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.333315425127466,0.333315425127466,0.333315425127466,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,HoldingTime,TimeInStation,Minimum (Hours),1.85321135930394E-05,1.85321135930394E-05,1.85321135930394E-05,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,EntryScale.Processing,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Object],Costs,TotalCost,Total (USD),5851.82053419627,5851.82053419627,5851.82053419627,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,ScheduledUtilization,Percent,1.89377573607456,1.89377573607456,1.89377573607456,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,UnitsAllocated,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,UnitsUtilized,Average,0.0189377573607456,0.0189377573607456,0.0189377573607456,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeProcessing,Average (Hours),0.0201782218166896,0.0201782218166896,0.0201782218166896,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeProcessing,Occurrences,1374,1374,1374,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeProcessing,Percent,1.89377573607456,1.89377573607456,1.89377573607456,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeProcessing,Total (Hours),27.7248767761315,27.7248767761315,27.7248767761315,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeStarved,Average (Hours),1.044563725981,1.044563725981,1.044563725981,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeStarved,Occurrences,1375,1375,1375,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeStarved,Percent,98.1062242639254,98.1062242639254,98.1062242639254,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale [Resource],ResourceState,TimeStarved,Total (Hours),1436.27512322387,1436.27512322387,1436.27512322387,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Content,NumberInStation,Average,0.005735978278954,0.005735978278954,0.005735978278954,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Content,NumberInStation,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Costs,CostPerItem,Average (USD),0.796481555306184,0.796481555306184,0.796481555306184,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Costs,CostPerItem,Maximum (USD),25.9103658252238,25.9103658252238,25.9103658252238,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Costs,TotalCost,Total (USD),1360.39049646296,1360.39049646296,1360.39049646296,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Average (Hours),0.004916552810532,0.004916552810532,0.004916552810532,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),0.159940529785331,0.159940529785331,0.159940529785331,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.InputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.OutputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.OutputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Content,NumberInStation,Average,0.0189377573607456,0.0189377573607456,0.0189377573607456,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Costs,CostPerItem,Average (USD),2.62964287923496,2.62964287923496,2.62964287923496,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Costs,CostPerItem,Maximum (USD),18.71030250632,18.71030250632,18.71030250632,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Costs,CostPerItem,Minimum (USD),0.00025154551030937,0.00025154551030937,0.00025154551030937,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Costs,TotalCost,Total (USD),4491.43003773331,4491.43003773331,4491.43003773331,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,HoldingTime,TimeInStation,Average (Hours),0.0162323634520676,0.0162323634520676,0.0162323634520676,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.115495694483457,0.115495694483457,0.115495694483457,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,HoldingTime,TimeInStation,Minimum (Hours),1.55275006363809E-06,1.55275006363809E-06,1.55275006363809E-06,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,ExitScale.Processing,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,InitialWoodInventory.OutputBuffer,Throughput,NumberEntered,Total,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,InitialWoodInventory.OutputBuffer,Throughput,NumberExited,Total,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,InitialWoodInventory.Processing,Throughput,NumberEntered,Total,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,InitialWoodInventory.Processing,Throughput,NumberExited,Total,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],Content,NumberOnLink,Average,0.0052855841790268,0.0052855841790268,0.0052855841790268,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],Content,NumberOnLink,Maximum,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000644841269841437,0.000644841269841437,0.000644841269841437,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],Throughput,NumberEntered,Total,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path1 [Travelers],Throughput,NumberExited,Total,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],Content,NumberOnLink,Average,0.000144986611545781,0.000144986611545781,0.000144986611545781,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000124274238467812,0.000124274238467812,0.000124274238467812,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000124274238487487,0.000124274238487487,0.000124274238487487,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000124274238430644,0.000124274238430644,0.000124274238430644,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path2 [Travelers],Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],Content,NumberOnLink,Average,1.61096234852829E-05,1.61096234852829E-05,1.61096234852829E-05,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],FlowTime,TimeOnLink,Average (Hours),1.3808248701671E-05,1.3808248701671E-05,1.3808248701671E-05,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),1.38082487239899E-05,1.38082487239899E-05,1.38082487239899E-05,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),1.38082486955682E-05,1.38082486955682E-05,1.38082486955682E-05,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path3 [Travelers],Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],Content,NumberOnLink,Average,0.000149336209832095,0.000149336209832095,0.000149336209832095,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000128002465570367,0.000128002465570367,0.000128002465570367,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000128002465601185,0.000128002465601185,0.000128002465601185,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000128002465544341,0.000128002465544341,0.000128002465544341,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path4 [Travelers],Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],Content,NumberOnLink,Average,0.00190740740750355,0.00190740740750355,0.00190740740750355,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],Content,NumberOnLink,Maximum,8,8,8,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.00040873015875076,0.00040873015875076,0.00040873015875076,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000408730158824255,0.000408730158824255,0.000408730158824255,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000408730158710569,0.000408730158710569,0.000408730158710569,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],Throughput,NumberEntered,Total,6832,6832,6832,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path6 [Travelers],Throughput,NumberExited,Total,6832,6832,6832,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],Content,NumberOnLink,Average,0.0019079942427523,0.0019079942427523,0.0019079942427523,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],Content,NumberOnLink,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000148809523807436,0.000148809523807436,0.000148809523807436,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000148809523810911,0.000148809523810911,0.000148809523810911,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000148809523807358,0.000148809523807358,0.000148809523807358,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],Throughput,NumberEntered,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Path7 [Travelers],Throughput,NumberExited,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockLowTally,UserSpecified,TallyValue,Average,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockLowTally,UserSpecified,TallyValue,HalfWidth,2E+20,2E+20,2E+20,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockLowTally,UserSpecified,TallyValue,Maximum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockLowTally,UserSpecified,TallyValue,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockLowTally,UserSpecified,TallyValue,Observations,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockOutTally,UserSpecified,TallyValue,Average,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockOutTally,UserSpecified,TallyValue,HalfWidth,2E+20,2E+20,2E+20,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockOutTally,UserSpecified,TallyValue,Maximum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockOutTally,UserSpecified,TallyValue,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,StockOutTally,UserSpecified,TallyValue,Observations,7,7,7,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,ScheduledUtilization,Percent,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,UnitsAllocated,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Average,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Average (Hours),1464,1464,1464,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Occurrences,1,1,1,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Percent,100,100,100,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Total (Hours),1464,1464,1464,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.InputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.InputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.MemberOutputBuffer,Throughput,NumberEntered,Total,6832,6832,6832,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.MemberOutputBuffer,Throughput,NumberExited,Total,6832,6832,6832,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.ParentOutputBuffer,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.ParentOutputBuffer,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.Processing,Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,TruckWoodSplit.Processing,Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Content,NumberInSystem,Average,4454.99531392534,4454.99531392534,4454.99531392534,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Content,NumberInSystem,Maximum,12000,12000,12000,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Content,NumberInSystem,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Costs,CostPerItem,Average (USD),1.98268798779639,1.98268798779639,1.98268798779639,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Costs,CostPerItem,Maximum (USD),4.10579763190666,4.10579763190666,4.10579763190666,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Costs,CostPerItem,Observations,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],FlowTime,TimeInSystem,Average (Hours),347.427611862256,347.427611862256,347.427611862256,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],FlowTime,TimeInSystem,Maximum (Hours),719.397371260581,719.397371260581,719.397371260581,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],FlowTime,TimeInSystem,Minimum (Hours),0.0627046439924508,0.0627046439924508,0.0627046439924508,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],FlowTime,TimeInSystem,Observations,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Throughput,NumberCreated,Total,18832,18832,18832,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,Wood [Population],Throughput,NumberDestroyed,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Average (Hours),347.427611862256,347.427611862256,347.427611862256,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,HalfWidth (Hours),3E+20,3E+20,3E+20,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Maximum (Hours),719.397371260581,719.397371260581,719.397371260581,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Minimum (Hours),0.0627046439924508,0.0627046439924508,0.0627046439924508,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Observations,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,WoodExit.InputBuffer,Throughput,NumberEntered,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Bright,Mill_Bright1,WoodExit.InputBuffer,Throughput,NumberExited,Total,18771,18771,18771,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,[Object],Costs,TotalCost,Total (USD),691186.282538929,691186.282538929,691186.282538929,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Object],Costs,TotalCost,Total (USD),27109.1830403469,27109.1830403469,27109.1830403469,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,ScheduledUtilization,Percent,83.1139162794465,83.1139162794465,83.1139162794465,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,UnitsAllocated,Total,17098,17098,17098,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,UnitsScheduled,Average,0.843440614749772,0.843440614749772,0.843440614749772,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,UnitsScheduled,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,UnitsUtilized,Average,0.701016526409974,0.701016526409974,0.701016526409974,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeOffShift,Average (Hours),25.4669933340371,25.4669933340371,25.4669933340371,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeOffShift,Occurrences,9,9,9,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeOffShift,Percent,15.6559385250228,15.6559385250228,15.6559385250228,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeOffShift,Total (Hours),229.202940006334,229.202940006334,229.202940006334,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeProcessing,Average (Hours),102.62881946642,102.62881946642,102.62881946642,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeProcessing,Occurrences,10,10,10,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeProcessing,Percent,70.1016526409974,70.1016526409974,70.1016526409974,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeProcessing,Total (Hours),1026.2881946642,1026.2881946642,1026.2881946642,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeStarved,Average (Hours),20.8508865329464,20.8508865329464,20.8508865329464,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeStarved,Occurrences,10,10,10,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeStarved,Percent,14.2424088339798,14.2424088339798,14.2424088339798,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester [Resource],ResourceState,TimeStarved,Total (Hours),208.508865329464,208.508865329464,208.508865329464,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Content,NumberInStation,Average,3244.213708107,3244.213708107,3244.213708107,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Content,NumberInStation,Maximum,9999,9999,9999,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Costs,CostPerItem,Average (USD),1.58536089363573,1.58536089363573,1.58536089363573,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Costs,CostPerItem,Maximum (USD),3.42549842265147,3.42549842265147,3.42549842265147,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Costs,TotalCost,Total (USD),27109.1830403469,27109.1830403469,27109.1830403469,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,HoldingTime,TimeInStation,Average (Hours),277.755228564979,277.755228564979,277.755228564979,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),600.147323648537,600.147323648537,600.147323648537,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Throughput,NumberEntered,Total,17152,17152,17152,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.InputBuffer,Throughput,NumberExited,Total,17098,17098,17098,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.OutputBuffer,Throughput,NumberEntered,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.OutputBuffer,Throughput,NumberExited,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,Content,NumberInStation,Average,0.701016526409974,0.701016526409974,0.701016526409974,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,HoldingTime,TimeInStation,Average (Hours),0.060024902344438,0.060024902344438,0.060024902344438,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.0726088711758166,0.0726088711758166,0.0726088711758166,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,HoldingTime,TimeInStation,Minimum (Hours),0.0466963389085322,0.0466963389085322,0.0466963389085322,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,Throughput,NumberEntered,Total,17098,17098,17098,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Digester.Processing,Throughput,NumberExited,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Object],Costs,TotalCost,Total (USD),644192.25401191,644192.25401191,644192.25401191,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,ScheduledUtilization,Percent,3.69757423100439,3.69757423100439,3.69757423100439,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,UnitsAllocated,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,UnitsScheduled,Average,5.50819672131148,5.50819672131148,5.50819672131148,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,UnitsScheduled,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,UnitsScheduled,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,UnitsUtilized,Average,0.203669662560242,0.203669662560242,0.203669662560242,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,UnitsUtilized,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeOffShift,Average (Hours),24,24,24,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeOffShift,Occurrences,5,5,5,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeOffShift,Percent,8.19672131147541,8.19672131147541,8.19672131147541,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeOffShift,Total (Hours),120,120,120,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeProcessing,Average (Hours),0.347859892467169,0.347859892467169,0.347859892467169,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeProcessing,Occurrences,431,431,431,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeProcessing,Percent,10.2409572167589,10.2409572167589,10.2409572167589,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeProcessing,Total (Hours),149.92761365335,149.92761365335,149.92761365335,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeStarved,Average (Hours),2.75767294768279,2.75767294768279,2.75767294768279,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeStarved,Occurrences,433,433,433,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeStarved,Percent,81.5623214717657,81.5623214717657,81.5623214717657,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff [Resource],ResourceState,TimeStarved,Total (Hours),1194.07238634665,1194.07238634665,1194.07238634665,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Content,NumberInStation,Average,2.5125157166305,2.5125157166305,2.5125157166305,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Content,NumberInStation,Maximum,84,84,84,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Costs,CostPerItem,Average (USD),333.270876667685,333.270876667685,333.270876667685,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Costs,CostPerItem,Maximum (USD),3887.55076998906,3887.55076998906,3887.55076998906,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Costs,TotalCost,Total (USD),595888.327481822,595888.327481822,595888.327481822,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,HoldingTime,TimeInStation,Average (Hours),2.05722763375115,2.05722763375115,2.05722763375115,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),23.9972269752411,23.9972269752411,23.9972269752411,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.InputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.OutputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.OutputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Content,NumberInStation,Average,0.203669662560242,0.203669662560242,0.203669662560242,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Content,NumberInStation,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Costs,CostPerItem,Average (USD),27.0156188647022,27.0156188647022,27.0156188647022,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Costs,CostPerItem,Maximum (USD),32.2702608084451,32.2702608084451,32.2702608084451,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Costs,CostPerItem,Minimum (USD),21.6545039118328,21.6545039118328,21.6545039118328,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Costs,TotalCost,Total (USD),48303.9265300875,48303.9265300875,48303.9265300875,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,HoldingTime,TimeInStation,Average (Hours),0.166763079411741,0.166763079411741,0.166763079411741,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.199199140792871,0.199199140792871,0.199199140792871,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,HoldingTime,TimeInStation,Minimum (Hours),0.133669777233536,0.133669777233536,0.133669777233536,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,DropOff.Processing,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Object],Costs,TotalCost,Total (USD),13235.1723299129,13235.1723299129,13235.1723299129,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,ScheduledUtilization,Percent,4.08446628864778,4.08446628864778,4.08446628864778,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,UnitsAllocated,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,UnitsUtilized,Average,0.0408446628864778,0.0408446628864778,0.0408446628864778,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeProcessing,Average (Hours),0.0450275500495508,0.0450275500495508,0.0450275500495508,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeProcessing,Occurrences,1328,1328,1328,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeProcessing,Percent,4.08446628864778,4.08446628864778,4.08446628864778,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeProcessing,Total (Hours),59.7965864658035,59.7965864658035,59.7965864658035,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeStarved,Average (Hours),1.05658646616569,1.05658646616569,1.05658646616569,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeStarved,Occurrences,1329,1329,1329,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeStarved,Percent,95.9155337113522,95.9155337113522,95.9155337113522,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale [Resource],ResourceState,TimeStarved,Total (Hours),1404.2034135342,1404.2034135342,1404.2034135342,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Content,NumberInStation,Average,0.0149603880896777,0.0149603880896777,0.0149603880896777,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Content,NumberInStation,Maximum,5,5,5,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Costs,CostPerItem,Average (USD),1.98441013559994,1.98441013559994,1.98441013559994,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Costs,CostPerItem,Maximum (USD),35.5184860258225,35.5184860258225,35.5184860258225,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Costs,TotalCost,Total (USD),3548.12532245269,3548.12532245269,3548.12532245269,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Average (Hours),0.0122494452814811,0.0122494452814811,0.0122494452814811,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),0.219249913739645,0.219249913739645,0.219249913739645,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.InputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.OutputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.OutputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Content,NumberInStation,Average,0.0408446628864778,0.0408446628864778,0.0408446628864778,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Costs,CostPerItem,Average (USD),5.41781152542515,5.41781152542515,5.41781152542515,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Costs,CostPerItem,Maximum (USD),42.6872508381472,42.6872508381472,42.6872508381472,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Costs,CostPerItem,Minimum (USD),0.00173023408387962,0.00173023408387962,0.00173023408387962,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Costs,TotalCost,Total (USD),9687.04700746017,9687.04700746017,9687.04700746017,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,HoldingTime,TimeInStation,Average (Hours),0.0334432810211429,0.0334432810211429,0.0334432810211429,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.263501548383625,0.263501548383625,0.263501548383625,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,HoldingTime,TimeInStation,Minimum (Hours),1.06804573078989E-05,1.06804573078989E-05,1.06804573078989E-05,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,EntryScale.Processing,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Object],Costs,TotalCost,Total (USD),6572.60005367576,6572.60005367576,6572.60005367576,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,ScheduledUtilization,Percent,2.08592547191273,2.08592547191273,2.08592547191273,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,UnitsAllocated,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,UnitsUtilized,Average,0.0208592547191273,0.0208592547191273,0.0208592547191273,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeProcessing,Average (Hours),0.0216581197934768,0.0216581197934768,0.0216581197934768,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeProcessing,Occurrences,1410,1410,1410,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeProcessing,Percent,2.08592547191273,2.08592547191273,2.08592547191273,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeProcessing,Total (Hours),30.5379489088023,30.5379489088023,30.5379489088023,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeStarved,Average (Hours),1.01591924244592,1.01591924244592,1.01591924244592,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeStarved,Occurrences,1411,1411,1411,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeStarved,Percent,97.9140745280873,97.9140745280873,97.9140745280873,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale [Resource],ResourceState,TimeStarved,Total (Hours),1433.4620510912,1433.4620510912,1433.4620510912,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Content,NumberInStation,Average,0.00685359041038329,0.00685359041038329,0.00685359041038329,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Content,NumberInStation,Maximum,5,5,5,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Costs,CostPerItem,Average (USD),0.909089670273929,0.909089670273929,0.909089670273929,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Costs,CostPerItem,Maximum (USD),24.3446740172526,24.3446740172526,24.3446740172526,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Costs,TotalCost,Total (USD),1625.45233044978,1625.45233044978,1625.45233044978,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Average (Hours),0.00561166463132054,0.00561166463132054,0.00561166463132054,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),0.150275765538595,0.150275765538595,0.150275765538595,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.InputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.OutputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.OutputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Content,NumberInStation,Average,0.0208592547191273,0.0208592547191273,0.0208592547191273,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Costs,CostPerItem,Average (USD),2.76686114274384,2.76686114274384,2.76686114274384,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Costs,CostPerItem,Maximum (USD),19.4497874048462,19.4497874048462,19.4497874048462,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Costs,CostPerItem,Minimum (USD),4.96286429552129E-05,4.96286429552129E-05,4.96286429552129E-05,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Costs,TotalCost,Total (USD),4947.14772322597,4947.14772322597,4947.14772322597,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,HoldingTime,TimeInStation,Average (Hours),0.0170793897700237,0.0170793897700237,0.0170793897700237,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.120060416079298,0.120060416079298,0.120060416079298,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,HoldingTime,TimeInStation,Minimum (Hours),3.06349647871684E-07,3.06349647871684E-07,3.06349647871684E-07,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,ExitScale.Processing,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,InitialWoodInventory.OutputBuffer,Throughput,NumberEntered,Total,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,InitialWoodInventory.OutputBuffer,Throughput,NumberExited,Total,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,InitialWoodInventory.Processing,Throughput,NumberEntered,Total,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,InitialWoodInventory.Processing,Throughput,NumberExited,Total,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],Content,NumberOnLink,Average,0.00440465348252234,0.00440465348252234,0.00440465348252234,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],Content,NumberOnLink,Maximum,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000644841269841394,0.000644841269841394,0.000644841269841394,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],Throughput,NumberEntered,Total,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path1 [Travelers],Throughput,NumberExited,Total,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],Content,NumberOnLink,Average,0.000151777553538366,0.000151777553538366,0.000151777553538366,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000124274238467655,0.000124274238467655,0.000124274238467655,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000124274238487487,0.000124274238487487,0.000124274238487487,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000124274238430644,0.000124274238430644,0.000124274238430644,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path2 [Travelers],Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],Content,NumberOnLink,Average,1.68641725944419E-05,1.68641725944419E-05,1.68641725944419E-05,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],Content,NumberOnLink,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],FlowTime,TimeOnLink,Average (Hours),1.38082487014894E-05,1.38082487014894E-05,1.38082487014894E-05,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),1.38082487239899E-05,1.38082487239899E-05,1.38082487239899E-05,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),1.38082486955682E-05,1.38082486955682E-05,1.38082486955682E-05,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path3 [Travelers],Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Content,NumberAccumulated,Average,4.01145535150016E-08,4.01145535150016E-08,4.01145535150016E-08,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Content,NumberAccumulated,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Content,NumberAccumulated,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Content,NumberOnLink,Average,0.000156330880081662,0.000156330880081662,0.000156330880081662,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.00012800246557022,0.00012800246557022,0.00012800246557022,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000128002465601185,0.000128002465601185,0.000128002465601185,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000128002465544341,0.000128002465544341,0.000128002465544341,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path4 [Travelers],Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],Content,NumberOnLink,Average,0.00199674733290309,0.00199674733290309,0.00199674733290309,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],Content,NumberOnLink,Maximum,8,8,8,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000408730158748618,0.000408730158748618,0.000408730158748618,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000408730158824255,0.000408730158824255,0.000408730158824255,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000408730158710569,0.000408730158710569,0.000408730158710569,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],Throughput,NumberEntered,Total,7152,7152,7152,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path6 [Travelers],Throughput,NumberExited,Total,7152,7152,7152,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],Content,NumberOnLink,Average,0.00289639848421883,0.00289639848421883,0.00289639848421883,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],Content,NumberOnLink,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000248015873012597,0.000248015873012597,0.000248015873012597,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000248015873019369,0.000248015873019369,0.000248015873019369,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000248015873012264,0.000248015873012264,0.000248015873012264,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],Throughput,NumberEntered,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Path7 [Travelers],Throughput,NumberExited,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockLowTally,UserSpecified,TallyValue,Average,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockLowTally,UserSpecified,TallyValue,HalfWidth,2E+20,2E+20,2E+20,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockLowTally,UserSpecified,TallyValue,Maximum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockLowTally,UserSpecified,TallyValue,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockLowTally,UserSpecified,TallyValue,Observations,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockOutTally,UserSpecified,TallyValue,Average,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockOutTally,UserSpecified,TallyValue,HalfWidth,2E+20,2E+20,2E+20,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockOutTally,UserSpecified,TallyValue,Maximum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockOutTally,UserSpecified,TallyValue,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,StockOutTally,UserSpecified,TallyValue,Observations,9,9,9,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,ScheduledUtilization,Percent,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,UnitsAllocated,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Average,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Average (Hours),1464,1464,1464,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Occurrences,1,1,1,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Percent,100,100,100,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Total (Hours),1464,1464,1464,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.InputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.InputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.MemberOutputBuffer,Throughput,NumberEntered,Total,7152,7152,7152,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.MemberOutputBuffer,Throughput,NumberExited,Total,7152,7152,7152,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.ParentOutputBuffer,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.ParentOutputBuffer,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.Processing,Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,TruckWoodSplit.Processing,Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Content,NumberInSystem,Average,3244.92402243272,3244.92402243272,3244.92402243272,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Content,NumberInSystem,Maximum,10000,10000,10000,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Content,NumberInSystem,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Costs,CostPerItem,Average (USD),1.58545044731143,1.58545044731143,1.58545044731143,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Costs,CostPerItem,Maximum (USD),3.42549842265147,3.42549842265147,3.42549842265147,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Costs,CostPerItem,Observations,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],FlowTime,TimeInSystem,Average (Hours),277.831738118238,277.831738118238,277.831738118238,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],FlowTime,TimeInSystem,Maximum (Hours),600.208924773219,600.208924773219,600.208924773219,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],FlowTime,TimeInSystem,Minimum (Hours),0.061023580754364,0.061023580754364,0.061023580754364,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],FlowTime,TimeInSystem,Observations,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Throughput,NumberCreated,Total,17152,17152,17152,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,Wood [Population],Throughput,NumberDestroyed,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Average (Hours),277.831738118238,277.831738118238,277.831738118238,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,HalfWidth (Hours),3E+20,3E+20,3E+20,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Maximum (Hours),600.208924773219,600.208924773219,600.208924773219,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Minimum (Hours),0.061023580754364,0.061023580754364,0.061023580754364,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Observations,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,WoodExit.InputBuffer,Throughput,NumberEntered,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_Koala,Mill_Koala1,WoodExit.InputBuffer,Throughput,NumberExited,Total,17097,17097,17097,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,[Object],Costs,TotalCost,Total (USD),1248432.91269214,1248432.91269214,1248432.91269214,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Object],Costs,TotalCost,Total (USD),20762.1030158301,20762.1030158301,20762.1030158301,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,ScheduledUtilization,Percent,99.9999559534652,99.9999559534652,99.9999559534652,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,UnitsAllocated,Total,30300,30300,30300,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,UnitsUtilized,Average,0.999999559534652,0.999999559534652,0.999999559534652,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeProcessing,Average (Hours),1463.99935515873,1463.99935515873,1463.99935515873,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeProcessing,Occurrences,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeProcessing,Percent,99.9999559534652,99.9999559534652,99.9999559534652,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeProcessing,Total (Hours),1463.99935515873,1463.99935515873,1463.99935515873,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeStarved,Average (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeStarved,Occurrences,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeStarved,Percent,4.40465348252233E-05,4.40465348252233E-05,4.40465348252233E-05,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester [Resource],ResourceState,TimeStarved,Total (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Content,NumberInStation,Average,2484.6451150091,2484.6451150091,2484.6451150091,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Content,NumberInStation,Maximum,5999,5999,5999,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Costs,CostPerItem,Average (USD),0.664278363841849,0.664278363841849,0.664278363841849,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Costs,CostPerItem,Maximum (USD),1.65339953432976,1.65339953432976,1.65339953432976,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Costs,TotalCost,Total (USD),20762.1030158301,20762.1030158301,20762.1030158301,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,HoldingTime,TimeInStation,Average (Hours),116.381569345092,116.381569345092,116.381569345092,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),289.675598414573,289.675598414573,289.675598414573,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Throughput,NumberEntered,Total,32512,32512,32512,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.InputBuffer,Throughput,NumberExited,Total,30300,30300,30300,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.OutputBuffer,Throughput,NumberEntered,Total,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.OutputBuffer,Throughput,NumberExited,Total,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,Content,NumberInStation,Average,0.999999559534652,0.999999559534652,0.999999559534652,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,HoldingTime,TimeInStation,Average (Hours),0.0483179439597079,0.0483179439597079,0.0483179439597079,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.0532860310057117,0.0532860310057117,0.0532860310057117,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,HoldingTime,TimeInStation,Minimum (Hours),0.0436834883749953,0.0436834883749953,0.0436834883749953,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,Throughput,NumberEntered,Total,30300,30300,30300,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Digester.Processing,Throughput,NumberExited,Total,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Object],Costs,TotalCost,Total (USD),1065003.2189864,1065003.2189864,1065003.2189864,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,ScheduledUtilization,Percent,13.6997578157169,13.6997578157169,13.6997578157169,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,UnitsAllocated,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,UnitsScheduled,Average,5.50819672131148,5.50819672131148,5.50819672131148,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,UnitsScheduled,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,UnitsScheduled,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,UnitsUtilized,Average,0.754609610832928,0.754609610832928,0.754609610832928,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,UnitsUtilized,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeOffShift,Average (Hours),24,24,24,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeOffShift,Occurrences,5,5,5,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeOffShift,Percent,8.19672131147541,8.19672131147541,8.19672131147541,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeOffShift,Total (Hours),120,120,120,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeProcessing,Average (Hours),0.690846318642096,0.690846318642096,0.690846318642096,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeProcessing,Occurrences,492,492,492,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeProcessing,Percent,23.2169664461688,23.2169664461688,23.2169664461688,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeProcessing,Total (Hours),339.896388771911,339.896388771911,339.896388771911,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeStarved,Average (Hours),2.04086099843107,2.04086099843107,2.04086099843107,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeStarved,Occurrences,492,492,492,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeStarved,Percent,68.5863122423558,68.5863122423558,68.5863122423558,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff [Resource],ResourceState,TimeStarved,Total (Hours),1004.10361122809,1004.10361122809,1004.10361122809,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Content,NumberInStation,Average,3.70310483203627,3.70310483203627,3.70310483203627,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Content,NumberInStation,Maximum,167,167,167,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Costs,CostPerItem,Average (USD),132.507236995229,132.507236995229,132.507236995229,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Costs,CostPerItem,Maximum (USD),3875.09009067508,3875.09009067508,3875.09009067508,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Costs,TotalCost,Total (USD),878257.96680438,878257.96680438,878257.96680438,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,HoldingTime,TimeInStation,Average (Hours),0.817945907377957,0.817945907377957,0.817945907377957,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),23.920309201698,23.920309201698,23.920309201698,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.InputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.OutputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.OutputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Content,NumberInStation,Average,0.78739649607883,0.78739649607883,0.78739649607883,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Content,NumberInStation,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Costs,CostPerItem,Average (USD),28.1752040105648,28.1752040105648,28.1752040105648,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Costs,CostPerItem,Maximum (USD),3914.7015215364,3914.7015215364,3914.7015215364,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Costs,CostPerItem,Minimum (USD),21.7115218509712,21.7115218509712,21.7115218509712,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Costs,TotalCost,Total (USD),186745.252182024,186745.252182024,186745.252182024,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,HoldingTime,TimeInStation,Average (Hours),0.173921012410894,0.173921012410894,0.173921012410894,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,HoldingTime,TimeInStation,Maximum (Hours),24.1648242070148,24.1648242070148,24.1648242070148,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,HoldingTime,TimeInStation,Minimum (Hours),0.13402173982081,0.13402173982081,0.13402173982081,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,DropOff.Processing,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Object],Costs,TotalCost,Total (USD),135166.072122474,135166.072122474,135166.072122474,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,ScheduledUtilization,Percent,14.84041320068,14.84041320068,14.84041320068,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,UnitsAllocated,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,UnitsUtilized,Average,0.1484041320068,0.1484041320068,0.1484041320068,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeProcessing,Average (Hours),0.0972096864688837,0.0972096864688837,0.0972096864688837,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeProcessing,Occurrences,2235,2235,2235,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeProcessing,Percent,14.84041320068,14.84041320068,14.84041320068,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeProcessing,Total (Hours),217.263649257955,217.263649257955,217.263649257955,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeStarved,Average (Hours),0.557574396575154,0.557574396575154,0.557574396575154,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeStarved,Occurrences,2236,2236,2236,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeStarved,Percent,85.15958679932,85.15958679932,85.15958679932,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale [Resource],ResourceState,TimeStarved,Total (Hours),1246.73635074205,1246.73635074205,1246.73635074205,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Content,NumberInStation,Average,0.421512855624218,0.421512855624218,0.421512855624218,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Content,NumberInStation,Maximum,20,20,20,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Costs,CostPerItem,Average (USD),15.0828848736699,15.0828848736699,15.0828848736699,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Costs,CostPerItem,Maximum (USD),113.029957439797,113.029957439797,113.029957439797,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Costs,TotalCost,Total (USD),99969.3609426844,99969.3609426844,99969.3609426844,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Average (Hours),0.0931042276152467,0.0931042276152467,0.0931042276152467,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),0.697715786665412,0.697715786665412,0.697715786665412,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.InputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.OutputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.OutputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Content,NumberInStation,Average,0.1484041320068,0.1484041320068,0.1484041320068,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Costs,CostPerItem,Average (USD),5.31030645440385,5.31030645440385,5.31030645440385,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Costs,CostPerItem,Maximum (USD),49.3046186148674,49.3046186148674,49.3046186148674,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Costs,CostPerItem,Minimum (USD),0.00173195458819464,0.00173195458819464,0.00173195458819464,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Costs,TotalCost,Total (USD),35196.7111797887,35196.7111797887,35196.7111797887,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,HoldingTime,TimeInStation,Average (Hours),0.0327796694716287,0.0327796694716287,0.0327796694716287,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.304349497622638,0.304349497622638,0.304349497622638,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,HoldingTime,TimeInStation,Minimum (Hours),1.06910777049052E-05,1.06910777049052E-05,1.06910777049052E-05,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,EntryScale.Processing,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Object],Costs,TotalCost,Total (USD),27215.8135751364,27215.8135751364,27215.8135751364,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,ScheduledUtilization,Percent,7.66272870791181,7.66272870791181,7.66272870791181,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,UnitsAllocated,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,UnitsUtilized,Average,0.0766272870791181,0.0766272870791181,0.0766272870791181,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeProcessing,Average (Hours),0.0256886531449116,0.0256886531449116,0.0256886531449116,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeProcessing,Occurrences,4367,4367,4367,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeProcessing,Percent,7.66272870791181,7.66272870791181,7.66272870791181,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeProcessing,Total (Hours),112.182348283829,112.182348283829,112.182348283829,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeStarved,Average (Hours),0.309482063121834,0.309482063121834,0.309482063121834,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeStarved,Occurrences,4368,4368,4368,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeStarved,Percent,92.3372712920882,92.3372712920882,92.3372712920882,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale [Resource],ResourceState,TimeStarved,Total (Hours),1351.81765171617,1351.81765171617,1351.81765171617,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Content,NumberInStation,Average,0.0381260252359345,0.0381260252359345,0.0381260252359345,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Content,NumberInStation,Maximum,6,6,6,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Costs,CostPerItem,Average (USD),1.36425364410925,1.36425364410925,1.36425364410925,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Costs,CostPerItem,Maximum (USD),26.2133713928233,26.2133713928233,26.2133713928233,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Costs,TotalCost,Total (USD),9042.27315315611,9042.27315315611,9042.27315315611,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Average (Hours),0.00842131879079784,0.00842131879079784,0.00842131879079784,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Maximum (Hours),0.161810934523601,0.161810934523601,0.161810934523601,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,HoldingTime,TimeInStation,Minimum (Hours),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.InputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.OutputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.OutputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Content,NumberInStation,Average,0.0766272870791181,0.0766272870791181,0.0766272870791181,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Content,NumberInStation,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Content,NumberInStation,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Costs,CostPerItem,Average (USD),2.74193428213341,2.74193428213341,2.74193428213341,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Costs,CostPerItem,Maximum (USD),26.3459986620323,26.3459986620323,26.3459986620323,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Costs,CostPerItem,Minimum (USD),0.00066998807960772,0.00066998807960772,0.00066998807960772,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Costs,TotalCost,Total (USD),18173.5404219802,18173.5404219802,18173.5404219802,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,HoldingTime,TimeInStation,Average (Hours),0.0169255202600828,0.0169255202600828,0.0169255202600828,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,HoldingTime,TimeInStation,Maximum (Hours),0.16262962137057,0.16262962137057,0.16262962137057,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,HoldingTime,TimeInStation,Minimum (Hours),4.1357288864674E-06,4.1357288864674E-06,4.1357288864674E-06,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,ExitScale.Processing,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,InitialWoodInventory.OutputBuffer,Throughput,NumberEntered,Total,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,InitialWoodInventory.OutputBuffer,Throughput,NumberExited,Total,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,InitialWoodInventory.Processing,Throughput,NumberEntered,Total,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,InitialWoodInventory.Processing,Throughput,NumberExited,Total,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],Content,NumberOnLink,Average,0.0026427920895134,0.0026427920895134,0.0026427920895134,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],Content,NumberOnLink,Maximum,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000644841269841234,0.000644841269841234,0.000644841269841234,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.00064484126984127,0.00064484126984127,0.00064484126984127,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],Throughput,NumberEntered,Total,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path1 [Travelers],Throughput,NumberExited,Total,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],Content,NumberOnLink,Average,0.00056262954413996,0.00056262954413996,0.00056262954413996,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000124274238476298,0.000124274238476298,0.000124274238476298,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000124274238487487,0.000124274238487487,0.000124274238487487,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000124274238430644,0.000124274238430644,0.000124274238430644,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path2 [Travelers],Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],Content,NumberOnLink,Average,6.25143936921762E-05,6.25143936921762E-05,6.25143936921762E-05,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],FlowTime,TimeOnLink,Average (Hours),1.38082486972459E-05,1.38082486972459E-05,1.38082486972459E-05,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),1.38082487239899E-05,1.38082487239899E-05,1.38082487239899E-05,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),1.38082486955682E-05,1.38082486955682E-05,1.38082486955682E-05,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path3 [Travelers],Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],Content,NumberOnLink,Average,0.000579508430131978,0.000579508430131978,0.000579508430131978,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000128002465557214,0.000128002465557214,0.000128002465557214,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000128002465601185,0.000128002465601185,0.000128002465601185,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000128002465544341,0.000128002465544341,0.000128002465544341,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path4 [Travelers],Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],Content,NumberOnLink,Average,0.00740181282022043,0.00740181282022043,0.00740181282022043,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],Content,NumberOnLink,Maximum,12,12,12,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000408730158750857,0.000408730158750857,0.000408730158750857,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000408730158824255,0.000408730158824255,0.000408730158824255,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000408730158710569,0.000408730158710569,0.000408730158710569,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],Throughput,NumberEntered,Total,26512,26512,26512,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path6 [Travelers],Throughput,NumberExited,Total,26512,26512,26512,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],Content,NumberOnLink,Average,0.0051329459948126,0.0051329459948126,0.0051329459948126,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],Content,NumberOnLink,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],FlowTime,TimeOnLink,Average (Hours),0.000248015873012497,0.000248015873012497,0.000248015873012497,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000248015873019369,0.000248015873019369,0.000248015873019369,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000248015873012264,0.000248015873012264,0.000248015873012264,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],Throughput,NumberEntered,Total,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Path7 [Travelers],Throughput,NumberExited,Total,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,StockLowTally,UserSpecified,TallyValue,Average,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,StockLowTally,UserSpecified,TallyValue,HalfWidth,2E+20,2E+20,2E+20,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,StockLowTally,UserSpecified,TallyValue,Maximum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,StockLowTally,UserSpecified,TallyValue,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,StockLowTally,UserSpecified,TallyValue,Observations,13,13,13,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,ScheduledUtilization,Percent,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,UnitsAllocated,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Average,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,UnitsScheduled,Minimum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Average,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Maximum,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],Capacity,UnitsUtilized,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Average (Hours),1464,1464,1464,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Occurrences,1,1,1,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Percent,100,100,100,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit [Resource],ResourceState,TimeStarved,Total (Hours),1464,1464,1464,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.InputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.InputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.MemberOutputBuffer,Throughput,NumberEntered,Total,26512,26512,26512,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.MemberOutputBuffer,Throughput,NumberExited,Total,26512,26512,26512,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.ParentOutputBuffer,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.ParentOutputBuffer,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.Processing,Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,TruckWoodSplit.Processing,Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Content,NumberInSystem,Average,2485.66029211957,2485.66029211957,2485.66029211957,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Content,NumberInSystem,Maximum,6000,6000,6000,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Content,NumberInSystem,Minimum,0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Costs,CostPerItem,Average (USD),0.664284383531752,0.664284383531752,0.664284383531752,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Costs,CostPerItem,Maximum (USD),1.65339953432976,1.65339953432976,1.65339953432976,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Costs,CostPerItem,Minimum (USD),0,0,0,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Costs,CostPerItem,Observations,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],FlowTime,TimeInSystem,Average (Hours),116.431645440973,116.431645440973,116.431645440973,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],FlowTime,TimeInSystem,Maximum (Hours),289.726667263555,289.726667263555,289.726667263555,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],FlowTime,TimeInSystem,Minimum (Hours),0.0502953581350305,0.0502953581350305,0.0502953581350305,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],FlowTime,TimeInSystem,Observations,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Throughput,NumberCreated,Total,32512,32512,32512,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,Wood [Population],Throughput,NumberDestroyed,Total,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Average (Hours),116.431645440973,116.431645440973,116.431645440973,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,HalfWidth (Hours),3E+20,3E+20,3E+20,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Maximum (Hours),289.726667263555,289.726667263555,289.726667263555,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Minimum (Hours),0.0502953581350305,0.0502953581350305,0.0502953581350305,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,WoodExit [DestroyedEntities],FlowTime,TimeInSystem,Observations,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,WoodExit.InputBuffer,Throughput,NumberEntered,Total,30299,30299,30299,NaN,NaN
+Scenario1,Mill_PaperTech,Mill_PaperTech1,WoodExit.InputBuffer,Throughput,NumberExited,Total,30299,30299,30299,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Content,NumberInSystem,Average,10.7179332005202,10.7179332005202,10.7179332005202,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Content,NumberInSystem,Maximum,222,222,222,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Content,NumberInSystem,Minimum,0,0,0,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Costs,CostPerItem,Average (USD),251.08166547817,251.08166547817,251.08166547817,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Costs,CostPerItem,Maximum (USD),3963.45171236102,3963.45171236102,3963.45171236102,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Costs,CostPerItem,Minimum (USD),23.2608689449708,23.2608689449708,23.2608689449708,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Costs,CostPerItem,Observations,10124,10124,10124,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],FlowTime,TimeInSystem,Average (Hours),1.54988682393931,1.54988682393931,1.54988682393931,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],FlowTime,TimeInSystem,Maximum (Hours),24.4657513108705,24.4657513108705,24.4657513108705,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],FlowTime,TimeInSystem,Minimum (Hours),0.143585610771424,0.143585610771424,0.143585610771424,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],FlowTime,TimeInSystem,Observations,10124,10124,10124,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Throughput,NumberCreated,Total,10124,10124,10124,NaN,NaN
+Scenario1,ModelEntity,TruckLoad,[Population],Throughput,NumberDestroyed,Total,10124,10124,10124,NaN,NaN
+Scenario1,Path,Path1,[Travelers],Content,NumberOnLink,Average,0.000256787398622743,0.000256787398622743,0.000256787398622743,NaN,NaN
+Scenario1,Path,Path1,[Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Path,Path1,[Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Path,Path1,[Travelers],FlowTime,TimeOnLink,Average (Hours),0.00022010348453378,0.00022010348453378,0.00022010348453378,NaN,NaN
+Scenario1,Path,Path1,[Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000220103484593892,0.000220103484593892,0.000220103484593892,NaN,NaN
+Scenario1,Path,Path1,[Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000220103484480205,0.000220103484480205,0.000220103484480205,NaN,NaN
+Scenario1,Path,Path1,[Travelers],Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Path,Path1,[Travelers],Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Path,Path2,[Travelers],Content,NumberOnLink,Average,0.000176561473561392,0.000176561473561392,0.000176561473561392,NaN,NaN
+Scenario1,Path,Path2,[Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Path,Path2,[Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Path,Path2,[Travelers],FlowTime,TimeOnLink,Average (Hours),0.000151338405909765,0.000151338405909765,0.000151338405909765,NaN,NaN
+Scenario1,Path,Path2,[Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.00015133840594217,0.00015133840594217,0.00015133840594217,NaN,NaN
+Scenario1,Path,Path2,[Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000151338405885326,0.000151338405885326,0.000151338405885326,NaN,NaN
+Scenario1,Path,Path2,[Travelers],Throughput,NumberEntered,Total,1708,1708,1708,NaN,NaN
+Scenario1,Path,Path2,[Travelers],Throughput,NumberExited,Total,1708,1708,1708,NaN,NaN
+Scenario1,Path,Path3,[Travelers],Content,NumberOnLink,Average,0.000752673301188186,0.000752673301188186,0.000752673301188186,NaN,NaN
+Scenario1,Path,Path3,[Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Path,Path3,[Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Path,Path3,[Travelers],FlowTime,TimeOnLink,Average (Hours),0.000166251314565405,0.000166251314565405,0.000166251314565405,NaN,NaN
+Scenario1,Path,Path3,[Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000166251314567489,0.000166251314567489,0.000166251314567489,NaN,NaN
+Scenario1,Path,Path3,[Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000166251314539068,0.000166251314539068,0.000166251314539068,NaN,NaN
+Scenario1,Path,Path3,[Travelers],Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Path,Path3,[Travelers],Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Path,Path4,[Travelers],Content,NumberOnLink,Average,0.00106086926247238,0.00106086926247238,0.00106086926247238,NaN,NaN
+Scenario1,Path,Path4,[Travelers],Content,NumberOnLink,Maximum,3,3,3,NaN,NaN
+Scenario1,Path,Path4,[Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Path,Path4,[Travelers],FlowTime,TimeOnLink,Average (Hours),0.000234325980727153,0.000234325980727153,0.000234325980727153,NaN,NaN
+Scenario1,Path,Path4,[Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.00023432598072759,0.00023432598072759,0.00023432598072759,NaN,NaN
+Scenario1,Path,Path4,[Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000234325980713379,0.000234325980713379,0.000234325980713379,NaN,NaN
+Scenario1,Path,Path4,[Travelers],Throughput,NumberEntered,Total,6628,6628,6628,NaN,NaN
+Scenario1,Path,Path4,[Travelers],Throughput,NumberExited,Total,6628,6628,6628,NaN,NaN
+Scenario1,Path,Path5,[Travelers],Content,NumberOnLink,Average,0.000158691864270183,0.000158691864270183,0.000158691864270183,NaN,NaN
+Scenario1,Path,Path5,[Travelers],Content,NumberOnLink,Maximum,1,1,1,NaN,NaN
+Scenario1,Path,Path5,[Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Path,Path5,[Travelers],FlowTime,TimeOnLink,Average (Hours),0.000129935620409143,0.000129935620409143,0.000129935620409143,NaN,NaN
+Scenario1,Path,Path5,[Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000129935620421406,0.000129935620421406,0.000129935620421406,NaN,NaN
+Scenario1,Path,Path5,[Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000129935620407196,0.000129935620407196,0.000129935620407196,NaN,NaN
+Scenario1,Path,Path5,[Travelers],Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Path,Path5,[Travelers],Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Path,Path6,[Travelers],Content,NumberOnLink,Average,0.000158860506006197,0.000158860506006197,0.000158860506006197,NaN,NaN
+Scenario1,Path,Path6,[Travelers],Content,NumberOnLink,Maximum,2,2,2,NaN,NaN
+Scenario1,Path,Path6,[Travelers],Content,NumberOnLink,Minimum,0,0,0,NaN,NaN
+Scenario1,Path,Path6,[Travelers],FlowTime,TimeOnLink,Average (Hours),0.000130073702904403,0.000130073702904403,0.000130073702904403,NaN,NaN
+Scenario1,Path,Path6,[Travelers],FlowTime,TimeOnLink,Maximum (Hours),0.000130073702962363,0.000130073702962363,0.000130073702962363,NaN,NaN
+Scenario1,Path,Path6,[Travelers],FlowTime,TimeOnLink,Minimum (Hours),0.000130073702848676,0.000130073702848676,0.000130073702848676,NaN,NaN
+Scenario1,Path,Path6,[Travelers],Throughput,NumberEntered,Total,1788,1788,1788,NaN,NaN
+Scenario1,Path,Path6,[Travelers],Throughput,NumberExited,Total,1788,1788,1788,NaN,NaN
+Scenario1,Sink,LogOp1Sink,[DestroyedEntities],FlowTime,TimeInSystem,Average (Hours),1.54988682393931,1.54988682393931,1.54988682393931,NaN,NaN
+Scenario1,Sink,LogOp1Sink,[DestroyedEntities],FlowTime,TimeInSystem,HalfWidth (Hours),0.948462605181152,0.948462605181152,0.948462605181152,NaN,NaN
+Scenario1,Sink,LogOp1Sink,[DestroyedEntities],FlowTime,TimeInSystem,Maximum (Hours),24.4657513108705,24.4657513108705,24.4657513108705,NaN,NaN
+Scenario1,Sink,LogOp1Sink,[DestroyedEntities],FlowTime,TimeInSystem,Minimum (Hours),0.143585610771424,0.143585610771424,0.143585610771424,NaN,NaN
+Scenario1,Sink,LogOp1Sink,[DestroyedEntities],FlowTime,TimeInSystem,Observations,10124,10124,10124,NaN,NaN
+Scenario1,Sink,LogOp1Sink,InputBuffer,Throughput,NumberEntered,Total,10124,10124,10124,NaN,NaN
+Scenario1,Sink,LogOp1Sink,InputBuffer,Throughput,NumberExited,Total,10124,10124,10124,NaN,NaN
+Scenario1,Source,LogOp1Source,OutputBuffer,Throughput,NumberEntered,Total,10124,10124,10124,NaN,NaN
+Scenario1,Source,LogOp1Source,OutputBuffer,Throughput,NumberExited,Total,10124,10124,10124,NaN,NaN
+Scenario1,Source,LogOp1Source,Processing,Throughput,NumberEntered,Total,10124,10124,10124,NaN,NaN
+Scenario1,Source,LogOp1Source,Processing,Throughput,NumberExited,Total,10124,10124,10124,NaN,NaN

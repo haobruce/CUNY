@@ -1,0 +1,134 @@
+---
+title: "BHao_Final"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA605/Final")
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+
+kaggle = read.csv("C:/Users/bhao/Google Drive/CUNY/git/DATA605/Final/train.csv")
+#str(kaggle)
+```
+
+###Probability  
+
+Since P(X|Y) != P(X)P(Y), splitting the data this way does not make them independent. This is also confirmed by the chi-square test, which resulted in a very small p-value.  
+
+```{r}
+library(MASS)
+
+df = kaggle %>% dplyr::select(SalePrice, LotArea)
+X = df$LotArea
+Y = df$SalePrice
+
+# set x = min of 4th quartile and y = min of 2nd quartile 
+x = quantile(df$LotArea, 0.75)
+y = quantile(df$SalePrice, 0.25)
+
+#a. P(X>x | Y>y) = 31.23% probability that lot area is greater than 0.75 quantile when 
+#sale price is greater than 0.25 quantile 
+df %>% filter(LotArea > x & SalePrice > y) %>% summarise(n = n()) / 
+df %>% filter(SalePrice > y) %>% summarise(n = n())
+
+#b. P(X>x, Y>y) = 23.42% probability that lot area is greater than 0.75 quantile AND
+#sale price is greater than 0.25 quantile
+df %>% filter(LotArea > x & SalePrice > y) %>% summarise(n = n()) / 
+nrow(df)
+
+#c. P(X<x | Y>y) = 68.77% probability that lot area is less than 0.75 quantile when
+#sale price is greater than 0.25 quantile
+df %>% filter(LotArea < x & SalePrice > y) %>% summarise(n = n()) / 
+df %>% filter(SalePrice > y) %>% summarise(n = n())
+
+#chi-square test
+tbl = table(df %>% mutate(topQtrX = if_else(LotArea > x, 'TopQtr', 'Bottom3Qtr'),
+              botQtrY = if_else(SalePrice > y, 'Top3Qtr', 'BottomQtr')) %>%
+  dplyr::select(topQtrX, botQtrY))
+
+chisq.test(tbl)
+```
+
+###Descriptive and Inferential Statistics  
+
+```{r}
+summary(df)
+p1 = df %>% ggplot(aes(x = factor(0), y = SalePrice)) + geom_boxplot()
+p2 = df %>% ggplot(aes(x = factor(0), y = LotArea)) + geom_boxplot()
+grid.arrange(p1, p2, ncol = 2)
+
+df %>% ggplot(aes(x = LotArea, y = SalePrice)) + geom_point()
+
+#box-cox transformation
+bc = boxcox(SalePrice ~ LotArea, data = df)
+cor(bc$x, bc$y, method = 'spearman')
+cor(df$LotArea, df$SalePrice)
+```
+
+###Linear Algebra and Correlation  
+
+```{r}
+cor_mat = cor(df)
+prec_mat = solve(cor_mat)  # invert correlation matrix
+cor_mat %*% prec_mat  # results in identity matrix
+prec_mat %*% cor_mat  # results in identity matrix
+```
+
+###Calculus-Based Probability & Statistics  
+
+I fit a lognormal distribution to the lot area data; the actual data exhibits much more skew wit a fatter tail.  
+
+```{r}
+# fit lognormal distribution to data 
+fit = fitdistr(df$LotArea, densfun = 'lognormal')
+meanLog = fit$estimate[1]
+sdLog = fit$estimate[2]
+
+samp = rlnorm(1000, meanLog, sdLog)
+typeof(samp)
+p1 = df %>% ggplot(aes(x = LotArea)) + geom_histogram() + xlim(c(0, 50000))
+p2 = qplot(samp, geom = 'histogram')
+grid.arrange(p1, p2, ncol = 2)
+```
+
+###Modeling  
+
+```{r}
+library(caret)
+
+set.seed(123)
+myControl = trainControl(method = 'cv', number = 5, verboseIter = TRUE)
+
+#try glmnet model 
+clean = imputeMissings::impute(kaggle, method = 'median/mode')  # impute medians for missing data 
+
+glmnet_model = train(SalePrice ~ ., data = clean, method = 'glmnet', trControl = myControl,
+                     preProcess = c('center', 'scale'))
+
+#try random forest model 
+rf_model = train(SalePrice ~ ., data = clean, method = 'ranger', trControl = myControl,
+                     preProcess = c('center', 'scale'))
+
+#compare models 
+model_list = list(glmnet = glmnet_model, rf = rf_model)
+
+#collect resamples from the CV folds
+resamps = resamples(model_list)
+dotplot(resamps, metric = 'RMSE')
+
+#load test data 
+test = read.csv("C:/Users/bhao/Google Drive/CUNY/git/DATA605/Final/test.csv")
+test_clean = imputeMissings::impute(test, method = 'median/mode')  # impute medians for missing data 
+test_pred = predict(rf_model, newdata = test_clean)
+test_pred = cbind(test, test_pred) %>% mutate(SalePrice = test_pred) %>% dplyr::select(Id, SalePrice)
+write.csv(test_pred, "C:/Users/bhao/Google Drive/CUNY/git/DATA605/Final/rf_pred.csv")
+```
+
+

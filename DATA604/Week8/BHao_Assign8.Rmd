@@ -1,0 +1,257 @@
+---
+title: "BHao_Assign8"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA604/Week8")
+library(xlsx)
+library(fitdistrplus)
+```
+
+##6.1  
+
+Based on the PP-plots and chi-squared (chisq), Kolmogorov-Smirnov (ks), aic and bic statistics, it appears that the lognormal distribution best fits these data.  
+
+```{r fig.width=10}
+df1 = read.xlsx('Problem_Dataset_06_01.xls', 'Sheet1', header = FALSE)
+
+# first plot histogram and CDF 
+par(mfrow=c(1,2))
+hist(df1$X1)
+plot(ecdf(df1$X1))
+
+# based on the histogram, we see that all values are positive with large outliers 
+# therefore, we should try to fit exponential, lognormal, gamma and weibull distributions 
+
+# try exponential distribution 
+expon1 = fitdist(df1$X1, 'exp', discrete = FALSE)
+plot(expon1)
+
+# try log normal distribution 
+lnorm1 = fitdist(df1$X1, 'lnorm', discrete = FALSE)
+plot(lnorm1)
+
+# try gamma distribution 
+gamma1 = fitdist(df1$X1, 'gamma', discrete = FALSE)
+plot(gamma1)
+
+# try weibull distribution
+weib1 = fitdist(df1$X1, 'weibull', discrete = FALSE)
+plot(weib1)
+
+# compare multiple fits 
+cbind('exp'=gofstat(expon1), 'lnorm'=gofstat(lnorm1), 'gamma'=gofstat(gamma1), 'weibul'=gofstat(weib1))
+
+# print summary of best fitting distribution
+summary(lnorm1)
+```
+
+##6.2  
+
+Again, based on the goodness-of-fit statistics and plots, the lognormal distribution seems to fit the data best.  
+
+```{r fig.width=10}
+df2 = read.xlsx('Problem_Dataset_06_02.xls', 'Sheet1', header = FALSE)
+
+# first plot histogram and CDF 
+par(mfrow=c(1,2))
+hist(df2$X1)
+plot(ecdf(df2$X1))
+
+# based on the histogram, we see that all values are positive with large outliers 
+# therefore, we should try to fit exponential, lognormal, gamma and weibull distributions 
+
+# try exponential distribution 
+expon1 = fitdist(df2$X1, 'exp', discrete = FALSE)
+plot(expon1)
+
+# try log normal distribution 
+lnorm1 = fitdist(df2$X1, 'lnorm', discrete = FALSE)
+plot(lnorm1)
+
+# try gamma distribution 
+gamma1 = fitdist(df2$X1, 'gamma', discrete = FALSE)
+plot(gamma1)
+
+# try weibull distribution
+weib1 = fitdist(df2$X1, 'weibull', discrete = FALSE)
+plot(weib1)
+
+# compare multiple fits 
+cbind('exp'=gofstat(expon1), 'lnorm'=gofstat(lnorm1), 'gamma'=gofstat(gamma1), 'weibul'=gofstat(weib1))
+
+# print summary of best fitting distribution
+summary(lnorm1)
+```
+
+##6.3  
+
+In this case, the Poisson distribution seemed to fit the data best.  
+
+```{r fig.width=10}
+df3 = read.xlsx('Problem_Dataset_06_03.xls', 'Sheet1', header = FALSE)
+
+# first plot histogram and CDF 
+par(mfrow=c(1,2))
+hist(df2$X1)
+plot(ecdf(df2$X1))
+
+# based on the histogram, we see that all values are positive with large outliers 
+# also, these data are discrete, we should try discrete distributions  
+# therefore, we should try to fit poisson, negative binomial and normal distributions
+
+# try poisson distribution 
+pois1 = fitdist(df3$X1, 'pois', discrete = TRUE)
+plot(pois1)
+
+# try negative binomial distribution 
+nbinom1 = fitdist(df3$X1, 'nbinom', discrete = TRUE)
+plot(nbinom1)
+
+# try normal distribution
+norm1 = fitdist(df3$X1, 'norm', discrete = TRUE)
+plot(norm1)
+
+# compare multiple fits 
+cbind('pois'=gofstat(pois1), 'nbinom'=gofstat(nbinom1), 'norm'=gofstat(norm1))
+
+# print summary of best fitting distribution
+summary(pois1)
+```
+
+##6.4  
+
+\[
+  F(x) =
+    \begin{cases}
+      0 & x \lt a \\
+      \frac{x - a}{b - a} & a \le x \le b \\
+      1 & x \gt b 
+    \end{cases}
+\]
+
+\[
+  X = a + R (b - a)
+\]
+
+##6.5  
+
+\[
+  F(x; k, \lambda) = 1 - e^{-(x/\lambda)^k}
+\]
+
+\[
+  X = -a[ln(1-R)]^{1/\lambda}I_{[0,1]}(R)  
+\]
+
+##6.8  
+
+```{r}
+set.seed(123)
+library(data.table)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# create a discrete sampling function 
+lbs_sample = function(item) {
+  R = runif(1)
+  if (item == 'oats') {
+    if (R <= 0.05) {lbs = 0.0}
+    else if (R <= 0.12) {lbs = 0.5}
+    else if (R <= 0.21) {lbs = 1.0}
+    else if (R <= 0.32) {lbs = 1.5}
+    else if (R <= 0.47) {lbs = 2.0}
+    else if (R <= 0.72) {lbs = 3.0}
+    else if (R <= 0.82) {lbs = 4.0}
+    else if (R <= 0.91) {lbs = 5.0}
+    else if (R <= 0.97) {lbs = 7.5}
+    else if (R <= 1.00) {lbs = 10.0}
+  }
+  if (item == 'peas') {
+    if (R <= 0.1) {lbs = 0.0}
+    else if (R <= 0.3) {lbs = 0.5}
+    else if (R <= 0.5) {lbs = 1.0}
+    else if (R <= 0.8) {lbs = 1.5}
+    else if (R <= 0.9) {lbs = 2.0}
+    else if (R <= 1.0) {lbs = 3.0}
+  }
+  if (item == 'beans') {
+    if (R <= 0.2) {lbs = 0.0}
+    else if (R <= 0.6) {lbs = 1.0}
+    else if (R <= 0.9) {lbs = 3.0}
+    else if (R <= 1.0) {lbs = 4.5}
+  }
+  if (item == 'barley') {
+    if (R <= 0.2) {lbs = 0.0}
+    else if (R <= 0.6) {lbs = 0.5}
+    else if (R <= 0.9) {lbs = 1.0}
+    else if (R <= 1.0) {lbs = 3.5}
+  }
+  return(lbs)
+}
+
+# create simulation function for one season
+run_sim = function(days = 90) {
+  # create data table to house inputs
+  tbl_items = data.table(item = c('oats', 'peas', 'beans', 'barley'),
+                  cost = c(1.05, 3.17, 1.99, 0.95),
+                  price = c(1.29, 3.76, 2.23, 1.65))
+  tbl_items = tbl_items[, profit := price - cost]
+
+  # create data frame to house results
+  tbl_sim = data.frame(day = rep(0, days), total_revenue = rep(0, days), 
+                       total_cost = rep(0, days), total_profit = rep(0, days))
+
+  for (i in 1:days) {
+    qty = NULL
+    revenue = 0
+    cost = 0
+    profit = 0
+    for (r in 1:nrow(tbl_items)) {
+      qty = lbs_sample(tbl_items[r, item])
+      revenue = revenue + tbl_items[r, price] * qty
+      cost = cost + tbl_items[r, cost] * qty
+      profit = profit + tbl_items[r, profit] * qty
+    }
+    tbl_sim[i,] = c(i, revenue, cost, profit)
+  }
+  return(data.table(tbl_sim))
+}
+
+# create simulation function for x seasons
+run_sim_season = function(seasons = 1000, days = 90) {
+  tbl_daily = data.frame(day = rep(0, seasons*days), total_revenue = rep(0, seasons*days), 
+                         total_cost = rep(0, seasons*days), total_profit = rep(0, seasons*days))
+  tbl_season = data.frame(season = rep(0, seasons), total_revenue = rep(0, seasons), 
+                          total_cost = rep(0, seasons), total_profit = rep(0, seasons))
+  for (i in 1:seasons) {
+    ## REPLACE LOGIC BELOW WITH A SIMPLE ARRAY AND THEN RETURN A DATA.TABLE 
+    sim = run_sim(days = days)
+    tbl_daily[(i*days-days+1):(i*days),] = sim
+    tbl_season[i,] = c(season = i, sim[, lapply(.SD, sum), .SDcols = 2:4])
+  }
+  return(list(tbl_daily = data.table(tbl_daily), tbl_season = data.table(tbl_season)))
+}
+
+# run simulation x times and aggregate results
+sim_results = run_sim_season(seasons = 100, days = 90)
+
+summary(sim_results$tbl_daily)
+summary(sim_results$tbl_season)
+
+sim_results$tbl_daily %>% select(-day) %>%
+  gather('metric', 'value') %>%
+  mutate('metric' = factor(metric, levels = c('total_revenue', 'total_cost', 'total_profit'))) %>%
+  ggplot(aes(x = value)) +
+  geom_histogram() +
+  facet_grid(. ~ metric, scales = 'free')
+
+sim_results$tbl_season %>% select(-season) %>%
+  gather('metric', 'value') %>%
+  mutate('metric' = factor(metric, levels = c('total_revenue', 'total_cost', 'total_profit'))) %>%
+  ggplot(aes(x = value)) +
+  geom_histogram() +
+  facet_grid(. ~ metric, scales = 'free')
+```

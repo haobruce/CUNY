@@ -1,0 +1,223 @@
+---
+title: "BHao_Assign8"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA605/HW8")
+```
+
+##Problem Set 1  
+
++/-B = takes bus (does not take train); does not take bus (takes train)   
++/-L = late; not late  
+
+Solve for P(+B | -L) = P(+B, -L) / P(-L)
+
+Solve numerator:  
+
+P(+B, -L) = 1/3 * 0.5  
+
+Solve denominator:  
+
+P(-L) = $\sum$$_B$ P(-L)  
+P(-L) = $\sum$$_B$ P(-L | B)  
+[case: +B, -L]: + P(+B) P(-L | +B)  
+[case: -B, -L]: + P(-B) P(-L | -B)  
+
+Given that she was on time today, the probability that she took the bus to work today was 21.74%.  
+
+```{r}
+numer = 1/3 * 0.5  
+denom = 1/3 * 0.5 + 2/3 * 0.9
+numer / denom
+```
+
+
+##Problem Set 2  
+
+*What happens to the probability of Dificulty of Course when you present the evidence that the received recommendation letter was good?*  
+
++/- D = not difficult; yes difficult  
++/- I = low intelligence; high intelligence  
++/- G = low grade; high grade  
++/- S = low SAT; high SAT  
++/- L = bad letter of rec; good letter of rec  
+
+Solve for P(+D | +L) = P(+D, +L) / P(+L)  
+
+Solve numerator:  
+
+P(+D, +L) = $\sum$$_G$ $\sum$$_I$ P(+D, +L)  
+P(+D, +L) = $\sum$$_G$ $\sum$$_I$ P(+D) P(I) P(G | +D, I) P(+L | G)  
+P(+D, +L) =  
+[case: +G, +I]: + P(+D) P(+I) P(+G | +D, +I) P(+L | +G)  
+[case: +G, -I]: + P(+D) P(-I) P(+G | +D, -I) P(+L | +G)  
+[case: -G, +I]: + P(+D) P(+I) P(-G | +D, +I) P(+L | -G)  
+[case: -G, -I]: + P(+D) P(-I) P(-G | +D, -I) P(+L | -G)  
+
+```{r}
+numer1 = 0.7 * 0.2 * 0.9 * 0.95  
+numer2 = 0.7 * 0.8 * 0.2 * 0.95
+numer3 = 0.7 * 0.2 * 0.1 * 0.1
+numer4 = 0.7 * 0.8 * 0.8 * 0.1
+numerator = numer1 + numer2 + numer3 + numer4
+```
+
+Solve denominator:  
+
+P(+L) = $\sum$$_D$ $\sum$$_I$ $\sum$$_G$ P(+L)  
+P(+L) = $\sum$$_D$ $\sum$$_I$ $\sum$$_G$ P(D) P(I) P(G | D, I) P(+L | G)  
+P(+L) = 
+[case: +D, +I, +G]: + P(+D) P(+I) P(+G | +D, +I) P(+L | +G)  
+[case: +D, -I, +G]: + P(+D) P(-I) P(+G | +D, -I) P(+L | +G)  
+[case: +D, +I, -G]: + P(+D) P(+I) P(-G | +D, +I) P(+L | -G)  
+[case: +D, -I, -G]: + P(+D) P(-I) P(-G | +D, -I) P(+L | -G)  
+[case: -D, +I, +G]: + P(-D) P(+I) P(+G | -D, +I) P(+L | +G)  
+[case: -D, -I, +G]: + P(-D) P(-I) P(+G | -D, -I) P(+L | +G)  
+[case: -D, +I, -G]: + P(-D) P(+I) P(-G | -D, +I) P(+L | -G)  
+[case: -D, -I, -G]: + P(-D) P(-I) P(-G | -D, -I) P(+L | -G)  
+
+```{r}
+denom1 = 0.7 * 0.2 * 0.9 * 0.95
+denom2 = 0.7 * 0.8 * 0.2 * 0.95
+denom3 = 0.7 * 0.2 * 0.1 * 0.1
+denom4 = 0.7 * 0.8 * 0.8 * 0.1
+denom5 = 0.3 * 0.2 * 0.99 * 0.95
+denom6 = 0.3 * 0.8 * 0.4 * 0.95
+denom7 = 0.3 * 0.2 * 0.01 * 0.1
+denom8 = 0.3 * 0.8 * 0.6 * 0.1
+denominator = denom1 + denom2 + denom3 + denom4 + denom5 + denom6 + denom7 + denom8
+```
+
+Given that the letter of recommendation was good, the probability that the course was difficult was 62.69%.  
+
+```{r}
+numerator / denominator
+```
+
+*Repeat using gRain package in R*  
+
+```{r}
+library(gRain)
+
+lh = c('low', 'high')
+D = cptable(~Difficulty, values = c(0.3, 0.7), levels = lh)
+I = cptable(~Intelligence, values = c(0.8, 0.2), levels = lh)
+G.DI = cptable(~Grade|Intelligence:Difficulty, values = c(0.6, 0.4, 0.01, 0.99, 0.8, 0.2, 0.1, 0.9), levels = lh)
+L.G = cptable(~Letter|Grade, values = c(0.9, 0.1, 0.05, 0.95), levels = lh)
+S.I = cptable(~SAT|Intelligence, values = c(0.9, 0.1, 0.2, 0.8), levels = lh)
+
+plist = compileCPT(list(D, I, G.DI, L.G, S.I))
+plist
+plist$Grade  # check order of conditional probabilities
+plist$Letter  # check order of conditional probabilities  
+```
+
+```{r}
+net1 = grain(plist)
+querygrain(net1, nodes = c('Difficulty', 'Intelligence', 'SAT', 'Grade', 'Letter'), type = 'marginal')
+```
+
+```{r}
+# query joint distribution  
+querygrain(net1, nodes = c('Letter', 'Grade'), type = 'joint')
+```
+
+```{r}
+# add evidence  
+net12 = setEvidence(net1, evidence = list(Letter='high'))
+
+# probability of observing this evidence under the model  
+pEvidence(net12)
+
+# query network again given new evidence  
+querygrain(net12, nodes = c('Difficulty'), type = 'marginal')  
+```
+
+**gRain results tie with manual calculations above!**  
+
+*In addition, now present the evidence that both SAT scores were good and the letter of recommendation was good, What is the probability of the Difficulty of Course now?*  
+
+Manually, we need to update the probabilities for the Intelligence node based on the new SAT information.  
+
+P(+I | +S) = P(+I, +S) / P(+S)  
+
+P(+I, +S) = P(+I) P(+S | +I) 
+P(+S) = $\sum$$_I$ P(+S)  
+P(+S) = $\sum$$_I$ P(I) P(+S | I)  
+[case: +I] + P(+I) P(+S | +I)  
+[case: -I] + P(-I) P(+S | -I)  
+
+Updated probabilities for +/-I are 2/3 and 1/3 respectively.  
+
+```{r}
+numerator = 0.2 * 0.8  
+denominator = (0.2 * 0.8) + (0.8 * 0.1)  
+numerator / denominator  
+```
+
+Solve for P(+D | +L) = P(+D, +L) / P(+L)  
+
+Solve numerator:  
+
+P(+D, +L) = $\sum$$_G$ $\sum$$_I$ P(+D, +L)  
+P(+D, +L) = $\sum$$_G$ $\sum$$_I$ P(+D) P(I) P(G | +D, I) P(+L | G)  
+P(+D, +L) =  
+[case: +G, +I]: + P(+D) P(+I) P(+G | +D, +I) P(+L | +G)  
+[case: +G, -I]: + P(+D) P(-I) P(+G | +D, -I) P(+L | +G)  
+[case: -G, +I]: + P(+D) P(+I) P(-G | +D, +I) P(+L | -G)  
+[case: -G, -I]: + P(+D) P(-I) P(-G | +D, -I) P(+L | -G)  
+
+```{r}
+numer1 = 0.7 * 2/3 * 0.9 * 0.95  
+numer2 = 0.7 * 1/3 * 0.2 * 0.95
+numer3 = 0.7 * 2/3 * 0.1 * 0.1
+numer4 = 0.7 * 1/3 * 0.8 * 0.1
+numerator = numer1 + numer2 + numer3 + numer4
+```
+
+Solve denominator:  
+
+P(+L) = $\sum$$_D$ $\sum$$_I$ $\sum$$_G$ P(+L)  
+P(+L) = $\sum$$_D$ $\sum$$_I$ $\sum$$_G$ P(D) P(I) P(G | D, I) P(+L | G)  
+P(+L) = 
+[case: +D, +I, +G]: + P(+D) P(+I) P(+G | +D, +I) P(+L | +G)  
+[case: +D, -I, +G]: + P(+D) P(-I) P(+G | +D, -I) P(+L | +G)  
+[case: +D, +I, -G]: + P(+D) P(+I) P(-G | +D, +I) P(+L | -G)  
+[case: +D, -I, -G]: + P(+D) P(-I) P(-G | +D, -I) P(+L | -G)  
+[case: -D, +I, +G]: + P(-D) P(+I) P(+G | -D, +I) P(+L | +G)  
+[case: -D, -I, +G]: + P(-D) P(-I) P(+G | -D, -I) P(+L | +G)  
+[case: -D, +I, -G]: + P(-D) P(+I) P(-G | -D, +I) P(+L | -G)  
+[case: -D, -I, -G]: + P(-D) P(-I) P(-G | -D, -I) P(+L | -G)  
+
+```{r}
+denom1 = 0.7 * 2/3 * 0.9 * 0.95
+denom2 = 0.7 * 1/3 * 0.2 * 0.95
+denom3 = 0.7 * 2/3 * 0.1 * 0.1
+denom4 = 0.7 * 1/3 * 0.8 * 0.1
+denom5 = 0.3 * 2/3 * 0.99 * 0.95
+denom6 = 0.3 * 1/3 * 0.4 * 0.95
+denom7 = 0.3 * 2/3 * 0.01 * 0.1
+denom8 = 0.3 * 1/3 * 0.6 * 0.1
+denominator = denom1 + denom2 + denom3 + denom4 + denom5 + denom6 + denom7 + denom8
+```
+
+Given a good letter of recommendation and high SAT score, the probability that the course was difficult was 66.77%.  
+
+```{r}
+numerator / denominator
+```
+
+*Repeat using gRain package in R*  
+
+```{r}
+# add evidence  
+net13 = setEvidence(net1, evidence = list(Letter='high', SAT='high')) 
+
+# query neetwork again given new evidence
+querygrain(net13, nodes = c('Difficulty'), type = 'marginal')  
+```
+
+**gRain results tie with manual calculations above!**  
+

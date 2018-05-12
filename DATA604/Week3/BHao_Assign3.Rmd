@@ -168,6 +168,5 @@ sim_results$tbl_season %>% select(-season) %>%
   ggplot(aes(x = value)) +
   geom_histogram() +
   facet_grid(. ~ metric, scales = 'free')
-
 ```
 

@@ -1,0 +1,46 @@
+---
+title: "BHao_Assign11"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA605/HW11")
+```
+
+* Fitting max heart rate to age using lm results in the following equation: max heart rate = 209.3416 - 0.7744 * age  
+* The effect of age on max heart rate is significant  
+* The significant level is at the 0.001 level  
+
+```{r}
+age = c(18,23,25,35,65,54,34,56,72,19,23,42,18,39,37)
+maxHR = c(202,186,187,180,156,169,174,172,156,199,193,174,198,183,178)
+
+age_hr = lm(maxHR ~ age)
+summary(age_hr)
+plot(maxHR ~ age)
+abline(age_hr$coefficients[1], age_hr$coefficients[2])
+```
+
+* Fitting a multiple regression the auto data set results in the equation below: mpg = 45.2511 - 0.0060 * disp - 0.0436 * hp - 0.0053 * weight - 0.0231 * accel  
+* hp and weight have significant impacts  
+* hp and weight have 0.001 and 0.01 significance levels, respectively  
+* the standard errors for disp, hp, weight and accel are shown below or 0.0067, 0.0166, 0.0008 and 0.1256, respectively  
+* unsurprisingly the significance levels and standard errors are much higher for the smaller sample vs. the full data set  
+
+```{r}
+mpg = read.table('auto-mpg.data')
+names(mpg) = c('disp', 'hp', 'weight', 'accel', 'mpg')
+str(mpg)
+
+lm_model = lm(mpg ~ ., data = mpg)
+summary(lm_model)
+```
+
+```{r}
+mpg_sample = mpg[sample(nrow(mpg), 40), ]
+lm_model_sample = lm(mpg ~ ., data = mpg_sample)
+summary(lm_model_sample)
+```
+

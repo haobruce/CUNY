@@ -1,0 +1,116 @@
+---
+title: "BHao_HW2"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd('/Users/brucehao/Google Drive/CUNY/git/DATA624')
+```
+
+```{r message=FALSE, warning=FALSE}
+library(fma)
+# data(package='fma')
+```
+
+## 6.7.2 The data below represent the monthly sales (in thousands) of product A for a plastics manufacturer for years 1 through 5 (data set plastics).  
+
+```{r}
+plastics
+```
+
+## 6.7.2.a Plot the time series of sales of product A. Can you identify seasonal fluctuations and/or a trend?  
+
+```{r}
+plot(plastics)
+```
+
+## 6.7.2.b Use a classical multiplicative decomposition to calculate the trend-cycle and seasonal indices.  
+
+```{r}
+fit = decompose(plastics, type='multiplicative')
+
+# seasonal indices 
+fit$seasonal 
+
+# trend-cycle indices 
+fit$trend
+```
+
+## 6.7.2.c Do the results support the graphical interpretation from part (a)?  
+
+Yes, the original data exhibits an upward trend with annual seasons, and the classical decomposition captures that.  
+
+## 6.7.2.d Compute and plot the seasonally adjusted data.  
+
+```{r}
+# plot of decomposition 
+plot(fit)
+```
+
+## 6.7.2.e Change one observation to be an outlier (e.g., add 500 to one observation), and recompute the seasonally adjusted data. What is the effect of the outlier?  
+
+The outlier doesn't seem to affect the trend-cycle component, but it certainly changes the magnitudes of the seasonal and random components (although the shape of the seasonal component still looks reasonably the same).  
+
+```{r}
+set.seed(123)
+plastics2 = plastics 
+plastics2[sample.int(60, 1)] = plastics2[sample.int(60, 1)] + 500 
+
+# plot decomposition 
+fit2 = decompose(plastics2)
+plot(fit2)
+```
+
+## 6.7.2.f Does it make any difference if the outlier is near the end rather than in the middle of the time series?  
+
+The location of the outlier does not seem to make much difference. In both cases, the outlier causes the seasonal and random components to be much larger than when no outlier exists.  
+
+```{r}
+plastics_end = plastics
+plastics_end[60] = plastics_end[60] + 500
+
+plastics_mid = plastics
+plastics_mid[30] = plastics_mid[30] + 500
+
+# plot decomposition 
+fit_end = decompose(plastics_end)
+plot(fit_end)
+
+fit_mid = decompose(plastics_mid)
+plot(fit_mid)
+```
+
+## 6.7.2.g Use a random walk with drift to produce forecasts of the seasonally adjusted data.  
+
+```{r}
+# create training and test sets 
+plastics_train = window(plastics, start=1, end=4.99)
+plastics_test  = window(plastics, start=5)
+
+# fit random walk with drift on training set 
+plastics_driftfit = rwf(plastics_train, h = 12, drift = TRUE)
+
+# plot 
+plot(plastics, main = 'Plastics')
+lines(plastics_driftfit$mean, col = 2)
+legend('topleft', lty = 1, col = c(2),
+       legend = c('drift method'))
+```
+
+## 6.7.2.h Reseasonalize the results to give forecasts on the original scale. 
+
+```{r}
+# multiply by seasonality index 
+plastics_driftfitSeas = plastics_driftfit$mean * fit$seasonal[49:60] 
+
+# plot 
+plot(plastics, main = 'Plastics')
+lines(plastics_driftfit$mean, col = 2)
+lines(plastics_driftfitSeas , col = 3)
+legend('topleft', lty = 1, col = c(2, 3),
+       legend = c('drift method', 'drift with seasonality'))
+```
+

@@ -1,0 +1,75 @@
+---
+title: "BHao_Discussion6"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("~/Google Drive/CUNY/git/DATA604/Week6")
+```
+
+##Banks Problem 8.1  
+
+\[
+  f(x) = 
+    \begin{cases}
+      e^{2x} & -\infty \lt x \le 0 \\
+      e^{-2x} & 0 \lt x \lt \infty
+    \end{cases}
+\]
+
+\[
+  F(x) =
+    \begin{cases}
+      \frac{e^{2x}}{2} & -\infty \lt x \le 0 \\
+      \frac{-e^{-2x}}{2} & 0 \lt x \lt \infty
+    \end{cases}
+\]
+
+\[
+  X =
+    \begin{cases}
+      \frac{-ln(-2R)}{2} & \frac{-1}{2} \lt R \lt 0 \\
+      \frac{ln(2R)}{2} & 0 \lt R \lt \frac{1}{2} 
+    \end{cases}
+\]
+
+```{r fig.width=10}
+x1 = seq(-5, 0, 0.01)
+x2 = seq(0, 5, 0.01)
+plot(c(exp(2*x1), exp(-2*x2)) ~ c(x1, x2))
+
+R = runif(100000, -0.5, 0.5)
+x = ifelse(R < 0, -log(-2*R)/2, log(2*R)/2)
+par(mfrow = c(1, 2))
+hist(x)
+plot(ecdf(x))
+```
+
+##Banks Problem 8.5  
+
+\[ 
+  F(x) = 
+    \begin{cases} 
+      0 & x \le -3 \\
+      \frac{1}{2} + \frac{x}{6} & -3 \lt x \le 0 \\
+      \frac{1}{2} + \frac{x^2}{32} & 0 \lt x \le 4 \\
+      1 & x \gt 4
+   \end{cases}
+\]
+
+\[
+  X =
+    \begin{cases}
+      6R - 3 & 0 \lt R \le 1/2 \\
+      4\sqrt{2R - 1 } & 1/2 \lt R \le 1
+    \end{cases}
+\]
+
+```{r fig.width=10}
+R = runif(100000, 0, 1)
+x = ifelse(R <= 0.5, 6*R - 3, 4*sqrt(2*R -1))
+par(mfrow = c(1, 2))
+hist(x)
+plot(ecdf(x))
+```
+

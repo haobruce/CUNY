@@ -1,0 +1,58 @@
+---
+title: "BHao_Assign10"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+setwd("C:/Users/bhao/Google Drive/CUNY/git/DATA605/HW10")
+library(expm)
+library(igraph)
+```
+
+##Playing with PageRank  
+
+```{r}
+# form A and B
+A = matrix(c(  0, 1/2, 1/2,   0,   0,   0,
+               0,   0,   0,   0,   0,   0,
+             1/3, 1/3,   0,   0, 1/3,   0,
+               0,   0,   0,   0, 1/2, 1/2,
+               0,   0,   0, 1/2,   0, 1/2,
+               0,   0,   0,   1,   0,   0),
+           6, 6, byrow = TRUE)
+
+# start with uniform rank and perform 1000 iterations
+r = rep(1/6, 6)
+
+# replace disconnected node 2 with uniform ranking
+A[2,] = r
+
+# create B matrix after transposing A
+B = 0.85 * t(A) + 0.15 / nrow(A)
+
+r = B %^% 50 %*% r
+r
+```
+
+```{r}
+# compute eigen-decomposition of B
+eig = eigen(B)
+eig$values
+eig$vectors[,1] 
+eig$vectors[,1] / sum(eig$vectors[,1])  # normalize
+```
+
+```{r}
+# use page.rank to compute page rank of A
+# g2 = graph.formula(1 -+ 2, 1 + 3,
+#                   3 -+ 2, 3 -+ 5,
+#                   4 + 5, 4 + 6,
+#                   5 -+ 6)
+
+g = graph_from_adjacency_matrix(A, weighted = T, mode = 'directed')
+plot(g)
+page.rank(g, damping = 0.85)
+```
+
